@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BTL_LTTQ_BIDA.Forms.Table
+namespace BTL_LTTQ_BIDA.Forms.Main
 {
-    public partial class AddTableDlg : Form
+    public partial class frmThemBanMoi : Form
     {
-        public AddTableDlg()
+        public frmThemBanMoi()
         {
             InitializeComponent();
+        }
+
+        private void txtGiaTien_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
