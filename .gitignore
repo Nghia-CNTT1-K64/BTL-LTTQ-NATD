@@ -89,7 +89,7 @@ x86/
 *.ilk/
 
 # Generated code & Designer
-*.designer.cs
+# *.designer.cs
 *.resources
 
 # JetBrains Rider project files
