@@ -16,5 +16,10 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         {
             InitializeComponent();
         }
+
+        private void FHoaDon_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
