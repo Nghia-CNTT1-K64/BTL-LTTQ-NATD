@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BTL_LTTQ_BIDA.Forms.Main
+namespace BTL_LTTQ_BIDA.Forms.Table
 {
-    public partial class FChangeTable : Form
+    public partial class frmDoiBan : Form
     {
-        public FChangeTable()
+        public frmDoiBan()
         {
             InitializeComponent();
+        }
+
+        private void lblBanCu_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
