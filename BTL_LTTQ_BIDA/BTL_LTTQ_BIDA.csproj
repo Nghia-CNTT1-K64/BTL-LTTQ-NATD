@@ -115,8 +115,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Account\AccountInfoDlg.resx">
+      <DependentUpon>AccountInfoDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\AccountToApproveDlg.resx">
+      <DependentUpon>AccountToApproveDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Bill\FAddHD.resx">
       <DependentUpon>FAddHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Bill\FHoaDon.resx">
+      <DependentUpon>FHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\AdminMenu.resx">
+      <DependentUpon>AdminMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\FMain.resx">
       <DependentUpon>FMain.cs</DependentUpon>
@@ -126,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\SignUpDlg.resx">
       <DependentUpon>SignUpDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Service\FAddService.resx">
+      <DependentUpon>FAddService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

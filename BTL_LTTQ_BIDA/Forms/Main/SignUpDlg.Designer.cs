@@ -51,7 +51,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label1.Location = new System.Drawing.Point(64, 113);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 24);
+            this.label1.Size = new System.Drawing.Size(56, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Họ tên:";
             // 
@@ -61,7 +61,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label2.Location = new System.Drawing.Point(64, 185);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 24);
+            this.label2.Size = new System.Drawing.Size(77, 18);
             this.label2.TabIndex = 1;
             this.label2.Text = "Ngày sinh:";
             // 
@@ -71,7 +71,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label3.Location = new System.Drawing.Point(64, 263);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(156, 24);
+            this.label3.Size = new System.Drawing.Size(129, 18);
             this.label3.TabIndex = 2;
             this.label3.Text = "Số CCCD/CMND:";
             // 
@@ -81,7 +81,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label4.Location = new System.Drawing.Point(64, 346);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(141, 24);
+            this.label4.Size = new System.Drawing.Size(105, 18);
             this.label4.TabIndex = 3;
             this.label4.Text = "Tên đăng nhập";
             // 
@@ -91,7 +91,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label5.Location = new System.Drawing.Point(64, 421);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 24);
+            this.label5.Size = new System.Drawing.Size(73, 18);
             this.label5.TabIndex = 4;
             this.label5.Text = "Mật khẩu:";
             // 
@@ -101,7 +101,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label6.Location = new System.Drawing.Point(64, 499);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(165, 24);
+            this.label6.Size = new System.Drawing.Size(130, 18);
             this.label6.TabIndex = 5;
             this.label6.Text = "Nhập lại mật khẩu:";
             // 
@@ -172,7 +172,7 @@
             this.checkBoxHienMK.AutoSize = true;
             this.checkBoxHienMK.Location = new System.Drawing.Point(634, 425);
             this.checkBoxHienMK.Name = "checkBoxHienMK";
-            this.checkBoxHienMK.Size = new System.Drawing.Size(114, 20);
+            this.checkBoxHienMK.Size = new System.Drawing.Size(111, 20);
             this.checkBoxHienMK.TabIndex = 14;
             this.checkBoxHienMK.Text = "Hiện mật khẩu";
             this.checkBoxHienMK.UseVisualStyleBackColor = true;
@@ -198,7 +198,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "SignUpDlg";
-            this.Text = "SignUpDlg";
+            this.Text = "Đăng kí";
             this.ResumeLayout(false);
             this.PerformLayout();
 

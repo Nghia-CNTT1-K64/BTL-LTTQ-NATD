@@ -46,7 +46,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.label1.Location = new System.Drawing.Point(55, 259);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(151, 25);
+            this.label1.Size = new System.Drawing.Size(120, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Tên đăng nhập:";
             // 
@@ -56,7 +56,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.label2.Location = new System.Drawing.Point(55, 321);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 25);
+            this.label2.Size = new System.Drawing.Size(79, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Mật khẩu:";
             // 
@@ -79,7 +79,7 @@
             this.checkBoxHienMK.AutoSize = true;
             this.checkBoxHienMK.Location = new System.Drawing.Point(587, 321);
             this.checkBoxHienMK.Name = "checkBoxHienMK";
-            this.checkBoxHienMK.Size = new System.Drawing.Size(114, 20);
+            this.checkBoxHienMK.Size = new System.Drawing.Size(111, 20);
             this.checkBoxHienMK.TabIndex = 5;
             this.checkBoxHienMK.Text = "Hiện mật khẩu";
             this.checkBoxHienMK.UseVisualStyleBackColor = true;
@@ -137,7 +137,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ptcLogoQuan);
             this.Name = "LoginDlg";
-            this.Text = "LoginDlg";
+            this.Text = "Đăng nhập";
             this.Load += new System.EventHandler(this.LoginDlg_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ptcLogoQuan)).EndInit();
             this.ResumeLayout(false);
