@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DataConnect.cs" />
+    <Compile Include="Data\Function.cs" />
     <Compile Include="Forms\Account\AccountInfoDlg.cs">
       <SubType>Form</SubType>
     </Compile>
