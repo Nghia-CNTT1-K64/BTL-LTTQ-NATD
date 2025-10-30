@@ -86,7 +86,7 @@
             this.nud.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.nud.Location = new System.Drawing.Point(50, 529);
             this.nud.Name = "nud";
-            this.nud.Size = new System.Drawing.Size(82, 30);
+            this.nud.Size = new System.Drawing.Size(82, 26);
             this.nud.TabIndex = 2;
             // 
             // btnThemDV
@@ -159,7 +159,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label4.Location = new System.Drawing.Point(349, 111);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 18);
+            this.label4.Size = new System.Drawing.Size(45, 15);
             this.label4.TabIndex = 3;
             this.label4.Text = "Địa chỉ";
             // 
@@ -169,7 +169,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label3.Location = new System.Drawing.Point(349, 48);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 18);
+            this.label3.Size = new System.Drawing.Size(79, 15);
             this.label3.TabIndex = 2;
             this.label3.Text = "Số điện thoại";
             // 
@@ -179,7 +179,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label2.Location = new System.Drawing.Point(19, 115);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 18);
+            this.label2.Size = new System.Drawing.Size(95, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Tên khách hàng";
             // 
@@ -189,7 +189,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label1.Location = new System.Drawing.Point(19, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 18);
+            this.label1.Size = new System.Drawing.Size(92, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã khách hàng";
             // 
@@ -266,7 +266,7 @@
             this.ClientSize = new System.Drawing.Size(965, 588);
             this.Controls.Add(this.splitContainer1);
             this.Name = "FAddHD";
-            this.Text = "FAddHD";
+            this.Text = "Thêm hóa đơn";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
