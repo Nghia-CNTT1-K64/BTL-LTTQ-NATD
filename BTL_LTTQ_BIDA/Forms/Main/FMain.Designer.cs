@@ -32,10 +32,10 @@
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thôngTinTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.tvHD = new System.Windows.Forms.TreeView();
             this.btnXuatHD = new System.Windows.Forms.Button();
-            this.btnThemHD = new System.Windows.Forms.Button();
+            this.tvHD = new System.Windows.Forms.TreeView();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnThemHD = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -45,31 +45,32 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adminToolStripMenuItem,
             this.thôngTinTàiKhoảnToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1055, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1055, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(107, 26);
             this.adminToolStripMenuItem.Text = "Quản trị viên";
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
             // 
             this.thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
-            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
+            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
             this.thôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản";
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 30);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -81,16 +82,9 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.flpTable);
             this.splitContainer1.Panel2.Controls.Add(this.btnThemHD);
-            this.splitContainer1.Size = new System.Drawing.Size(1055, 522);
+            this.splitContainer1.Size = new System.Drawing.Size(1055, 516);
             this.splitContainer1.SplitterDistance = 351;
             this.splitContainer1.TabIndex = 1;
-            // 
-            // tvHD
-            // 
-            this.tvHD.Location = new System.Drawing.Point(3, 3);
-            this.tvHD.Name = "tvHD";
-            this.tvHD.Size = new System.Drawing.Size(345, 462);
-            this.tvHD.TabIndex = 0;
             // 
             // btnXuatHD
             // 
@@ -101,6 +95,20 @@
             this.btnXuatHD.Text = "Xuất hóa đơn";
             this.btnXuatHD.UseVisualStyleBackColor = true;
             // 
+            // tvHD
+            // 
+            this.tvHD.Location = new System.Drawing.Point(3, 3);
+            this.tvHD.Name = "tvHD";
+            this.tvHD.Size = new System.Drawing.Size(345, 462);
+            this.tvHD.TabIndex = 0;
+            // 
+            // flpTable
+            // 
+            this.flpTable.Location = new System.Drawing.Point(3, 96);
+            this.flpTable.Name = "flpTable";
+            this.flpTable.Size = new System.Drawing.Size(697, 426);
+            this.flpTable.TabIndex = 4;
+            // 
             // btnThemHD
             // 
             this.btnThemHD.Location = new System.Drawing.Point(3, 3);
@@ -109,13 +117,6 @@
             this.btnThemHD.TabIndex = 3;
             this.btnThemHD.Text = "Thêm hóa đơn mới";
             this.btnThemHD.UseVisualStyleBackColor = true;
-            // 
-            // flpTable
-            // 
-            this.flpTable.Location = new System.Drawing.Point(3, 96);
-            this.flpTable.Name = "flpTable";
-            this.flpTable.Size = new System.Drawing.Size(697, 426);
-            this.flpTable.TabIndex = 4;
             // 
             // FMain
             // 
