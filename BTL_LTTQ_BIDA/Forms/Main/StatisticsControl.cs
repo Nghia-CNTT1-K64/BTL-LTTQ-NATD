@@ -187,14 +187,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void DrawChart(DataTable table)
         {
-            barChart.ChartItems.Clear();
-            foreach (DataRow row in table.Rows)
-            {
-                var name = row[0].ToString();
-                var value = Convert.ToDouble(row["DOANHTHU"]);
-                barChart.ChartItems.Add(new ChartItem<double>(name, value));
-            }
-
+            // ✅ Cập nhật thông tin biểu đồ cơ bản
             barChart.HorizontalText = comboBox_TableType.Text;
             barChart.VerticalText = "Doanh thu (VNĐ)";
 
@@ -206,8 +199,17 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
             panel_Chart.AutoScroll = true;
             panel_Chart.AutoScrollMinSize = new Size(barChart.Width, barChart.Height);
-            barChart.Refresh();
+
+            // ✅ Phân trang biểu đồ
+            beginIndex = 0;
+            endIndex = Math.Min(15, table.Rows.Count);
+            currentPageNum = 1;
+            maxPageNum = (int)Math.Ceiling(table.Rows.Count / 15.0);
+
+            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
+            UpdateChartPage(); // 👉 Vẽ 15 dòng đầu tiên
         }
+
 
         private void AdjustZoom(int direction)
         {
@@ -289,6 +291,72 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
             return g == 1 ? "CAST(h.NGAYLAP AS DATE)" : "YEAR(h.NGAYLAP), MONTH(h.NGAYLAP)";
         }
+
+        // ====== Các biến hỗ trợ phân trang ======
+        private int currentPageNum = 1;
+        private int maxPageNum = 1;
+        private int beginIndex = 0;
+        private int endIndex = 0;
+
+        // =======================================
+        // ====== Nút lùi trang (Previous) =======
+        private void button_PageDecrease_Click(object sender, EventArgs e)
+        {
+            if (currentTable == null || currentTable.Rows.Count == 0) return;
+            if (currentPageNum <= 1) return;
+
+            currentPageNum--;
+            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
+
+            endIndex = beginIndex;
+            beginIndex -= 15;
+            if (beginIndex < 0) beginIndex = 0;
+
+            UpdateChartPage();
+        }
+
+        // =======================================
+        // ====== Nút tiến trang (Next) ==========
+        private void button_PageIncrease_Click(object sender, EventArgs e)
+        {
+            if (currentTable == null || currentTable.Rows.Count == 0) return;
+            if (currentPageNum >= maxPageNum) return;
+
+            currentPageNum++;
+            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
+
+            beginIndex = endIndex;
+            endIndex += 15;
+            if (endIndex > currentTable.Rows.Count) endIndex = currentTable.Rows.Count;
+
+            UpdateChartPage();
+        }
+
+        // =======================================
+        // ====== Khi label_Page thay đổi ========
+        private void label_Page_TextChanged(object sender, EventArgs e)
+        {
+            // Bật / tắt nút điều hướng
+            button_PageDecrease.Enabled = currentPageNum > 1;
+            button_PageIncrease.Enabled = currentPageNum < maxPageNum;
+        }
+
+        // =======================================
+        // ====== Hàm cập nhật biểu đồ trang =====
+        private void UpdateChartPage()
+        {
+            barChart.ChartItems.Clear();
+
+            for (int i = beginIndex; i < endIndex; i++)
+            {
+                var name = currentTable.Rows[i][0].ToString();
+                double value = Convert.ToDouble(currentTable.Rows[i]["DOANHTHU"]);
+                barChart.ChartItems.Add(new ChartItem<double>(name, value));
+            }
+
+            barChart.Refresh();
+        }
+
 
         private string GetCondition()
         {

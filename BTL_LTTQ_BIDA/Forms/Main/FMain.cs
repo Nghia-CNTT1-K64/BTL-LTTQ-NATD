@@ -13,10 +13,6 @@ namespace BTL_LTTQ_BIDA
 {
     public partial class FMain : Form
     {
-        public static int IDKH { get; set; }
-        public static int IDHD { get; set; }
-        public static int IDNV_Current { get; set; }
-        public static bool IsAdminState { get; set; }
         public FMain()
         {
             InitializeComponent();
