@@ -57,6 +57,7 @@
             this.btnDuyet.TabIndex = 1;
             this.btnDuyet.Text = "Duyệt";
             this.btnDuyet.UseVisualStyleBackColor = true;
+            
             // 
             // btnDuyetTatCa
             // 
@@ -66,6 +67,7 @@
             this.btnDuyetTatCa.TabIndex = 2;
             this.btnDuyetTatCa.Text = "Duyệt tất cả";
             this.btnDuyetTatCa.UseVisualStyleBackColor = true;
+            
             // 
             // btnXoaTatCa
             // 
@@ -75,6 +77,7 @@
             this.btnXoaTatCa.TabIndex = 4;
             this.btnXoaTatCa.Text = "Xóa tất cả";
             this.btnXoaTatCa.UseVisualStyleBackColor = true;
+            
             // 
             // btnXoa
             // 
@@ -85,10 +88,11 @@
             this.btnXoa.TabIndex = 3;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            
             // 
             // AccountToApproveDlg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 499);
             this.Controls.Add(this.btnXoaTatCa);

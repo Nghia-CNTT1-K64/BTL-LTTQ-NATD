@@ -72,6 +72,18 @@
     <Compile Include="Forms\Bill\FAddHD.Designer.cs">
       <DependentUpon>FAddHD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Main\BarChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\BarChart.Designer.cs">
+      <DependentUpon>BarChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\StatisticsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\StatisticsControl.Designer.cs">
+      <DependentUpon>StatisticsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Table\AddTableDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +143,9 @@
     <EmbeddedResource Include="Forms\Main\AdminMenu.resx">
       <DependentUpon>AdminMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\BarChart.resx">
+      <DependentUpon>BarChart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\FMain.resx">
       <DependentUpon>FMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\SignUpDlg.resx">
       <DependentUpon>SignUpDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\StatisticsControl.resx">
+      <DependentUpon>StatisticsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Service\FAddService.resx">
       <DependentUpon>FAddService.cs</DependentUpon>
@@ -166,7 +184,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Images\NATD-BILLIARD.png" />
   </ItemGroup>

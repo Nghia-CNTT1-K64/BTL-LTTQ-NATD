@@ -16,5 +16,10 @@ namespace BTL_LTTQ_BIDA.Forms.Account
         {
             InitializeComponent();
         }
+
+        private void btnDuyet_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
