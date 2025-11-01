@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTL_LTTQ_BIDA.Forms.Account;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,9 +18,15 @@ namespace BTL_LTTQ_BIDA
             InitializeComponent();
         }
 
-        private void btnThemHD_Click(object sender, EventArgs e)
+        private void FMain_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void thôngTinTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AccountInfoDlg form = new AccountInfoDlg();
+            form.ShowDialog();
         }
     }
 }
