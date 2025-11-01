@@ -18,19 +18,19 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             InitializeComponent();
         }
 
-        // ============================================================
-        // 🔹 FORM LOAD
-        // ============================================================
+        // FORM LOAD
         private void AdminMenu_Load(object sender, EventArgs e)
         {
             ShowPanel(pAdminNhanVien);
             InitDgvDichVu();
             UpdateDichVu();
+
+            // Ensure ID textbox is never editable by the user
+            txtMaDV.ReadOnly = true;
+            txtMaDV.TabStop = false;
         }
 
-        // ============================================================
-        // 🔹 CẤU HÌNH DGV DỊCH VỤ
-        // ============================================================
+        // DGV SETUP
         private void InitDgvDichVu()
         {
             dgvDichVu.Columns.Clear();
@@ -61,15 +61,16 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             dgvDichVu.Columns["SOLUONG"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        // ============================================================
-        // 🔹 LOAD DỮ LIỆU DỊCH VỤ
-        // ============================================================
+        // LOAD DATA
         private void UpdateDichVu()
         {
             try
             {
                 var table = dtBase.ReadData("SELECT * FROM DICHVU ORDER BY IDDV");
                 dgvDichVu.Rows.Clear();
+
+                if (table == null || table.Rows.Count == 0)
+                    return;
 
                 foreach (DataRow row in table.Rows)
                 {
@@ -94,9 +95,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             }
         }
 
-        // ============================================================
-        // 🔹 CHUYỂN PANEL
-        // ============================================================
+        // PANEL SWITCH
         private void ShowPanel(Panel targetPanel)
         {
             pAdminNhanVien.Visible = pAdminBan.Visible = pAdminDichVu.Visible = pAdminThongKe.Visible = false;
@@ -123,9 +122,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             ShowPanel(pAdminThongKe);
         }
 
-        // ============================================================
-        // 🔹 NÚT TRỞ VỀ
-        // ============================================================
+        // NAVIGATION BACK TO MAIN
         private void btnTroVe_Click(object sender, EventArgs e)
         {
             Hide();
@@ -138,9 +135,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             mainForm.Show();
         }
 
-        // ============================================================
-        // 🔹 CHỌN DÒNG TRONG DGV
-        // ============================================================
+        // DGV ROW SELECTED
         private void dgvDichVu_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.RowIndex >= dgvDichVu.Rows.Count)
@@ -150,7 +145,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
             txtMaDV.Text = Convert.ToString(row.Cells["IDDV"].Value) ?? string.Empty;
             txtTenDV.Text = Convert.ToString(row.Cells["TENDV"].Value) ?? string.Empty;
-
             txtGiaDV.Text = (Convert.ToString(row.Cells["GIATIEN"].Value) ?? string.Empty).Replace(CurrencySuffix, "").Trim();
             txtSoLuong.Text = Convert.ToString(row.Cells["SOLUONG"].Value) ?? string.Empty;
             oldIDDV = txtMaDV.Text.Trim();
@@ -160,14 +154,17 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             btnHienThiLai.Enabled = string.Equals(hienThiValue, "Không", StringComparison.OrdinalIgnoreCase);
         }
 
-        // ============================================================
-        // 🔹 CHỈNH SỬA DỊCH VỤ
-        // ============================================================
+        // EDIT SERVICE
         private void btnChinhSuaDV_Click(object sender, EventArgs e)
         {
             bool isEditing = btnChinhSuaDV.Text == "Chỉnh sửa";
 
-            txtTenDV.ReadOnly = txtGiaDV.ReadOnly = txtSoLuong.ReadOnly = txtMaDV.ReadOnly = !isEditing;
+            // Allow editing only for name, price and quantity. ID must stay read-only.
+            txtTenDV.ReadOnly = !isEditing;
+            txtGiaDV.ReadOnly = !isEditing;
+            txtSoLuong.ReadOnly = !isEditing;
+            txtMaDV.ReadOnly = true; // never editable
+
             btnChinhSuaDV.Text = isEditing ? "Lưu" : "Chỉnh sửa";
 
             if (!isEditing)
@@ -206,9 +203,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             }
         }
 
-        // ============================================================
-        // 🔹 ẨN / HIỂN THỊ DỊCH VỤ
-        // ============================================================
+        // SHOW / HIDE SERVICE
         private void btnBoHienThi_Click(object sender, EventArgs e) => SetServiceVisibility(false);
         private void btnHienThiLai_Click(object sender, EventArgs e) => SetServiceVisibility(true);
 
@@ -232,21 +227,21 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             UpdateDichVu();
         }
 
-        // ============================================================
-        // 🔹 THÊM DỊCH VỤ
-        // ============================================================
+        // ADD SERVICE
         private void btnThemDV_Click(object sender, EventArgs e)
         {
-            using (var dlg = new FAddService())
+            // Mở form FAddService ở dạng non-modal (song song, không chặn)
+            var frm = new FAddService();
+            frm.FormClosed += (s, args) =>
             {
-                if (dlg.ShowDialog() == DialogResult.OK)
-                    UpdateDichVu();
-            }
+                // Cập nhật danh sách dịch vụ sau khi form đóng
+                UpdateDichVu();
+            };
+            frm.Show(); // ✅ KHÔNG DÙNG ShowDialog()
         }
 
-        // ============================================================
-        // 🔹 XÓA DỊCH VỤ
-        // ============================================================
+
+        // DELETE SERVICE (double-click)
         private void dgvDichVu_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.RowIndex >= dgvDichVu.Rows.Count)

@@ -1,10 +1,12 @@
-﻿using BTL_LTTQ_BIDA.Data;
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using BTL_LTTQ_BIDA.Data;
 
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
@@ -19,6 +21,14 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private readonly float[] zoomRatioArr = { 0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f };
         private int currentZoomRatioIndex = 3;
 
+        private int currentPageNum = 1;
+        private int maxPageNum = 1;
+        private int beginIndex = 0;
+        private int endIndex = 0;
+
+        // ==============================================
+        // CONSTRUCTOR
+        // ==============================================
         public StatisticsControl()
         {
             InitializeComponent();
@@ -30,7 +40,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 AutoCalculateVerticalValueList = true
             };
 
-            // enable double buffering on the control to reduce flicker
+            // Enable double buffering to reduce flicker
             typeof(Panel).InvokeMember(
                 "DoubleBuffered",
                 System.Reflection.BindingFlags.SetProperty |
@@ -39,6 +49,9 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 null, barChart, new object[] { true });
         }
 
+        // ==============================================
+        // FORM LOAD
+        // ==============================================
         private void StatisticsControl_Load(object sender, EventArgs e)
         {
             InitImageLists();
@@ -52,15 +65,17 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             button_AxisColor.BackColor = barChart.AxisColor;
         }
 
+        // ==============================================
+        // INITIALIZATION
+        // ==============================================
         private void InitImageLists()
         {
             var basePath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\Images"));
-
             imageListSmall.Images.Clear();
+            imageList32x32.Images.Clear();
+
             imageListSmall.ImageSize = new Size(16, 16);
             imageListSmall.ColorDepth = ColorDepth.Depth32Bit;
-
-            imageList32x32.Images.Clear();
             imageList32x32.ImageSize = new Size(32, 32);
             imageList32x32.ColorDepth = ColorDepth.Depth32Bit;
 
@@ -95,6 +110,9 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             dateTimePicker_EndDate.Value = endDate;
         }
 
+        // ==============================================
+        // EVENTS
+        // ==============================================
         private void CheckBox_ValueLabel_CheckedChanged(object sender, EventArgs e)
         {
             barChart.IsValueLabelShowed = checkBox_ValueLabel.Checked;
@@ -105,9 +123,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             comboBox_ID.Items.Clear();
             comboBox_Name.Items.Clear();
 
-            var index = comboBox_TableType.SelectedIndex;
             string sql;
-            switch (index)
+            switch (comboBox_TableType.SelectedIndex)
             {
                 case 0: sql = "SELECT IDHD FROM HOADON"; break;
                 case 1: sql = "SELECT IDDV, TENDV FROM DICHVU"; break;
@@ -127,6 +144,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private void ButtonShow_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
+
             try
             {
                 startDate = dateTimePicker_StartDate.Value.Date;
@@ -144,12 +162,11 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                     return;
                 }
 
-                var sql =
-                    "SELECT " + GetSelect() +
-                    ", DOANHTHU = SUM(" + GetSumExpression() + ") " +
-                    "FROM " + GetTableName() + " " +
-                    GetCondition() +
-                    " GROUP BY " + GetGroupBy();
+                var sql = "SELECT " + GetSelect() +
+                          ", DOANHTHU = SUM(" + GetSumExpression() + ") " +
+                          "FROM " + GetTableName() + " " +
+                          GetCondition() +
+                          " GROUP BY " + GetGroupBy();
 
                 currentTable = dtBase.ReadData(sql);
 
@@ -176,6 +193,98 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private void button_ZoomIn_Click(object sender, EventArgs e) => AdjustZoom(1);
         private void button_ZoomOut_Click(object sender, EventArgs e) => AdjustZoom(-1);
 
+        private void label_Page_TextChanged(object sender, EventArgs e)
+        {
+            button_PageDecrease.Enabled = currentPageNum > 1;
+            button_PageIncrease.Enabled = currentPageNum < maxPageNum;
+        }
+
+        // ==============================================
+        // DRAW CHART
+        // ==============================================
+        private void DrawChart(DataTable table)
+        {
+            barChart.HorizontalText = comboBox_TableType.Text;
+            barChart.VerticalText = "Doanh thu (VNĐ)";
+
+            panel_Chart.AutoScroll = false;
+
+            beginIndex = 0;
+            endIndex = Math.Min(15, table.Rows.Count);
+            currentPageNum = 1;
+            maxPageNum = (int)Math.Ceiling(table.Rows.Count / 15.0);
+
+            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
+
+            barChart.Dock = DockStyle.Fill;
+            barChart.Width = panel_Chart.Width - 5;
+            barChart.Height = panel_Chart.Height - 5;
+
+            UpdateChartPage();
+            barChart.Refresh();
+        }
+
+        private void UpdateChartPage()
+        {
+            barChart.ChartItems.Clear();
+
+            for (int i = beginIndex; i < endIndex; i++)
+            {
+                string name = currentTable.Rows[i][0].ToString();
+                double value = Convert.ToDouble(currentTable.Rows[i]["DOANHTHU"]);
+                barChart.ChartItems.Add(new ChartItem<double>(name, value));
+            }
+
+            barChart.Refresh();
+        }
+
+        // ==============================================
+        // PAGINATION
+        // ==============================================
+        private void button_PageDecrease_Click(object sender, EventArgs e)
+        {
+            if (currentTable == null || currentTable.Rows.Count == 0 || currentPageNum <= 1) return;
+
+            currentPageNum--;
+            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
+
+            endIndex = beginIndex;
+            beginIndex = Math.Max(0, beginIndex - 15);
+
+            UpdateChartPage();
+        }
+
+        private void button_PageIncrease_Click(object sender, EventArgs e)
+        {
+            if (currentTable == null || currentTable.Rows.Count == 0 || currentPageNum >= maxPageNum) return;
+
+            currentPageNum++;
+            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
+
+            beginIndex = endIndex;
+            endIndex = Math.Min(currentTable.Rows.Count, endIndex + 15);
+
+            UpdateChartPage();
+        }
+
+        // ==============================================
+        // OTHER METHODS
+        // ==============================================
+        private void AdjustZoom(int direction)
+        {
+            int newIndex = currentZoomRatioIndex + direction;
+            if (newIndex < 0 || newIndex >= zoomRatioArr.Length) return;
+
+            currentZoomRatioIndex = newIndex;
+            float zoom = zoomRatioArr[currentZoomRatioIndex];
+
+            barChart.ZoomRatio = zoom;
+            barChart.Refresh();
+
+            button_ZoomOut.Enabled = currentZoomRatioIndex > 0;
+            button_ZoomIn.Enabled = currentZoomRatioIndex < zoomRatioArr.Length - 1;
+        }
+
         private void DisplaySummary(DataTable table)
         {
             var rows = table.Rows.Cast<DataRow>();
@@ -185,51 +294,9 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             textBox_MinValue.Text = rows.Min(r => Convert.ToDecimal(r["DOANHTHU"])).ToString("C0");
         }
 
-        private void DrawChart(DataTable table)
-        {
-            // ✅ Cập nhật thông tin biểu đồ cơ bản
-            barChart.HorizontalText = comboBox_TableType.Text;
-            barChart.VerticalText = "Doanh thu (VNĐ)";
-
-            var numBars = table.Rows.Count;
-            var totalWidth = Math.Max(panel_Chart.Width, numBars * 120);
-
-            barChart.Width = totalWidth;
-            barChart.Height = panel_Chart.Height - 10;
-
-            panel_Chart.AutoScroll = true;
-            panel_Chart.AutoScrollMinSize = new Size(barChart.Width, barChart.Height);
-
-            // ✅ Phân trang biểu đồ
-            beginIndex = 0;
-            endIndex = Math.Min(15, table.Rows.Count);
-            currentPageNum = 1;
-            maxPageNum = (int)Math.Ceiling(table.Rows.Count / 15.0);
-
-            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
-            UpdateChartPage(); // 👉 Vẽ 15 dòng đầu tiên
-        }
-
-
-        private void AdjustZoom(int direction)
-        {
-            var newIndex = currentZoomRatioIndex + direction;
-            if (newIndex < 0 || newIndex >= zoomRatioArr.Length) return;
-
-            currentZoomRatioIndex = newIndex;
-            var zoom = zoomRatioArr[currentZoomRatioIndex];
-
-            barChart.ZoomRatio = zoom;
-            barChart.Width = (int)(barChart.Width * zoom);
-            barChart.Height = (int)(barChart.Height * zoom);
-
-            button_ZoomOut.Enabled = currentZoomRatioIndex > 0;
-            button_ZoomIn.Enabled = currentZoomRatioIndex < zoomRatioArr.Length - 1;
-
-            barChart.Refresh();
-            barChart.Parent?.PerformLayout();
-        }
-
+        // ==============================================
+        // SQL HELPERS
+        // ==============================================
         private string GetTableName()
         {
             switch (comboBox_TableType.SelectedIndex)
@@ -254,8 +321,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private string GetSelect()
         {
-            var g = comboBox_GroupBy.SelectedIndex;
-            var t = comboBox_TableType.SelectedIndex;
+            int g = comboBox_GroupBy.SelectedIndex;
+            int t = comboBox_TableType.SelectedIndex;
 
             if (g == 0)
             {
@@ -269,13 +336,14 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 }
             }
 
-            return g == 1 ? "NGHD = CAST(h.NGAYLAP AS DATE)" : "NAM = YEAR(h.NGAYLAP), THANG = MONTH(h.NGAYLAP)";
+            return g == 1 ? "NGHD = CAST(h.NGAYLAP AS DATE)" :
+                            "NAM = YEAR(h.NGAYLAP), THANG = MONTH(h.NGAYLAP)";
         }
 
         private string GetGroupBy()
         {
-            var g = comboBox_GroupBy.SelectedIndex;
-            var t = comboBox_TableType.SelectedIndex;
+            int g = comboBox_GroupBy.SelectedIndex;
+            int t = comboBox_TableType.SelectedIndex;
 
             if (g == 0)
             {
@@ -289,106 +357,145 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 }
             }
 
-            return g == 1 ? "CAST(h.NGAYLAP AS DATE)" : "YEAR(h.NGAYLAP), MONTH(h.NGAYLAP)";
+            return g == 1 ? "CAST(h.NGAYLAP AS DATE)" :
+                            "YEAR(h.NGAYLAP), MONTH(h.NGAYLAP)";
         }
-
-        // ====== Các biến hỗ trợ phân trang ======
-        private int currentPageNum = 1;
-        private int maxPageNum = 1;
-        private int beginIndex = 0;
-        private int endIndex = 0;
-
-        // =======================================
-        // ====== Nút lùi trang (Previous) =======
-        private void button_PageDecrease_Click(object sender, EventArgs e)
-        {
-            if (currentTable == null || currentTable.Rows.Count == 0) return;
-            if (currentPageNum <= 1) return;
-
-            currentPageNum--;
-            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
-
-            endIndex = beginIndex;
-            beginIndex -= 15;
-            if (beginIndex < 0) beginIndex = 0;
-
-            UpdateChartPage();
-        }
-
-        // =======================================
-        // ====== Nút tiến trang (Next) ==========
-        private void button_PageIncrease_Click(object sender, EventArgs e)
-        {
-            if (currentTable == null || currentTable.Rows.Count == 0) return;
-            if (currentPageNum >= maxPageNum) return;
-
-            currentPageNum++;
-            label_Page.Text = $"Trang {currentPageNum}/{maxPageNum}";
-
-            beginIndex = endIndex;
-            endIndex += 15;
-            if (endIndex > currentTable.Rows.Count) endIndex = currentTable.Rows.Count;
-
-            UpdateChartPage();
-        }
-
-        // =======================================
-        // ====== Khi label_Page thay đổi ========
-        private void label_Page_TextChanged(object sender, EventArgs e)
-        {
-            // Bật / tắt nút điều hướng
-            button_PageDecrease.Enabled = currentPageNum > 1;
-            button_PageIncrease.Enabled = currentPageNum < maxPageNum;
-        }
-
-        // =======================================
-        // ====== Hàm cập nhật biểu đồ trang =====
-        private void UpdateChartPage()
-        {
-            barChart.ChartItems.Clear();
-
-            for (int i = beginIndex; i < endIndex; i++)
-            {
-                var name = currentTable.Rows[i][0].ToString();
-                double value = Convert.ToDouble(currentTable.Rows[i]["DOANHTHU"]);
-                barChart.ChartItems.Add(new ChartItem<double>(name, value));
-            }
-
-            barChart.Refresh();
-        }
-
 
         private string GetCondition()
         {
-            var t = comboBox_TableType.SelectedIndex;
-            var where = "WHERE ";
+            int t = comboBox_TableType.SelectedIndex;
+            string where = "WHERE ";
 
             if (comboBox_ID.SelectedIndex != -1)
             {
-                var id = comboBox_ID.SelectedItem.ToString();
-                var col = t == 0 ? "h.IDHD" :
-                          t == 1 ? "dv.IDDV" :
-                          t == 2 ? "h.IDKH" :
-                          t == 3 ? "h.IDNV" : "b.IDBAN";
-                where += col + " = N'" + id + "' AND ";
+                string id = comboBox_ID.SelectedItem.ToString();
+                string col = t == 0 ? "h.IDHD" :
+                             t == 1 ? "dv.IDDV" :
+                             t == 2 ? "h.IDKH" :
+                             t == 3 ? "h.IDNV" : "b.IDBAN";
+                where += $"{col} = N'{id}' AND ";
             }
+
+            string s = startDate.ToString("yyyy-MM-dd");
+            string e = endDate.ToString("yyyy-MM-dd");
 
             if (comboBox_GroupBy.SelectedIndex <= 1)
-            {
-                var s = startDate.ToString("yyyy-MM-dd");
-                var e = endDate.ToString("yyyy-MM-dd");
                 where += $"CAST(h.NGAYLAP AS DATE) BETWEEN '{s}' AND '{e}'";
-            }
             else
-            {
-                var s = startDate.ToString("yyyy-MM-dd");
-                var e = endDate.ToString("yyyy-MM-dd");
                 where += "YEAR(h.NGAYLAP) * 12 + MONTH(h.NGAYLAP) BETWEEN " +
-                         $"YEAR('{s}') * 12 + MONTH('{s}') AND " +
-                         $"YEAR('{e}') * 12 + MONTH('{e}')";
-            }
+                         $"YEAR('{s}') * 12 + MONTH('{s}') AND YEAR('{e}') * 12 + MONTH('{e}')";
 
             return where;
+        }
+
+        private void button_ExportExcel_Click(object sender, EventArgs e)
+        {
+            if (currentTable == null || currentTable.Rows.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                using (var sfd = new SaveFileDialog
+                {
+                    Filter = "Excel Workbook (*.xlsx)|*.xlsx",
+                    FileName = $"ThongKe_{comboBox_TableType.Text}_{DateTime.Now:yyyyMMdd_HHmm}.xlsx"
+                })
+                {
+                    if (sfd.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    // Create Excel application
+                    Excel.Application app = null;
+                    Excel.Workbook workbook = null;
+                    Excel.Worksheet sheet = null;
+                    Excel.Chart chart = null;
+                    Excel.ChartObject chartObject = null;
+
+                    try
+                    {
+                        app = new Excel.Application();
+                        workbook = app.Workbooks.Add(Type.Missing);
+                        sheet = (Excel.Worksheet)workbook.Sheets[1];
+                        sheet.Name = "ThongKe";
+
+                        // Title
+                        sheet.Cells[1, 1] = "THỐNG KÊ DOANH THU " + comboBox_TableType.Text.ToUpper();
+                        Excel.Range titleRange = sheet.Range["A1", "D1"];
+                        titleRange.Merge();
+                        titleRange.Font.Size = 14;
+                        titleRange.Font.Bold = true;
+                        titleRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+
+                        // Column headers
+                        for (int i = 0; i < currentTable.Columns.Count; i++)
+                        {
+                            sheet.Cells[3, i + 1] = currentTable.Columns[i].ColumnName;
+                            Excel.Range cell = (Excel.Range)sheet.Cells[3, i + 1];
+                            cell.Font.Bold = true;
+                            cell.Interior.Color = ColorTranslator.ToOle(Color.LightCyan);
+                            cell.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                        }
+
+                        // Data
+                        for (int i = 0; i < currentTable.Rows.Count; i++)
+                        {
+                            for (int j = 0; j < currentTable.Columns.Count; j++)
+                            {
+                                sheet.Cells[i + 4, j + 1] = currentTable.Rows[i][j].ToString();
+                                ((Excel.Range)sheet.Cells[i + 4, j + 1]).Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                            }
+                        }
+
+                        // Auto fit and chart
+                        sheet.Columns.AutoFit();
+
+                        var charts = (Excel.ChartObjects)sheet.ChartObjects(Type.Missing);
+                        chartObject = charts.Add(350, 60, 500, 300);
+                        chart = chartObject.Chart;
+
+                        Excel.Range chartRange = sheet.Range[
+                            sheet.Cells[3, 1],
+                            sheet.Cells[currentTable.Rows.Count + 3, currentTable.Columns.Count]
+                        ];
+
+                        chart.SetSourceData(chartRange);
+                        chart.ChartType = Excel.XlChartType.xlColumnClustered;
+                        chart.ChartTitle.Text = "Biểu đồ doanh thu " + comboBox_TableType.Text;
+                        chart.HasLegend = true;
+                        chart.Legend.Position = Excel.XlLegendPosition.xlLegendPositionBottom;
+                        chart.Axes(Excel.XlAxisType.xlCategory).HasTitle = true;
+                        chart.Axes(Excel.XlAxisType.xlCategory).AxisTitle.Text = comboBox_TableType.Text;
+                        chart.Axes(Excel.XlAxisType.xlValue).HasTitle = true;
+                        chart.Axes(Excel.XlAxisType.xlValue).AxisTitle.Text = "Doanh thu (VNĐ)";
+
+                        // Save
+                        workbook.SaveAs(sfd.FileName);
+                    }
+                    finally
+                    {
+                        // Close and release COM objects
+                        try { workbook?.Close(); } catch { }
+                        try { app?.Quit(); } catch { }
+
+                        if (chart != null) Marshal.ReleaseComObject(chart);
+                        if (chartObject != null) Marshal.ReleaseComObject(chartObject);
+                        if (sheet != null) Marshal.ReleaseComObject(sheet);
+                        if (workbook != null) Marshal.ReleaseComObject(workbook);
+                        if (app != null) Marshal.ReleaseComObject(app);
+                    }
+
+                    MessageBox.Show($"✅ Xuất file Excel thành công!\nĐường dẫn:\n{sfd.FileName}",
+                        "Hoàn tất", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Lỗi khi xuất Excel: " + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
