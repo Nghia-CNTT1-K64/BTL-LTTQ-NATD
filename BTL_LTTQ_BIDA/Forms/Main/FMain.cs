@@ -4,7 +4,7 @@ using BTL_LTTQ_BIDA.Forms.Main;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+using System.Data; // <<< TÔI ĐÃ THÊM THƯ VIỆN NÀY
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
@@ -12,7 +12,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using BTL_LTTQ_BIDA.Utils;
+//dung de ket noi sql
+using System.Data.SqlClient;
 
 namespace BTL_LTTQ_BIDA
 {

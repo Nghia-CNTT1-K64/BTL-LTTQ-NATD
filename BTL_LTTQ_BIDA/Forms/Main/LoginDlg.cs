@@ -28,5 +28,15 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         {
 
         }
+
+        private void txtMatKhau_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTenDN_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

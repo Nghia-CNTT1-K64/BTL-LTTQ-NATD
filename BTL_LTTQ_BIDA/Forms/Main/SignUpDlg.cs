@@ -16,5 +16,10 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace BTL_LTTQ_BIDA.Data
                 sqlconnect.Open();
         }
 
+        // đóng kết nối
         public void CloseConnect()
         {
             if (sqlconnect != null && sqlconnect.State != ConnectionState.Closed)

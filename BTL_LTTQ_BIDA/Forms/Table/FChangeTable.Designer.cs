@@ -65,6 +65,7 @@
             this.cboBanMoi.Name = "cboBanMoi";
             this.cboBanMoi.Size = new System.Drawing.Size(121, 24);
             this.cboBanMoi.TabIndex = 3;
+            this.cboBanMoi.SelectedIndexChanged += new System.EventHandler(this.cboBanMoi_SelectedIndexChanged);
             // 
             // btnDoiBan
             // 
