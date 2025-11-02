@@ -1,6 +1,6 @@
 ﻿namespace BTL_LTTQ_BIDA.Forms.Main
 {
-    partial class frmThemBanMoi
+    partial class AddTableDlg
     {
         /// <summary>
         /// Required designer variable.
@@ -98,7 +98,7 @@
             this.btnHuy.UseVisualStyleBackColor = true;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
-            // frmThemBanMoi
+            // AddTableDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,7 +109,7 @@
             this.Controls.Add(this.txtMaBan);
             this.Controls.Add(this.lblGiaTien);
             this.Controls.Add(this.lblMaBan);
-            this.Name = "frmThemBanMoi";
+            this.Name = "AddTableDlg";
             this.Text = "Thêm bàn mới";
             this.Load += new System.EventHandler(this.frmThemBanMoi_Load);
             this.ResumeLayout(false);

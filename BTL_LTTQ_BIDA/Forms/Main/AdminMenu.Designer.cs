@@ -25,6 +25,18 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.btnQLBan = new System.Windows.Forms.Button();
             this.btnQLDichVu = new System.Windows.Forms.Button();
             this.pAdminNhanVien = new System.Windows.Forms.Panel();
+            this.btnTuyenDungLai = new System.Windows.Forms.Button();
+            this.btnXuatDSNhanVien = new System.Windows.Forms.Button();
+            this.txtSDT = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnTuyenDung = new System.Windows.Forms.Button();
+            this.btnChoNghiViec = new System.Windows.Forms.Button();
+            this.btnChinhSua = new System.Windows.Forms.Button();
+            this.txtTenDN = new System.Windows.Forms.TextBox();
+            this.txtCCCD = new System.Windows.Forms.TextBox();
+            this.txtTenNV = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -166,7 +178,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.btnQLBan.TabIndex = 2;
             this.btnQLBan.Text = "QUẢN LÝ BÀN";
             this.btnQLBan.UseVisualStyleBackColor = true;
-            this.btnQLBan.Click += new System.EventHandler(this.btnQLBan_Click);
+            this.btnQLBan.Click += new System.EventHandler(this.btnQLBan_Click_1);
             // 
             // btnQLDichVu
             // 
@@ -178,11 +190,35 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.btnQLDichVu.TabIndex = 1;
             this.btnQLDichVu.Text = "QUẢN LÝ DỊCH VỤ";
             this.btnQLDichVu.UseVisualStyleBackColor = true;
-            this.btnQLDichVu.Click += new System.EventHandler(this.btnQLDichVu_Click);
+            this.btnQLDichVu.Click += new System.EventHandler(this.btnQLDichVu_Click_1);
+            // 
+            // btnQLNhanVien
+            // 
+            this.btnQLNhanVien.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnQLNhanVien.Location = new System.Drawing.Point(3, 3);
+            this.btnQLNhanVien.Name = "btnQLNhanVien";
+            this.btnQLNhanVien.Size = new System.Drawing.Size(209, 96);
+            this.btnQLNhanVien.TabIndex = 0;
+            this.btnQLNhanVien.Text = "QUẢN LÝ NHÂN VIÊN";
+            this.btnQLNhanVien.UseVisualStyleBackColor = true;
+            this.btnQLNhanVien.Click += new System.EventHandler(this.btnQLNhanVien_Click_1);
             // 
             // pAdminNhanVien
             // 
-            this.pAdminNhanVien.BackColor = System.Drawing.Color.White;
+            this.pAdminNhanVien.Controls.Add(this.btnTuyenDungLai);
+            this.pAdminNhanVien.Controls.Add(this.btnXuatDSNhanVien);
+            this.pAdminNhanVien.Controls.Add(this.txtSDT);
+            this.pAdminNhanVien.Controls.Add(this.label13);
+            this.pAdminNhanVien.Controls.Add(this.btnTuyenDung);
+            this.pAdminNhanVien.Controls.Add(this.btnChoNghiViec);
+            this.pAdminNhanVien.Controls.Add(this.btnChinhSua);
+            this.pAdminNhanVien.Controls.Add(this.txtTenDN);
+            this.pAdminNhanVien.Controls.Add(this.txtCCCD);
+            this.pAdminNhanVien.Controls.Add(this.txtTenNV);
+            this.pAdminNhanVien.Controls.Add(this.label6);
+            this.pAdminNhanVien.Controls.Add(this.label5);
             this.pAdminNhanVien.Controls.Add(this.label4);
             this.pAdminNhanVien.Controls.Add(this.label3);
             this.pAdminNhanVien.Controls.Add(this.label5);
@@ -207,10 +243,117 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.pAdminNhanVien.Size = new System.Drawing.Size(961, 586);
             this.pAdminNhanVien.TabIndex = 1;
             // 
+            // btnTuyenDungLai
+            // 
+            this.btnTuyenDungLai.Location = new System.Drawing.Point(799, 500);
+            this.btnTuyenDungLai.Name = "btnTuyenDungLai";
+            this.btnTuyenDungLai.Size = new System.Drawing.Size(113, 33);
+            this.btnTuyenDungLai.TabIndex = 22;
+            this.btnTuyenDungLai.Text = "Tuyển dụng lại";
+            this.btnTuyenDungLai.UseVisualStyleBackColor = true;
+            this.btnTuyenDungLai.Click += new System.EventHandler(this.btnTuyenDungLai_Click);
+            // 
+            // btnXuatDSNhanVien
+            // 
+            this.btnXuatDSNhanVien.Location = new System.Drawing.Point(541, 500);
+            this.btnXuatDSNhanVien.Name = "btnXuatDSNhanVien";
+            this.btnXuatDSNhanVien.Size = new System.Drawing.Size(113, 33);
+            this.btnXuatDSNhanVien.TabIndex = 21;
+            this.btnXuatDSNhanVien.Text = "Xuất ra Excel";
+            this.btnXuatDSNhanVien.UseVisualStyleBackColor = true;
+            this.btnXuatDSNhanVien.Click += new System.EventHandler(this.btnXuatDSNhanVien_Click);
+            // 
+            // txtSDT
+            // 
+            this.txtSDT.Location = new System.Drawing.Point(669, 64);
+            this.txtSDT.Name = "txtSDT";
+            this.txtSDT.Size = new System.Drawing.Size(227, 22);
+            this.txtSDT.TabIndex = 20;
+            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(538, 70);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(88, 16);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Số điện thoại:";
+            // 
+            // btnTuyenDung
+            // 
+            this.btnTuyenDung.Location = new System.Drawing.Point(669, 500);
+            this.btnTuyenDung.Name = "btnTuyenDung";
+            this.btnTuyenDung.Size = new System.Drawing.Size(113, 33);
+            this.btnTuyenDung.TabIndex = 18;
+            this.btnTuyenDung.Text = "Tuyển dụng ";
+            this.btnTuyenDung.UseVisualStyleBackColor = true;
+            this.btnTuyenDung.Click += new System.EventHandler(this.btnTuyenDung_Click_1);
+            // 
+            // btnChoNghiViec
+            // 
+            this.btnChoNghiViec.Location = new System.Drawing.Point(799, 431);
+            this.btnChoNghiViec.Name = "btnChoNghiViec";
+            this.btnChoNghiViec.Size = new System.Drawing.Size(113, 33);
+            this.btnChoNghiViec.TabIndex = 17;
+            this.btnChoNghiViec.Text = "Cho nghỉ việc";
+            this.btnChoNghiViec.UseVisualStyleBackColor = true;
+            this.btnChoNghiViec.Click += new System.EventHandler(this.btnChoNghiViec_Click);
+            // 
+            // btnChinhSua
+            // 
+            this.btnChinhSua.Location = new System.Drawing.Point(669, 431);
+            this.btnChinhSua.Name = "btnChinhSua";
+            this.btnChinhSua.Size = new System.Drawing.Size(113, 33);
+            this.btnChinhSua.TabIndex = 16;
+            this.btnChinhSua.Text = "Chỉnh sửa";
+            this.btnChinhSua.UseVisualStyleBackColor = true;
+            this.btnChinhSua.Click += new System.EventHandler(this.btnChinhSua_Click);
+            // 
+            // txtTenDN
+            // 
+            this.txtTenDN.Location = new System.Drawing.Point(669, 336);
+            this.txtTenDN.Name = "txtTenDN";
+            this.txtTenDN.Size = new System.Drawing.Size(227, 22);
+            this.txtTenDN.TabIndex = 15;
+            // 
+            // txtCCCD
+            // 
+            this.txtCCCD.Location = new System.Drawing.Point(669, 226);
+            this.txtCCCD.Name = "txtCCCD";
+            this.txtCCCD.Size = new System.Drawing.Size(227, 22);
+            this.txtCCCD.TabIndex = 14;
+            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
+            // 
+            // txtTenNV
+            // 
+            this.txtTenNV.Location = new System.Drawing.Point(669, 116);
+            this.txtTenNV.Name = "txtTenNV";
+            this.txtTenNV.Size = new System.Drawing.Size(227, 22);
+            this.txtTenNV.TabIndex = 13;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(538, 342);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(98, 16);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Tên đăng nhập";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(538, 287);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 16);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Quyền QTV";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(551, 185);
+            this.label4.Location = new System.Drawing.Point(538, 232);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 16);
             this.label4.TabIndex = 8;
@@ -219,7 +362,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(551, 130);
+            this.label3.Location = new System.Drawing.Point(538, 177);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 16);
             this.label3.TabIndex = 9;
@@ -237,7 +380,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(551, 75);
+            this.label2.Location = new System.Drawing.Point(538, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 16);
             this.label2.TabIndex = 10;
@@ -272,8 +415,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // cbQQTV
             // 
             this.cbQQTV.AutoSize = true;
-            this.cbQQTV.Location = new System.Drawing.Point(681, 236);
-            this.cbQQTV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbQQTV.Location = new System.Drawing.Point(669, 283);
             this.cbQQTV.Name = "cbQQTV";
             this.cbQQTV.Size = new System.Drawing.Size(18, 17);
             this.cbQQTV.TabIndex = 12;
@@ -289,8 +431,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // dtpNgaySinh
             // 
             this.dtpNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNgaySinh.Location = new System.Drawing.Point(681, 124);
-            this.dtpNgaySinh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpNgaySinh.Location = new System.Drawing.Point(669, 171);
             this.dtpNgaySinh.Name = "dtpNgaySinh";
             this.dtpNgaySinh.Size = new System.Drawing.Size(200, 22);
             this.dtpNgaySinh.TabIndex = 13;
@@ -315,12 +456,13 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // 
             // btnThemNV
             // 
-            this.btnThemNV.Location = new System.Drawing.Point(529, 384);
-            this.btnThemNV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnThemNV.Location = new System.Drawing.Point(541, 431);
             this.btnThemNV.Name = "btnThemNV";
             this.btnThemNV.Size = new System.Drawing.Size(136, 33);
             this.btnThemNV.TabIndex = 15;
             this.btnThemNV.Text = "Thêm nhân viên";
+            this.btnThemNV.UseVisualStyleBackColor = true;
+            this.btnThemNV.Click += new System.EventHandler(this.btnThemNV_Click);
             // 
             // btnChoNghiViec
             // 
@@ -339,14 +481,14 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.txtTenDN.Size = new System.Drawing.Size(100, 22);
             this.txtTenDN.TabIndex = 3;
             // 
-            // btnTuyenDungLai
-            // 
-            this.btnTuyenDungLai.Location = new System.Drawing.Point(681, 453);
-            this.btnTuyenDungLai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnTuyenDungLai.Name = "btnTuyenDungLai";
-            this.btnTuyenDungLai.Size = new System.Drawing.Size(113, 33);
-            this.btnTuyenDungLai.TabIndex = 0;
-            this.btnTuyenDungLai.Text = "Tuyển dụng lại";
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(563, 392);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(267, 16);
+            this.linkLabel1.TabIndex = 2;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Hiển thị danh sách tài khoản chờ được duyệt";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // dgvNhanVien
             // 
@@ -355,8 +497,11 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.dgvNhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvNhanVien.Name = "dgvNhanVien";
             this.dgvNhanVien.RowHeadersWidth = 51;
-            this.dgvNhanVien.Size = new System.Drawing.Size(505, 465);
-            this.dgvNhanVien.TabIndex = 17;
+            this.dgvNhanVien.RowTemplate.Height = 24;
+            this.dgvNhanVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvNhanVien.Size = new System.Drawing.Size(509, 465);
+            this.dgvNhanVien.TabIndex = 0;
+            this.dgvNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNhanVien_CellClick);
             // 
             // pAdminDichVu
             // 
@@ -584,6 +729,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.btnChinhSuaBan.Size = new System.Drawing.Size(113, 33);
             this.btnChinhSuaBan.TabIndex = 1;
             this.btnChinhSuaBan.Text = "Chỉnh sửa bàn";
+            this.btnChinhSuaBan.UseVisualStyleBackColor = true;
+            this.btnChinhSuaBan.Click += new System.EventHandler(this.btnChinhSuaBan_Click);
             // 
             // txtGiaTien
             // 
@@ -636,6 +783,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.btnThemBan.Size = new System.Drawing.Size(113, 33);
             this.btnThemBan.TabIndex = 7;
             this.btnThemBan.Text = "Thêm bàn";
+            this.btnThemBan.UseVisualStyleBackColor = true;
+            this.btnThemBan.Click += new System.EventHandler(this.btnThemBan_Click);
             // 
             // dgvBan
             // 
@@ -645,7 +794,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.dgvBan.Name = "dgvBan";
             this.dgvBan.RowHeadersWidth = 51;
             this.dgvBan.Size = new System.Drawing.Size(509, 465);
-            this.dgvBan.TabIndex = 8;
+            this.dgvBan.TabIndex = 0;
+            this.dgvBan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBan_CellClick);
             // 
             // pAdminThongKe
             // 
@@ -675,10 +825,12 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1176, 586);
-            this.Controls.Add(this.pMainMenu);
+            this.ClientSize = new System.Drawing.Size(1176, 572);
+            this.Controls.Add(this.pAdminNhanVien);
+            this.Controls.Add(this.pAdminBan);
             this.Controls.Add(this.pAdminControl);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Controls.Add(this.pAdminThongKe);
+            this.Controls.Add(this.pAdminDichVu);
             this.Name = "AdminMenu";
             this.Text = "AdminMenu";
             this.Load += new System.EventHandler(this.AdminMenu_Load);
@@ -714,6 +866,24 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private System.Windows.Forms.Button btnQLDichVu;
         private System.Windows.Forms.Button btnQLNhanVien;
         private System.Windows.Forms.Panel pAdminNhanVien;
+        private System.Windows.Forms.DataGridView dgvNhanVien;
+        private System.Windows.Forms.TextBox txtTenDN;
+        private System.Windows.Forms.TextBox txtCCCD;
+        private System.Windows.Forms.TextBox txtTenNV;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbQQTV;
+        private System.Windows.Forms.DateTimePicker dtpNgaySinh;
+        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Button btnThemNV;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button btnTuyenDung;
+        private System.Windows.Forms.Button btnChoNghiViec;
+        private System.Windows.Forms.Button btnChinhSua;
         private System.Windows.Forms.Panel pAdminDichVu;
         private System.Windows.Forms.Button btnHienThiLai;
         private System.Windows.Forms.Button btnBoHienThi;
@@ -738,27 +908,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private System.Windows.Forms.DataGridView dgvBan;
         private System.Windows.Forms.Panel pAdminThongKe;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtSoLuong;
-        private Panel pMainMenu;
-        private DataGridView dgvNhanVien;
-        private Label label1;
-        private Button btnTuyenDungLai;
-        private Button btnChoNghiViec;
-        private Button btnChinhSua;
-        private TextBox txtTenDN;
-        private TextBox txtCCCD;
-        private TextBox txtTenNV;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private CheckBox cbQQTV;
-        private DateTimePicker dtpNgaySinh;
-        private TextBox txtID;
-        private Button btnThemNV;
-        private SplitContainer splitContainer1;
-        private GroupBox groupBox1;
-        private GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtSDT;
+        private System.Windows.Forms.Button btnXuatDSNhanVien;
+        private System.Windows.Forms.Button btnTuyenDungLai;
     }
 }

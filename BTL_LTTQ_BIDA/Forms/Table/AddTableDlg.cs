@@ -5,7 +5,7 @@ using BTL_LTTQ_BIDA.Data;
 
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
-    public partial class frmThemBanMoi : Form
+    public partial class AddTableDlg : Form
     {
         private readonly DataConnect dtBase = new DataConnect();
 
