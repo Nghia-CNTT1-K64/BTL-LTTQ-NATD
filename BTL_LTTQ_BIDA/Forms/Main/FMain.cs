@@ -35,16 +35,11 @@ namespace BTL_LTTQ_BIDA
         private readonly TreeNode root_XuLi = new TreeNode();
         private readonly TreeNode root_KetThuc = new TreeNode();
 
-        public FMain()
         private NhanVien currentUser;
         public FMain(NhanVien nv)
         {
             InitializeComponent();
             this.currentUser = nv;
-        }
-        private void FMain_Load(object sender, EventArgs e)
-        {
-            adminToolStripMenuItem.Enabled = currentUser.QuyenAdmin;
         }
 
 
@@ -65,6 +60,7 @@ namespace BTL_LTTQ_BIDA
             root_XuLi.Text = "Hóa đơn đang xử lý";
             root_KetThuc.Text = "Hóa đơn đã kết thúc";
             tvHD.NodeMouseDoubleClick += TvHD_NodeMouseDoubleClick;
+            adminToolStripMenuItem.Enabled = currentUser.QuyenAdmin;
         }
 
         public void LoadTable()

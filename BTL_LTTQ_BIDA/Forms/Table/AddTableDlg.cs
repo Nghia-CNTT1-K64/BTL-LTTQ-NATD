@@ -9,7 +9,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
     {
         private readonly DataConnect dtBase = new DataConnect();
 
-        public frmThemBanMoi()
+        public AddTableDlg()
         {
             InitializeComponent();
         }

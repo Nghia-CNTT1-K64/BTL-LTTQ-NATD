@@ -43,10 +43,9 @@
             this.lblMaBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaBan.Location = new System.Drawing.Point(60, 63);
             this.lblMaBan.Name = "lblMaBan";
-            this.lblMaBan.Size = new System.Drawing.Size(69, 20);
+            this.lblMaBan.Size = new System.Drawing.Size(59, 17);
             this.lblMaBan.TabIndex = 0;
             this.lblMaBan.Text = "Mã bàn:";
-            //this.lblMaBan.Click += new System.EventHandler(this.lblMaBan_Click_1);
             // 
             // lblGiaTien
             // 
@@ -54,7 +53,7 @@
             this.lblGiaTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGiaTien.Location = new System.Drawing.Point(60, 144);
             this.lblGiaTien.Name = "lblGiaTien";
-            this.lblGiaTien.Size = new System.Drawing.Size(72, 20);
+            this.lblGiaTien.Size = new System.Drawing.Size(61, 17);
             this.lblGiaTien.TabIndex = 1;
             this.lblGiaTien.Text = "Giá tiền:";
             // 
@@ -65,7 +64,6 @@
             this.txtMaBan.Name = "txtMaBan";
             this.txtMaBan.Size = new System.Drawing.Size(168, 27);
             this.txtMaBan.TabIndex = 2;
-            //this.txtMaBan.TextChanged += new System.EventHandler(this.txtMaBan_TextChanged_1);
             // 
             // txtGiaTien
             // 

@@ -19,7 +19,7 @@ namespace BTL_LTTQ_BIDA
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FMain());
+            Application.Run(new LoginDlg());
         }
     }
 }

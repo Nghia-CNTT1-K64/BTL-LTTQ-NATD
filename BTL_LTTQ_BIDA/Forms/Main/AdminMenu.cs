@@ -19,8 +19,6 @@ using BTL_LTTQ_BIDA.Classes;
 using BTL_LTTQ_BIDA.Data;
 using BTL_LTTQ_BIDA.Forms.Account;
 using BTL_LTTQ_BIDA.Forms.Table;
-using OfficeOpenXml;
-using OfficeOpenXml.Style;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BTL_LTTQ_BIDA.Forms.Main
@@ -37,19 +35,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             InitializeComponent();
         }
 
-        // FORM LOAD
-        private void AdminMenu_Load(object sender, EventArgs e)
-        {
-            ShowPanel(pAdminNhanVien);
-            InitDgvDichVu();
-            UpdateDichVu();
-
-            txtMaDV.ReadOnly = true;
-            txtMaDV.TabStop = false;
-
-            // 👉 Thêm style UI (như CSS)
-            UIStyler.ApplyFormStyle(this);
-        }
         // ===========================================================
         // 🎨 UI BEAUTIFY – tạo hiệu ứng đẹp, giống CSS
         // ===========================================================
@@ -191,9 +176,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 UpdateDichVu();
         }
 
-        private void btnQLNhanVien_Click(object sender, EventArgs e) => ShowPanel(pAdminNhanVien);
-        private void btnQLDichVu_Click(object sender, EventArgs e) => ShowPanel(pAdminDichVu);
-        private void btnQLBan_Click(object sender, EventArgs e) => ShowPanel(pAdminBan);
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
@@ -211,14 +193,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         // NAVIGATION BACK TO MAIN
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            Hide();
-            var mainForm = Application.OpenForms["FMain"] as FMain;
-            if (mainForm == null)
-            {
-                mainForm = new FMain();
-                mainForm.FormClosed += (s, args) => Close();
-            }
-            mainForm.Show();
+            this.Close();
         }
 
         // DGV ROW SELECTED
@@ -377,17 +352,12 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             }
         }
 
-        private DataConnect dtBase = new DataConnect();
         private NhanVien currentUser;
         public AdminMenu(NhanVien nv)
         {
             InitializeComponent();
         }
-        private void ShowPanel(Panel targetPanel)
-        {
-            pAdminNhanVien.Visible = pAdminBan.Visible = pAdminDichVu.Visible = pAdminThongKe.Visible = false;
-            targetPanel.Visible = true;
-        }
+
         private void btnQLNhanVien_Click_1(object sender, EventArgs e) => ShowPanel(pAdminNhanVien);
 
 
@@ -399,7 +369,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void AdminMenu_Load(object sender, EventArgs e)
         {
-
+            dgvNhanVien.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //quản lí nhân viên - Nghĩa
             if (dgvNhanVien.Columns.Count == 0)
             {
@@ -431,6 +401,11 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             btnChinhSuaBan.Enabled = false;
             txtMaBan.ReadOnly = true;
             //quản lí bàn -Nghĩa
+            InitDgvDichVu();
+            UpdateDichVu();
+
+            txtMaDV.ReadOnly = true;
+            txtMaDV.TabStop = false;
 
         }
 
@@ -476,10 +451,10 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         }
 
 
-        private void btnTroVe_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        //private void btnTroVe_Click(object sender, EventArgs e)
+        //{
+        //    this.Close();
+        //}
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -575,12 +550,16 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private void dgvNhanVien_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            DataGridViewRow row = dgvNhanVien.Rows[e.RowIndex];
+            var row = dgvNhanVien.Rows[e.RowIndex];
+
+            // ⚙️ Kiểm tra null để tránh lỗi
+            if (row.Cells["NGHIVIEC"] == null || row.Cells["NGHIVIEC"].Value == null)
+                return;
+
             string trangThaiNV = row.Cells["NGHIVIEC"].Value.ToString();
 
             if (trangThaiNV == "Nghỉ việc")
             {
-                // Nhân viên nghỉ (False = 0)
                 row.DefaultCellStyle.BackColor = Color.LightGray;
                 row.DefaultCellStyle.ForeColor = Color.DarkGray;
             }
@@ -928,7 +907,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             updateBan();
         }
 
-        
+
+
 
 
 

@@ -67,7 +67,7 @@
             this.txtTenDN.Name = "txtTenDN";
             this.txtTenDN.Size = new System.Drawing.Size(348, 26);
             this.txtTenDN.TabIndex = 3;
-            this.txtTenDN.TextChanged += new System.EventHandler(this.txtTenDN_TextChanged);
+            //this.txtTenDN.TextChanged += new System.EventHandler(this.txtTenDN_TextChanged);
             // 
             // txtMatKhau
             // 
