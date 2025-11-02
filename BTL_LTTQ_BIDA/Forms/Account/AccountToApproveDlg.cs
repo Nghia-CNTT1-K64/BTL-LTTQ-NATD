@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BTL_LTTQ_BIDA.Data;
+using BTL_LTTQ_BIDA.Utils;
 
 namespace BTL_LTTQ_BIDA.Forms.Account
 {
@@ -20,6 +21,7 @@ namespace BTL_LTTQ_BIDA.Forms.Account
 
         private void AccountToApproveDlg_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
             if (dgvNhanVien.Columns.Count == 0)
             {
                 dgvNhanVien.Columns.Add("IDNV", "Mã Nhân Viên");

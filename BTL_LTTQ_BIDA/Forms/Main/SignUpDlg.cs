@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using BTL_LTTQ_BIDA.Utils;
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
     public partial class SignUpDlg : Form
@@ -19,6 +19,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         }
         private void SignUpDlg_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
             txtIDNV.ReadOnly = true;
             string sql = "SELECT TOP 1 IDNV FROM NHANVIEN ORDER BY IDNV DESC";
             DataTable table = dtBase.ReadData(sql);

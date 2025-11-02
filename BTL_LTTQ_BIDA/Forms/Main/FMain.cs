@@ -12,16 +12,17 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BTL_LTTQ_BIDA.Utils;
 //dung de ket noi sql
 using System.Data.SqlClient;
 using BTL_LTTQ_BIDA.Classes;
 using BTL_LTTQ_BIDA.Forms.Account;
-using BTL_LTTQ_BIDA.Forms.Main;
 
 namespace BTL_LTTQ_BIDA
 {
     public partial class FMain : Form
     {
+        
         DataConnect dtbase = new DataConnect();
 
         TableBiDa tableBiDa = new TableBiDa();
@@ -41,10 +42,13 @@ namespace BTL_LTTQ_BIDA
             InitializeComponent();
             this.currentUser = nv;
         }
+        // Áp dụng style chung cho form
+        
 
 
         private void FMain_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
 
             IDNV_Current = currentUser.IDNV; // 👈 gán tạm để test
 

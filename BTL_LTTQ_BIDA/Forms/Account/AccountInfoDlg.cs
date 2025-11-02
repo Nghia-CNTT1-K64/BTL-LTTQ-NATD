@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BTL_LTTQ_BIDA.Classes;
+using BTL_LTTQ_BIDA.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BTL_LTTQ_BIDA.Classes;
-
+using static BTL_LTTQ_BIDA.Utils.UIStyler;
 namespace BTL_LTTQ_BIDA.Forms.Account
 {
     public partial class AccountInfoDlg : Form
     {
+
         private NhanVien nv;
         public AccountInfoDlg(NhanVien nv)
         {
@@ -31,6 +33,7 @@ namespace BTL_LTTQ_BIDA.Forms.Account
 
         private void AccountInfoDlg_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
             cbHienMK.Checked = false;
             txtMatKhau.PasswordChar = '●';
             txtCCCD.Text = nv.CCCD;

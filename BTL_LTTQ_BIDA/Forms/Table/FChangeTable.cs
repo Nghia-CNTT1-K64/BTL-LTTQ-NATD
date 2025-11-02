@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using BTL_LTTQ_BIDA.Utils;
 namespace BTL_LTTQ_BIDA.Forms.Table
 {
     public partial class FChangeTable : Form
@@ -27,6 +27,7 @@ namespace BTL_LTTQ_BIDA.Forms.Table
 
         private void FChangeTable_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
             try
             {
                 txtBanCu.Text = idBanCu;

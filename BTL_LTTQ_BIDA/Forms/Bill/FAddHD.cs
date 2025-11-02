@@ -1,5 +1,6 @@
 ﻿using BTL_LTTQ_BIDA.Class;
 using BTL_LTTQ_BIDA.Data;
+using BTL_LTTQ_BIDA.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BTL_LTTQ_BIDA.Utils;
 
 
 
@@ -34,6 +36,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void FAddHD_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
             //load mã hóa đơn từ FMain khi ấn tạo hóa đơn mới
             txtMaHD.Text = FMain.IDHD;
 

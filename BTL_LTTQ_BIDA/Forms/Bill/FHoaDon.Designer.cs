@@ -36,6 +36,10 @@
             this.flpDichVu = new System.Windows.Forms.FlowLayoutPanel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtTenNV = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtMaNV = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblThoiGianChoi = new System.Windows.Forms.Label();
             this.btnTaoKH = new System.Windows.Forms.Button();
             this.cboMaKH = new System.Windows.Forms.ComboBox();
@@ -68,10 +72,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvBan = new System.Windows.Forms.DataGridView();
             this.timerChoi = new System.Windows.Forms.Timer(this.components);
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtMaNV = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtTenNV = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -207,6 +207,44 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chung";
+            // 
+            // txtTenNV
+            // 
+            this.txtTenNV.Enabled = false;
+            this.txtTenNV.Location = new System.Drawing.Point(527, 224);
+            this.txtTenNV.Name = "txtTenNV";
+            this.txtTenNV.Size = new System.Drawing.Size(194, 24);
+            this.txtTenNV.TabIndex = 23;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label11.ForeColor = System.Drawing.Color.Blue;
+            this.label11.Location = new System.Drawing.Point(384, 222);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(137, 25);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Tên nhân viên";
+            // 
+            // txtMaNV
+            // 
+            this.txtMaNV.Enabled = false;
+            this.txtMaNV.Location = new System.Drawing.Point(171, 222);
+            this.txtMaNV.Name = "txtMaNV";
+            this.txtMaNV.Size = new System.Drawing.Size(158, 24);
+            this.txtMaNV.TabIndex = 21;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label10.ForeColor = System.Drawing.Color.Blue;
+            this.label10.Location = new System.Drawing.Point(35, 220);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(130, 25);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Mã nhân viên";
             // 
             // lblThoiGianChoi
             // 
@@ -519,44 +557,6 @@
             this.timerChoi.Interval = 1000;
             this.timerChoi.Tick += new System.EventHandler(this.timerChoi_Tick);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label10.ForeColor = System.Drawing.Color.Blue;
-            this.label10.Location = new System.Drawing.Point(35, 220);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(130, 25);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "Mã nhân viên";
-            // 
-            // txtMaNV
-            // 
-            this.txtMaNV.Enabled = false;
-            this.txtMaNV.Location = new System.Drawing.Point(171, 222);
-            this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(158, 24);
-            this.txtMaNV.TabIndex = 21;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label11.ForeColor = System.Drawing.Color.Blue;
-            this.label11.Location = new System.Drawing.Point(384, 222);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(137, 25);
-            this.label11.TabIndex = 22;
-            this.label11.Text = "Tên nhân viên";
-            // 
-            // txtTenNV
-            // 
-            this.txtTenNV.Enabled = false;
-            this.txtTenNV.Location = new System.Drawing.Point(527, 224);
-            this.txtTenNV.Name = "txtTenNV";
-            this.txtTenNV.Size = new System.Drawing.Size(194, 24);
-            this.txtTenNV.TabIndex = 23;
-            // 
             // FHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -565,6 +565,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.Name = "FHoaDon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hóa đơn";
             this.Load += new System.EventHandler(this.FHoaDon_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

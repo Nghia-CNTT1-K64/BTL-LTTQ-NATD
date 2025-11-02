@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BTL_LTTQ_BIDA.Classes;
-
+using BTL_LTTQ_BIDA.Utils;
 
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
@@ -54,6 +54,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void FHoaDon_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
 
             try
             {
@@ -798,44 +799,57 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         {
             try
             {
-                // 🔹 Lấy thông tin bàn, giá, giờ bắt đầu/kết thúc
                 string sql = $@"
-                    SELECT b.GIATIEN, p.GIOBATDAU, p.GIOKETTHUC, h.TRANGTHAI, h.TONGTIEN
-                    FROM HOADON h
-                    JOIN PHIENCHOI p ON h.IDPHIEN = p.IDPHIEN
-                    JOIN BAN b ON p.IDBAN = b.IDBAN
-                    WHERE h.IDHD = '{IDHD}'";
+SELECT b.GIATIEN, p.GIOBATDAU, p.GIOKETTHUC, h.TRANGTHAI, h.TONGTIEN
+FROM HOADON h
+JOIN PHIENCHOI p ON h.IDPHIEN = p.IDPHIEN
+JOIN BAN b ON p.IDBAN = b.IDBAN
+WHERE h.IDHD = '{IDHD}'";
 
                 DataTable dt = dtbase.ReadData(sql);
                 if (dt.Rows.Count == 0) return;
 
                 double giaBan = Convert.ToDouble(dt.Rows[0]["GIATIEN"]);
                 DateTime gioBD = Convert.ToDateTime(dt.Rows[0]["GIOBATDAU"]);
-                DateTime gioKT;
-
                 int trangThaiHD = Convert.ToInt32(dt.Rows[0]["TRANGTHAI"]);
                 double tongTienDaLuu = Convert.ToDouble(dt.Rows[0]["TONGTIEN"]);
-
-                // 🔹 Nếu hóa đơn đã kết thúc thì dùng giờ kết thúc
-                if (trangThaiHD == 1 && dt.Rows[0]["GIOKETTHUC"] != DBNull.Value)
-                    gioKT = Convert.ToDateTime(dt.Rows[0]["GIOKETTHUC"]);
-                else
-                    gioKT = DateTime.Now;
-
-                // 🔹 Tính số giờ chơi hiện tại (chưa kết thúc)
-                double gioChoi = (gioKT - gioBD).TotalHours;
-                double soBlock = Math.Ceiling(gioChoi / 0.5) * 0.5;
-                double tienBanHienTai = giaBan * soBlock;
-
-                // 🔹 Tiền dịch vụ hiện tại
                 double tienDV = string.IsNullOrEmpty(txtTongTienDV.Text) ? 0 : Convert.ToDouble(txtTongTienDV.Text);
 
-                // 🔹 Tổng tiền = tiền hóa đơn đã có + tiền bàn hiện tại + tiền dịch vụ
-                double tongTienHD = tongTienDaLuu + tienBanHienTai + tienDV;
+                // ---------------------------
+                // 🔹 Nếu hóa đơn đang xử lý
+                // ---------------------------
+                if (trangThaiHD == 0)
+                {
+                    DateTime gioKT = DateTime.Now;
 
-                // 🔹 Cập nhật textbox
-                txtTienBan.Text = tienBanHienTai.ToString("N0");
-                txtTongTienHD.Text = tongTienHD.ToString("N0");
+                    double gioChoi = (gioKT - gioBD).TotalHours;
+                    double soBlock = Math.Ceiling(gioChoi / 0.5) * 0.5;
+                    double tienBanHienTai = giaBan * soBlock;
+
+                    double tongTienHD = tongTienDaLuu + tienBanHienTai + tienDV;
+
+                    txtTienBan.Text = tienBanHienTai.ToString("N0");
+                    txtTongTienHD.Text = tongTienHD.ToString("N0");
+                }
+                // ---------------------------
+                // 🔹 Nếu hóa đơn đã kết thúc
+                // ---------------------------
+                else
+                {
+                    // Lấy giờ kết thúc từ DB (để hiển thị thời gian chính xác)
+                    if (dt.Rows[0]["GIOKETTHUC"] != DBNull.Value)
+                    {
+                        DateTime gioKT = Convert.ToDateTime(dt.Rows[0]["GIOKETTHUC"]);
+                        TimeSpan tgChoi = gioKT - gioBD;
+                        lblThoiGianChoi.Text = $"Thời gian chơi: {tgChoi.Hours} giờ {tgChoi.Minutes} phút";
+                    }
+
+                    // ✅ Lấy tổng tiền thực tế đã lưu trong DB
+                    txtTongTienHD.Text = tongTienDaLuu.ToString("N0");
+
+                    // ✅ (Không cần tính lại tiền bàn vì đã kết thúc)
+                    txtTienBan.Text = (tongTienDaLuu - tienDV).ToString("N0");
+                }
             }
             catch (Exception ex)
             {
@@ -951,10 +965,14 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 exSheet.Cells[6, 2] = txtDiaChi.Text;
                 exSheet.Cells[7, 1] = "Ngày lập:";
                 exSheet.Cells[7, 2] = dtpNgay.Value.ToString("dd/MM/yyyy");
+                exSheet.Cells[8, 1] = "Mã nhân viên lập hóa đơn";
+                exSheet.Cells[8, 2] = txtMaNV.Text;
+                exSheet.Cells[9, 1] = "Nhân viên lập hóa đơn:";
+                exSheet.Cells[9, 2] = txtTenNV.Text;
 
                 // 🧾 5. Thông tin bàn
-                exSheet.Cells[9, 1] = "THÔNG TIN BÀN";
-                exSheet.Cells[9, 1].Font.Bold = true;
+                exSheet.Cells[9+1, 1] = "THÔNG TIN BÀN";
+                exSheet.Cells[9+1, 1].Font.Bold = true;
 
                 string sqlBan = $@"
                     SELECT b.IDBAN, b.GIATIEN, p.GIOBATDAU, p.GIOKETTHUC
@@ -966,10 +984,10 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 DataTable dtBan = dtbase.ReadData(sqlBan);
                 if (dtBan.Rows.Count > 0)
                 {
-                    exSheet.Cells[10, 1] = "Mã bàn";
-                    exSheet.Cells[10, 2] = "Giá tiền";
-                    exSheet.Cells[10, 3] = "Giờ bắt đầu";
-                    exSheet.Cells[10, 4] = "Giờ kết thúc";
+                    exSheet.Cells[10+1, 1] = "Mã bàn";
+                    exSheet.Cells[10+1, 2] = "Giá tiền";
+                    exSheet.Cells[10+1, 3] = "Giờ bắt đầu";
+                    exSheet.Cells[10+1, 4] = "Giờ kết thúc";
                     exSheet.Range["A10", "D10"].Font.Bold = true;
 
                     for (int i = 0; i < dtBan.Rows.Count; i++)

@@ -361,6 +361,7 @@
             this.ClientSize = new System.Drawing.Size(1121, 588);
             this.Controls.Add(this.splitContainer1);
             this.Name = "FAddHD";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm hóa đơn";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FAddHD_FormClosing);
             this.Load += new System.EventHandler(this.FAddHD_Load);

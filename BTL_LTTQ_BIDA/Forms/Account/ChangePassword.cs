@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BTL_LTTQ_BIDA.Classes;
+using BTL_LTTQ_BIDA.Data;
+using BTL_LTTQ_BIDA.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BTL_LTTQ_BIDA.Classes;
-using BTL_LTTQ_BIDA.Data;
 
 namespace BTL_LTTQ_BIDA.Forms.Account
 {
@@ -24,6 +25,7 @@ namespace BTL_LTTQ_BIDA.Forms.Account
 
         private void ChangePassword_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
             txtMKcu.ReadOnly = true;
             txtMKmoi.Focus();
             txtMKmoi.PasswordChar = '●';

@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using BTL_LTTQ_BIDA.Data;
-
+using BTL_LTTQ_BIDA.Utils;
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
     public partial class AddTableDlg : Form
@@ -54,6 +54,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         // =====================================================
         private void frmThemBanMoi_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
             LoadNextTableID();
         }
 

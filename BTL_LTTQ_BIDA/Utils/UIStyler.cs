@@ -51,6 +51,11 @@ namespace BTL_LTTQ_BIDA.Utils
                 foreach (Control c in ctrl.Controls)
                     ApplyControlStyle(c);
             }
+            else if (ctrl is Label lbl)
+                StyleLabel(lbl);
+            else if (ctrl is ComboBox cb)
+                StyleComboBox(cb);
+
         }
 
         // ================== COMPONENT STYLES ==================
@@ -89,5 +94,18 @@ namespace BTL_LTTQ_BIDA.Utils
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgv.GridColor = Color.FromArgb(200, 200, 200);
         }
+        public static void StyleLabel(Label lbl)
+        {
+            lbl.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            lbl.ForeColor = Color.FromArgb(40, 40, 40);
+        }
+
+        public static void StyleComboBox(ComboBox cb)
+        {
+            cb.FlatStyle = FlatStyle.Flat;
+            cb.BackColor = Color.White;
+            cb.Font = new Font("Segoe UI", 9);
+        }
+
     }
 }

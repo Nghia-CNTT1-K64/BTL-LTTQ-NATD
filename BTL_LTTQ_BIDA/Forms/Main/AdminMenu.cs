@@ -11,7 +11,7 @@ using BTL_LTTQ_BIDA.Classes;
 using BTL_LTTQ_BIDA.Forms.Account;
 using BTL_LTTQ_BIDA.Forms.Table;
 using Excel = Microsoft.Office.Interop.Excel;
-
+using BTL_LTTQ_BIDA.Utils;
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
     public partial class AdminMenu : Form
@@ -279,6 +279,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void AdminMenu_Load(object sender, EventArgs e)
         {
+            UIStyler.ApplyFormStyle(this);
+
             dgvNhanVien.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             // staff grid
@@ -303,6 +305,14 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             btnTuyenDung.Enabled = false;
 
             // tables
+
+            dgvBan.Columns.Clear();
+            dgvBan.RowHeadersVisible = false;
+            dgvBan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBan.AllowUserToAddRows = false;
+            dgvBan.ReadOnly = true;
+            dgvBan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvBan.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             if (dgvBan.Columns.Count == 0)
             {
                 dgvBan.Columns.Add("IDBAN", "Mã Bàn");
@@ -748,7 +758,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void btnChinhSuaBan_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn có chắc chắn muốn chỉnh sửa thông tin bàn?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show("Bạn có chắc chắn muốn chỉnh sửa thông tin bàn?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) 
                 return;
 
             string idBan = txtMaBan.Text;
