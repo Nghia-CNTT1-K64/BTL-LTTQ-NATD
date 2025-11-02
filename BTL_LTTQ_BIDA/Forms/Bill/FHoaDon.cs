@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BTL_LTTQ_BIDA.Classes;
 
 
 namespace BTL_LTTQ_BIDA.Forms.Main
@@ -27,6 +28,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         DateTime gioBatDau; //thời gian bắt đầu chơi
         private string idhd;
         private string idkh;
+        private NhanVien currentUser;
 
         public static int Trangthai { get; set; } //được lấy từ hàm TvHD_NodeMouseDoubleClick ở FMain
 
@@ -42,10 +44,11 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         }
 
 
-        public FHoaDon(string id_hd)
+        public FHoaDon(string id_hd, NhanVien nv)
         {
             InitializeComponent();
             IDHD = id_hd;
+            currentUser = nv;
         }
         
 
@@ -54,35 +57,53 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
             try
             {
-                // 🔹 Lấy IDKH từ hóa đơn
-                string sql = $"SELECT IDKH FROM HOADON WHERE IDHD = '{IDHD}'";
+                string sql = $@"
+                    SELECT h.IDHD, h.IDKH, h.IDNV, h.NGAYLAP, nv.HOTENNV 
+                    FROM HOADON h
+                    JOIN NHANVIEN nv ON h.IDNV = nv.IDNV
+                    WHERE h.IDHD = '{IDHD}'";
+
                 DataTable dt = dtbase.ReadData(sql);
+
+                string idKH = "";
                 if (dt.Rows.Count > 0)
                 {
-                    IDKH = dt.Rows[0]["IDKH"].ToString();
+                    txtMaHD.Text = dt.Rows[0]["IDHD"].ToString();
+                    idKH = dt.Rows[0]["IDKH"].ToString();
+                    txtMaNV.Text = dt.Rows[0]["IDNV"].ToString();
+                    txtTenNV.Text = dt.Rows[0]["HOTENNV"].ToString();
+
+                    if (dt.Rows[0]["NGAYLAP"] != DBNull.Value)
+                        dtpNgay.Value = Convert.ToDateTime(dt.Rows[0]["NGAYLAP"]);
                 }
 
-                // 🔹 Load dữ liệu cơ bản
-                LoadUnCheckHD();  // vẫn gọi để lấy thông tin mã HD, ngày lập
-                LoadKH();
+                // 🔹 Load danh sách khách hàng trước
                 LoadKhachHang();
+
+                // 🔹 Sau đó mới set giá trị đã chọn
+                if (!string.IsNullOrEmpty(idKH))
+                {
+                    cboMaKH.SelectedValue = idKH;
+                    IDKH = idKH; // để LoadKH() biết khách hàng nào
+                    LoadKH();
+                }
+
                 LoadDichVu();
                 LoadBan();
                 LoadDichVuDaThem();
                 TinhTongTienDV();
-
-                // 🔹 Chọn đúng khách hàng
-                if (!string.IsNullOrEmpty(IDKH))
-                    cboMaKH.SelectedValue = IDKH;
-
-                // ==========================
-                // 🔸 PHÂN NHÁNH THEO TRẠNG THÁI
-                // ==========================
                 SetupTrangThaiHoaDon();
+
+                KhoaTextBox(true);
+                txtDiaChi.Enabled = false;
+                txtSDT.Enabled = false;
+                txtTenKH.Enabled = false;
+                KiemTraQuyenNut();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải hóa đơn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải hóa đơn: " + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1079,6 +1100,125 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             {
                 MessageBox.Show("Lỗi khi mở form đổi bàn: " + ex.Message,
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        //nghĩa
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 🟢 1. Kiểm tra rỗng
+                if (string.IsNullOrWhiteSpace(txtTenKH.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập tên khách hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtTenKH.Focus();
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtSDT.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập số điện thoại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtSDT.Focus();
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtDiaChi.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập địa chỉ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDiaChi.Focus();
+                    return;
+                }
+
+                // 🟢 2. Lấy mã khách hàng hiện tại
+                if (cboMaKH.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn khách hàng hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string idKH = cboMaKH.SelectedValue.ToString();
+
+                // 🟢 3. Cập nhật lại thông tin khách hàng trong DB
+                //string sqlUpdate = $@"
+                //    UPDATE KHACHHANG 
+                //    SET HOTEN = N'{txtTenKH.Text.Replace("'", "''")}', 
+                //    DCHI = N'{txtDiaChi.Text.Replace("'", "''")}', 
+                //    SODT = '{txtSDT.Text.Replace("'", "''")}'
+                //    WHERE IDKH = '{idKH}'";
+
+                //dtbase.UpdateData(sqlUpdate);
+
+                string sqlUpdateHD = $@"
+                    UPDATE HOADON 
+                    SET IDKH = '{idKH}'
+                    WHERE IDHD = '{IDHD}'";
+                dtbase.UpdateData(sqlUpdateHD);
+
+                MessageBox.Show("Đã lưu thông tin khách hàng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // 🟢 4. Khóa lại giao diện sau khi lưu
+                KhoaTextBox(true);
+                btnLuu.Visible = false;
+                btnHuySua.Visible = false;
+                btnSuaHoaDon.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        private void btnHuySua_Click(object sender, EventArgs e)
+        {
+            KhoaTextBox(true);
+            btnLuu.Visible = false;
+            btnHuySua.Visible = false;
+            btnSuaHoaDon.Enabled = true;
+
+
+            // Tải lại dữ liệu gốc
+            FHoaDon_Load(sender, e);
+        }
+        private void btnSuaHoaDon_Click(object sender, EventArgs e)
+        {
+            KhoaTextBox(false);
+            btnLuu.Visible = true;
+            btnHuySua.Visible = true;
+            btnSuaHoaDon.Enabled = false;
+        }
+        private void KhoaTextBox(bool khoa)
+        {          
+            cboMaKH.Enabled = !khoa;
+
+        }
+        private void KiemTraQuyenNut()
+        {
+            try
+            {
+                //Lấy thông tin giờ kết thúc
+                string sql = $@"
+            SELECT p.GIOKETTHUC
+            FROM HOADON h
+            JOIN PHIENCHOI p ON h.IDPHIEN = p.IDPHIEN
+            WHERE h.IDHD = '{IDHD}'";
+                DataTable dt = dtbase.ReadData(sql);
+
+                bool coGioKetThuc = (dt.Rows.Count > 0 && dt.Rows[0]["GIOKETTHUC"] != DBNull.Value);
+
+                // 🟢 Nút Sửa: chỉ bật khi hóa đơn đã có giờ kết thúc
+                btnSuaHoaDon.Enabled = (currentUser.QuyenAdmin && coGioKetThuc);
+
+                // 🟢 Nút Hủy hóa đơn:
+                // Nếu đã kết thúc -> chỉ Admin được hủy
+                // Nếu chưa kết thúc -> ai cũng có thể hủy
+                if (coGioKetThuc)
+                    btnHuyHoaDon.Enabled = currentUser.QuyenAdmin;
+                else
+                    btnHuyHoaDon.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi kiểm tra quyền nút: " + ex.Message);
             }
         }
     }

@@ -44,7 +44,23 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             LoadDataDV();
             LoadTable();
             LoadDichVu();
+
+            // 🔹 Lấy mã NV từ nhân viên đang đăng nhập
+            txtMaNV.Text = FMain.IDNV_Current;
+            txtMaNV.ReadOnly = true;
+
+            // 🔹 Lấy tên nhân viên tương ứng
+            string sql = $"SELECT HOTENNV FROM NHANVIEN WHERE IDNV = '{FMain.IDNV_Current}'";
+            DataTable dtNV = new DataConnect().ReadData(sql);
+            if (dtNV.Rows.Count > 0)
+            {
+                txtTenNV.Text = dtNV.Rows[0]["HOTENNV"].ToString();
+                txtTenNV.ReadOnly = true;
+            }
+
         }
+
+        
 
         void LoadDataDV()
         {
@@ -265,6 +281,11 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                     mainForm.LoadTable();
                     break;
                 }
+                //if(f is AdminMenu adminForm)
+                //{
+                //    adminForm.UpdateDichVu();
+                //    break;
+                //}
             }
             
 

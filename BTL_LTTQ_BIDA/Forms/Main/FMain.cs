@@ -46,7 +46,7 @@ namespace BTL_LTTQ_BIDA
         private void FMain_Load(object sender, EventArgs e)
         {
 
-            IDNV_Current = "NV001"; // 👈 gán tạm để test
+            IDNV_Current = currentUser.IDNV; // 👈 gán tạm để test
 
             // ✅ BẬT DOUBLE BUFFERING CHO CÁC CONTROL LỚN
             SetDoubleBuffered(flpTable);
@@ -309,7 +309,7 @@ namespace BTL_LTTQ_BIDA
                 string idhd = fullText.Split('-')[0].Trim(); // Lấy phần "HD301020251"
 
                 // Mở form hóa đơn
-                FHoaDon fHoadon = new FHoaDon(idhd);
+                FHoaDon fHoadon = new FHoaDon(idhd, currentUser);
 
                 // Xác định trạng thái
                 if (tvHD.SelectedNode.Parent.Text == "Hóa đơn đang xử lý")

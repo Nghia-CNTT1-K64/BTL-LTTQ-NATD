@@ -133,7 +133,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         }
 
         // LOAD DATA
-        private void UpdateDichVu()
+        public void UpdateDichVu()
         {
             try
             {
