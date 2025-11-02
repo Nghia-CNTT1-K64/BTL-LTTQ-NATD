@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.16.0.18925.20022\lib\net40\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -80,6 +84,18 @@
     <Compile Include="Forms\Bill\FAddHD.Designer.cs">
       <DependentUpon>FAddHD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Main\BarChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\BarChart.Designer.cs">
+      <DependentUpon>BarChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\StatisticsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\StatisticsControl.Designer.cs">
+      <DependentUpon>StatisticsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Table\AddTableDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +140,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\UIStyler.cs" />
     <EmbeddedResource Include="Forms\Account\AccountInfoDlg.resx">
       <DependentUpon>AccountInfoDlg.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +156,9 @@
     <EmbeddedResource Include="Forms\Main\AdminMenu.resx">
       <DependentUpon>AdminMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\BarChart.resx">
+      <DependentUpon>BarChart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\FMain.resx">
       <DependentUpon>FMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\SignUpDlg.resx">
       <DependentUpon>SignUpDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\StatisticsControl.resx">
+      <DependentUpon>StatisticsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Service\FAddService.resx">
       <DependentUpon>FAddService.cs</DependentUpon>
@@ -164,6 +187,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
