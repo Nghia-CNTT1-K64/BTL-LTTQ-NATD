@@ -67,6 +67,7 @@
             this.cboBanCu.Size = new System.Drawing.Size(121, 24);
             this.cboBanCu.TabIndex = 2;
             this.cboBanCu.TabStop = false;
+            this.cboBanCu.SelectedIndexChanged += new System.EventHandler(this.cboBanCu_SelectedIndexChanged);
             // 
             // cboBanMoi
             // 
@@ -75,6 +76,7 @@
             this.cboBanMoi.Name = "cboBanMoi";
             this.cboBanMoi.Size = new System.Drawing.Size(121, 24);
             this.cboBanMoi.TabIndex = 3;
+            this.cboBanMoi.SelectedIndexChanged += new System.EventHandler(this.cboBanMoi_SelectedIndexChanged);
             // 
             // btnDoiBan
             // 
@@ -85,6 +87,7 @@
             this.btnDoiBan.TabIndex = 4;
             this.btnDoiBan.Text = "Đổi bàn";
             this.btnDoiBan.UseVisualStyleBackColor = true;
+            this.btnDoiBan.Click += new System.EventHandler(this.btnDoiBan_Click);
             // 
             // frmDoiBan
             // 

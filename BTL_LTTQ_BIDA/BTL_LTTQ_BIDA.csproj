@@ -143,6 +143,12 @@
     <EmbeddedResource Include="Forms\Service\FAddService.resx">
       <DependentUpon>FAddService.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Table\AddTableDlg.resx">
+      <DependentUpon>AddTableDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Table\FChangeTable.resx">
+      <DependentUpon>FChangeTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

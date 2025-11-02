@@ -21,5 +21,20 @@ namespace BTL_LTTQ_BIDA.Forms.Table
         {
 
         }
+
+        private void cboBanCu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboBanMoi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDoiBan_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
