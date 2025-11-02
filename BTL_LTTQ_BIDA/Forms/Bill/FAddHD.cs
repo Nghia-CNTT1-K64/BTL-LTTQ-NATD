@@ -213,31 +213,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void btnTao_Click(object sender, EventArgs e) //buttonAddHD
         {
-            //Version 1
-            //string commandText = $"INSERT INTO KHACHHANG VALUES ('{cboMaKH.Text}', '{txtTenKH.Text}', '{txtDiaChi.Text}', '{txtSDT.Text}')";
-            //dtbase.UpdateData(commandText);
-            ////thêm hóa đơn
-            //FMain.IDKH = cboMaKH.Text;
-
-            //string insertHD = $"INSERT INTO HOADON(IDHD, IDKH, TRANGTHAI) VALUES ('{FMain.IDHD}', '{cboMaKH.Text}', '0')";
-            //dtbase.UpdateData(insertHD);
-            ////thêm hóa đơn bàn
-            //List<BTL_LTTQ_BIDA.Class.Table> listTable = tableBiDa.LoadTableList();
-            //foreach (BTL_LTTQ_BIDA.Class.Table item in listTable)
-            //{
-            //    foreach (Control ct in flpBan.Controls)
-            //    {
-            //        if (ct.Text == "Bàn " + item.Idban + Environment.NewLine + "đang chọn")
-            //        {
-            //            string insertHDBan = $"INSERT INTO HOADONBAN(IDHD,IDBAN,GIOBATDAU,GIOKETTHUC) VALUES ('{FMain.IDHD}', '{item.Idban}','{DateTime.Now}','{DateTime.Now}')";
-            //            dtbase.UpdateData(insertHDBan);
-            //            break;
-            //        }
-            //    }
-            //}
-            //LoadDataDV();
-
-
 
             //Version 2: Đã tạo hóa đơn tạm từ FMain khi ấn tạo hóa đơn mới
 
@@ -252,6 +227,9 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 MessageBox.Show("Vui lòng chọn hoặc nhập khách hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            
+
 
             // 🔹 Lấy ID phiên hiện tại của hóa đơn
             string sqlGetPhien = $"SELECT IDPHIEN FROM HOADON WHERE IDHD = '{FMain.IDHD}'";
@@ -271,7 +249,9 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             tableBiDa.UpdateDataTable(new BTL_LTTQ_BIDA.Class.Table { Idban = selectedTableId }, 1);
 
             MessageBox.Show("Hóa đơn đã được khởi tạo và bắt đầu tính giờ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             btnTao.Enabled = false; // 🚫 KHÔNG cho ấn “Tạo hóa đơn” nữa
+            btnThoat.Enabled = true; // ✅ Cho phép thoát
 
             // 🔁 Cập nhật lại danh sách bàn ở FMain
             foreach (Form f in Application.OpenForms)
@@ -456,6 +436,12 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                     {
                         btnTaoKH.Visible = true; // Hiển thị nút tạo khách hàng
                         btnTao.Enabled = false;   // 🚫 KHÔNG cho ấn “Tạo hóa đơn”
+                        cboMaKH.Enabled = false; // 🚫 KHÔNG cho chọn mã KH từ combobox
+
+                        txtTenKH.Enabled = true;
+                        txtDiaChi.Enabled = true;
+
+                        btnThoat.Enabled = false; // 🚫 KHÔNG cho thoát khi đang tạo KH mới
 
                         //xóa các thông tin khách hàng hiện tại để nhập mới
                         cboMaKH.SelectedIndex = -1;
@@ -475,12 +461,63 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void btnTaoKH_Click(object sender, EventArgs e)
         {
+            //string maKH = cboMaKH.Text.Trim();
+            //string tenKH = txtTenKH.Text.Trim();
+            //string diaChi = txtDiaChi.Text.Trim();
+            //string sdt = txtSDT.Text.Trim();
+
+            //// 1️⃣ Kiểm tra dữ liệu nhập
+            //if (string.IsNullOrEmpty(tenKH))
+            //{
+            //    MessageBox.Show("Vui lòng nhập tên khách hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    txtTenKH.Focus();
+            //    return;
+            //}
+
+            //if (string.IsNullOrEmpty(sdt))
+            //{
+            //    MessageBox.Show("Vui lòng nhập số điện thoại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    txtSDT.Focus();
+            //    return;
+            //}
+
+            //// 2️⃣ Nếu không nhập mã KH → tự động sinh mã mới
+            //if (string.IsNullOrEmpty(maKH))
+            //{
+            //    maKH = GenerateNextCustomerID(); 
+            //}
+            //else
+            //{
+            //    // 3️⃣ Nếu có nhập → kiểm tra trùng
+            //    string sqlCheck = $"SELECT * FROM KHACHHANG WHERE IDKH = '{maKH}'";
+            //    DataTable dtCheck = dtbase.ReadData(sqlCheck);
+            //    if (dtCheck.Rows.Count > 0)
+            //    {
+            //        MessageBox.Show("Mã khách hàng đã tồn tại! Vui lòng nhập mã khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        return;
+            //    }
+            //}
+
+            //// 4️⃣ Thêm khách hàng mới vào CSDL
+            //string sqlInsert = $"INSERT INTO KHACHHANG VALUES ('{maKH}', N'{tenKH}', N'{diaChi}', '{sdt}')";
+            //dtbase.UpdateData(sqlInsert);
+
+            //MessageBox.Show($"Thêm khách hàng mới thành công!\nMã KH: {maKH}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //btnTaoKH.Visible = false;
+            //btnTao.Enabled = true; //cho phép tạo hóa đơn sau khi tạo khách hàng xong
+
+            //// 5️⃣ Cập nhật lại combobox khách hàng
+            //LoadKhachHang();
+            //cboMaKH.SelectedValue = maKH;
+
+
+            //Version 2
             string maKH = cboMaKH.Text.Trim();
             string tenKH = txtTenKH.Text.Trim();
             string diaChi = txtDiaChi.Text.Trim();
             string sdt = txtSDT.Text.Trim();
 
-            // 1️⃣ Kiểm tra dữ liệu nhập
+            // 1️⃣ Kiểm tra dữ liệu nhập cơ bản
             if (string.IsNullOrEmpty(tenKH))
             {
                 MessageBox.Show("Vui lòng nhập tên khách hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -495,32 +532,54 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 return;
             }
 
-            // 2️⃣ Nếu không nhập mã KH → tự động sinh mã mới
+            // 2️⃣ Kiểm tra định dạng số điện thoại Việt Nam (bắt đầu bằng 0, có 10 chữ số)
+            if (!System.Text.RegularExpressions.Regex.IsMatch(sdt, @"^0\d{9}$"))
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ! Vui lòng nhập đúng 10 chữ số và bắt đầu bằng 0.",
+                    "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSDT.Focus();
+                return;
+            }
+
+            // 3️⃣ Nếu không nhập mã KH → tự động sinh mã mới
             if (string.IsNullOrEmpty(maKH))
             {
-                maKH = GenerateNextCustomerID(); 
+                maKH = GenerateNextCustomerID();
             }
             else
             {
-                // 3️⃣ Nếu có nhập → kiểm tra trùng
+                // 4️⃣ Nếu có nhập → kiểm tra trùng mã KH
                 string sqlCheck = $"SELECT * FROM KHACHHANG WHERE IDKH = '{maKH}'";
                 DataTable dtCheck = dtbase.ReadData(sqlCheck);
                 if (dtCheck.Rows.Count > 0)
                 {
-                    MessageBox.Show("Mã khách hàng đã tồn tại! Vui lòng nhập mã khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Mã khách hàng đã tồn tại! Vui lòng nhập mã khác.",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
 
-            // 4️⃣ Thêm khách hàng mới vào CSDL
+            // 5️⃣ Kiểm tra trùng số điện thoại (tránh tạo KH trùng SDT)
+            string sqlCheckPhone = $"SELECT * FROM KHACHHANG WHERE SODT = '{sdt}'";
+            DataTable dtPhone = dtbase.ReadData(sqlCheckPhone);
+            if (dtPhone.Rows.Count > 0)
+            {
+                MessageBox.Show("Số điện thoại này đã tồn tại trong hệ thống! Vui lòng kiểm tra lại.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 6️⃣ Thêm khách hàng mới vào CSDL
             string sqlInsert = $"INSERT INTO KHACHHANG VALUES ('{maKH}', N'{tenKH}', N'{diaChi}', '{sdt}')";
             dtbase.UpdateData(sqlInsert);
 
-            MessageBox.Show($"Thêm khách hàng mới thành công!\nMã KH: {maKH}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnTaoKH.Visible = false;
-            btnTao.Enabled = true; //cho phép tạo hóa đơn sau khi tạo khách hàng xong
+            MessageBox.Show($"Thêm khách hàng mới thành công!\nMã KH: {maKH}",
+                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // 5️⃣ Cập nhật lại combobox khách hàng
+            // 7️⃣ Cập nhật lại giao diện
+            btnTaoKH.Visible = false;
+            btnTao.Enabled = true; // cho phép tạo hóa đơn sau khi thêm KH
+
             LoadKhachHang();
             cboMaKH.SelectedValue = maKH;
         }
