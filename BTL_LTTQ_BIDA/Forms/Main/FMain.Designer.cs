@@ -117,6 +117,7 @@
             this.btnThemHD.TabIndex = 3;
             this.btnThemHD.Text = "Thêm hóa đơn mới";
             this.btnThemHD.UseVisualStyleBackColor = true;
+            this.btnThemHD.Click += new System.EventHandler(this.btnThemHD_Click_1);
             // 
             // FMain
             // 
@@ -128,6 +129,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FMain";
             this.Text = "NATD-Billiard";
+            this.Load += new System.EventHandler(this.FMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

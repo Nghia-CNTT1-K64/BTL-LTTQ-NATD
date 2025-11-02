@@ -10,7 +10,7 @@ namespace BTL_LTTQ_BIDA.Data
     internal class DataConnect
     {
         SqlConnection sqlconnect = null;
-        string connectStr = "Data Source=localhost;Initial Catalog=QLQuanBilliard;Integrated Security=True;";
+        string connectStr = "Data Source=localhost;Initial Catalog=QLQuanBilliard4;Integrated Security=True;";
 
         //open connect 
         public void OpenConnect()
