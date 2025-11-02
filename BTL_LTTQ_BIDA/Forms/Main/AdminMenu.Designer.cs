@@ -37,6 +37,10 @@
             this.btnQLNhanVien = new System.Windows.Forms.Button();
             this.pAdminNhanVien = new System.Windows.Forms.Panel();
             this.btnTuyenDungLai = new System.Windows.Forms.Button();
+            this.btnXuatDSNhanVien = new System.Windows.Forms.Button();
+            this.txtSDT = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnTuyenDung = new System.Windows.Forms.Button();
             this.btnChoNghiViec = new System.Windows.Forms.Button();
             this.btnChinhSua = new System.Windows.Forms.Button();
             this.txtTenDN = new System.Windows.Forms.TextBox();
@@ -128,6 +132,7 @@
             this.btnTroVe.TabIndex = 4;
             this.btnTroVe.Text = "TRỞ VỀ";
             this.btnTroVe.UseVisualStyleBackColor = true;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // btnThongKe
             // 
@@ -152,6 +157,7 @@
             this.btnQLBan.TabIndex = 2;
             this.btnQLBan.Text = "QUẢN LÝ BÀN";
             this.btnQLBan.UseVisualStyleBackColor = true;
+            this.btnQLBan.Click += new System.EventHandler(this.btnQLBan_Click_1);
             // 
             // btnQLDichVu
             // 
@@ -164,6 +170,7 @@
             this.btnQLDichVu.TabIndex = 1;
             this.btnQLDichVu.Text = "QUẢN LÝ DỊCH VỤ";
             this.btnQLDichVu.UseVisualStyleBackColor = true;
+            this.btnQLDichVu.Click += new System.EventHandler(this.btnQLDichVu_Click_1);
             // 
             // btnQLNhanVien
             // 
@@ -176,10 +183,15 @@
             this.btnQLNhanVien.TabIndex = 0;
             this.btnQLNhanVien.Text = "QUẢN LÝ NHÂN VIÊN";
             this.btnQLNhanVien.UseVisualStyleBackColor = true;
+            this.btnQLNhanVien.Click += new System.EventHandler(this.btnQLNhanVien_Click_1);
             // 
             // pAdminNhanVien
             // 
             this.pAdminNhanVien.Controls.Add(this.btnTuyenDungLai);
+            this.pAdminNhanVien.Controls.Add(this.btnXuatDSNhanVien);
+            this.pAdminNhanVien.Controls.Add(this.txtSDT);
+            this.pAdminNhanVien.Controls.Add(this.label13);
+            this.pAdminNhanVien.Controls.Add(this.btnTuyenDung);
             this.pAdminNhanVien.Controls.Add(this.btnChoNghiViec);
             this.pAdminNhanVien.Controls.Add(this.btnChinhSua);
             this.pAdminNhanVien.Controls.Add(this.txtTenDN);
@@ -204,48 +216,89 @@
             // 
             // btnTuyenDungLai
             // 
-            this.btnTuyenDungLai.Location = new System.Drawing.Point(669, 458);
+            this.btnTuyenDungLai.Location = new System.Drawing.Point(799, 500);
             this.btnTuyenDungLai.Name = "btnTuyenDungLai";
             this.btnTuyenDungLai.Size = new System.Drawing.Size(113, 33);
-            this.btnTuyenDungLai.TabIndex = 18;
+            this.btnTuyenDungLai.TabIndex = 22;
             this.btnTuyenDungLai.Text = "Tuyển dụng lại";
             this.btnTuyenDungLai.UseVisualStyleBackColor = true;
+            this.btnTuyenDungLai.Click += new System.EventHandler(this.btnTuyenDungLai_Click);
+            // 
+            // btnXuatDSNhanVien
+            // 
+            this.btnXuatDSNhanVien.Location = new System.Drawing.Point(541, 500);
+            this.btnXuatDSNhanVien.Name = "btnXuatDSNhanVien";
+            this.btnXuatDSNhanVien.Size = new System.Drawing.Size(113, 33);
+            this.btnXuatDSNhanVien.TabIndex = 21;
+            this.btnXuatDSNhanVien.Text = "Xuất ra Excel";
+            this.btnXuatDSNhanVien.UseVisualStyleBackColor = true;
+            this.btnXuatDSNhanVien.Click += new System.EventHandler(this.btnXuatDSNhanVien_Click);
+            // 
+            // txtSDT
+            // 
+            this.txtSDT.Location = new System.Drawing.Point(669, 64);
+            this.txtSDT.Name = "txtSDT";
+            this.txtSDT.Size = new System.Drawing.Size(227, 22);
+            this.txtSDT.TabIndex = 20;
+            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(538, 70);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(88, 16);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Số điện thoại:";
+            // 
+            // btnTuyenDung
+            // 
+            this.btnTuyenDung.Location = new System.Drawing.Point(669, 500);
+            this.btnTuyenDung.Name = "btnTuyenDung";
+            this.btnTuyenDung.Size = new System.Drawing.Size(113, 33);
+            this.btnTuyenDung.TabIndex = 18;
+            this.btnTuyenDung.Text = "Tuyển dụng ";
+            this.btnTuyenDung.UseVisualStyleBackColor = true;
+            this.btnTuyenDung.Click += new System.EventHandler(this.btnTuyenDung_Click_1);
             // 
             // btnChoNghiViec
             // 
-            this.btnChoNghiViec.Location = new System.Drawing.Point(799, 389);
+            this.btnChoNghiViec.Location = new System.Drawing.Point(799, 431);
             this.btnChoNghiViec.Name = "btnChoNghiViec";
             this.btnChoNghiViec.Size = new System.Drawing.Size(113, 33);
             this.btnChoNghiViec.TabIndex = 17;
             this.btnChoNghiViec.Text = "Cho nghỉ việc";
             this.btnChoNghiViec.UseVisualStyleBackColor = true;
+            this.btnChoNghiViec.Click += new System.EventHandler(this.btnChoNghiViec_Click);
             // 
             // btnChinhSua
             // 
-            this.btnChinhSua.Location = new System.Drawing.Point(669, 389);
+            this.btnChinhSua.Location = new System.Drawing.Point(669, 431);
             this.btnChinhSua.Name = "btnChinhSua";
             this.btnChinhSua.Size = new System.Drawing.Size(113, 33);
             this.btnChinhSua.TabIndex = 16;
             this.btnChinhSua.Text = "Chỉnh sửa";
             this.btnChinhSua.UseVisualStyleBackColor = true;
+            this.btnChinhSua.Click += new System.EventHandler(this.btnChinhSua_Click);
             // 
             // txtTenDN
             // 
-            this.txtTenDN.Location = new System.Drawing.Point(669, 294);
+            this.txtTenDN.Location = new System.Drawing.Point(669, 336);
             this.txtTenDN.Name = "txtTenDN";
             this.txtTenDN.Size = new System.Drawing.Size(227, 22);
             this.txtTenDN.TabIndex = 15;
             // 
             // txtCCCD
             // 
-            this.txtCCCD.Location = new System.Drawing.Point(669, 184);
+            this.txtCCCD.Location = new System.Drawing.Point(669, 226);
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(227, 22);
             this.txtCCCD.TabIndex = 14;
+            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
             // 
             // txtTenNV
             // 
-            this.txtTenNV.Location = new System.Drawing.Point(669, 74);
+            this.txtTenNV.Location = new System.Drawing.Point(669, 116);
             this.txtTenNV.Name = "txtTenNV";
             this.txtTenNV.Size = new System.Drawing.Size(227, 22);
             this.txtTenNV.TabIndex = 13;
@@ -253,7 +306,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(538, 300);
+            this.label6.Location = new System.Drawing.Point(538, 342);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(98, 16);
             this.label6.TabIndex = 12;
@@ -262,7 +315,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(538, 245);
+            this.label5.Location = new System.Drawing.Point(538, 287);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 16);
             this.label5.TabIndex = 11;
@@ -271,7 +324,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(538, 190);
+            this.label4.Location = new System.Drawing.Point(538, 232);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 16);
             this.label4.TabIndex = 10;
@@ -280,7 +333,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(538, 135);
+            this.label3.Location = new System.Drawing.Point(538, 177);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 16);
             this.label3.TabIndex = 9;
@@ -289,7 +342,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(538, 80);
+            this.label2.Location = new System.Drawing.Point(538, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 16);
             this.label2.TabIndex = 8;
@@ -307,7 +360,7 @@
             // cbQQTV
             // 
             this.cbQQTV.AutoSize = true;
-            this.cbQQTV.Location = new System.Drawing.Point(669, 241);
+            this.cbQQTV.Location = new System.Drawing.Point(669, 283);
             this.cbQQTV.Name = "cbQQTV";
             this.cbQQTV.Size = new System.Drawing.Size(18, 17);
             this.cbQQTV.TabIndex = 6;
@@ -316,7 +369,7 @@
             // dtpNgaySinh
             // 
             this.dtpNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNgaySinh.Location = new System.Drawing.Point(669, 129);
+            this.dtpNgaySinh.Location = new System.Drawing.Point(669, 171);
             this.dtpNgaySinh.Name = "dtpNgaySinh";
             this.dtpNgaySinh.Size = new System.Drawing.Size(105, 22);
             this.dtpNgaySinh.TabIndex = 5;
@@ -331,22 +384,24 @@
             // 
             // btnThemNV
             // 
-            this.btnThemNV.Location = new System.Drawing.Point(541, 389);
+            this.btnThemNV.Location = new System.Drawing.Point(541, 431);
             this.btnThemNV.Name = "btnThemNV";
             this.btnThemNV.Size = new System.Drawing.Size(113, 33);
             this.btnThemNV.TabIndex = 3;
             this.btnThemNV.Text = "Thêm nhân viên";
             this.btnThemNV.UseVisualStyleBackColor = true;
+            this.btnThemNV.Click += new System.EventHandler(this.btnThemNV_Click);
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(563, 350);
+            this.linkLabel1.Location = new System.Drawing.Point(563, 392);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(267, 16);
             this.linkLabel1.TabIndex = 2;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Hiển thị danh sách tài khoản chờ được duyệt";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // dgvNhanVien
             // 
@@ -355,8 +410,10 @@
             this.dgvNhanVien.Name = "dgvNhanVien";
             this.dgvNhanVien.RowHeadersWidth = 51;
             this.dgvNhanVien.RowTemplate.Height = 24;
+            this.dgvNhanVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNhanVien.Size = new System.Drawing.Size(509, 465);
             this.dgvNhanVien.TabIndex = 0;
+            this.dgvNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNhanVien_CellClick);
             // 
             // pAdminDichVu
             // 
@@ -502,6 +559,7 @@
             this.btnChinhSuaBan.TabIndex = 16;
             this.btnChinhSuaBan.Text = "Chỉnh sửa bàn";
             this.btnChinhSuaBan.UseVisualStyleBackColor = true;
+            this.btnChinhSuaBan.Click += new System.EventHandler(this.btnChinhSuaBan_Click);
             // 
             // txtGiaTien
             // 
@@ -552,6 +610,7 @@
             this.btnThemBan.TabIndex = 3;
             this.btnThemBan.Text = "Thêm bàn";
             this.btnThemBan.UseVisualStyleBackColor = true;
+            this.btnThemBan.Click += new System.EventHandler(this.btnThemBan_Click);
             // 
             // dgvBan
             // 
@@ -562,6 +621,7 @@
             this.dgvBan.RowTemplate.Height = 24;
             this.dgvBan.Size = new System.Drawing.Size(509, 465);
             this.dgvBan.TabIndex = 0;
+            this.dgvBan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBan_CellClick);
             // 
             // pAdminThongKe
             // 
@@ -575,13 +635,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1176, 572);
-            this.Controls.Add(this.pAdminControl);
             this.Controls.Add(this.pAdminNhanVien);
+            this.Controls.Add(this.pAdminBan);
+            this.Controls.Add(this.pAdminControl);
             this.Controls.Add(this.pAdminThongKe);
             this.Controls.Add(this.pAdminDichVu);
-            this.Controls.Add(this.pAdminBan);
             this.Name = "AdminMenu";
             this.Text = "AdminMenu";
+            this.Load += new System.EventHandler(this.AdminMenu_Load);
             this.pAdminControl.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pAdminNhanVien.ResumeLayout(false);
@@ -622,7 +683,7 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Button btnThemNV;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button btnTuyenDungLai;
+        private System.Windows.Forms.Button btnTuyenDung;
         private System.Windows.Forms.Button btnChoNghiViec;
         private System.Windows.Forms.Button btnChinhSua;
         private System.Windows.Forms.Panel pAdminDichVu;
@@ -648,5 +709,9 @@
         private System.Windows.Forms.Button btnThemBan;
         private System.Windows.Forms.DataGridView dgvBan;
         private System.Windows.Forms.Panel pAdminThongKe;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtSDT;
+        private System.Windows.Forms.Button btnXuatDSNhanVien;
+        private System.Windows.Forms.Button btnTuyenDungLai;
     }
 }

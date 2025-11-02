@@ -10,14 +10,19 @@ using System.Windows.Forms;
 
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
-    public partial class frmThemBanMoi : Form
+    public partial class AddTableDlg : Form
     {
-        public frmThemBanMoi()
+        public AddTableDlg()
         {
             InitializeComponent();
         }
 
         private void txtGiaTien_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmThemBanMoi_Load(object sender, EventArgs e)
         {
 
         }
