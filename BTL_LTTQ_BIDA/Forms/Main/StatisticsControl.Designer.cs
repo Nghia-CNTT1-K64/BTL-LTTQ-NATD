@@ -71,11 +71,11 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.imageList32x32 = new System.Windows.Forms.ImageList(this.components);
             this.button_ZoomIn = new System.Windows.Forms.Button();
             this.checkBox_ValueLabel = new System.Windows.Forms.CheckBox();
-            this.button_ExportExcel = new System.Windows.Forms.Button();
             this.panel_Chart = new System.Windows.Forms.Panel();
             this.buttonShow = new System.Windows.Forms.Button();
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.label_Page = new System.Windows.Forms.Label();
+            this.button_ExportExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).BeginInit();
             this.splitContainer_Main.Panel1.SuspendLayout();
             this.splitContainer_Main.Panel2.SuspendLayout();
@@ -204,6 +204,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.button_AxisColor.Size = new System.Drawing.Size(31, 22);
             this.button_AxisColor.TabIndex = 14;
             this.button_AxisColor.UseVisualStyleBackColor = true;
+            this.button_AxisColor.Click += new System.EventHandler(this.button_AxisColor_Click);
             // 
             // label11
             // 
@@ -230,7 +231,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(300, 16);
+            this.label3.Location = new System.Drawing.Point(280, 16);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(216, 18);
@@ -245,7 +246,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             "Mã số",
             "Thời gian - Ngày",
             "Thời gian - Tháng"});
-            this.comboBox_GroupBy.Location = new System.Drawing.Point(537, 14);
+            this.comboBox_GroupBy.Location = new System.Drawing.Point(517, 14);
             this.comboBox_GroupBy.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_GroupBy.Name = "comboBox_GroupBy";
             this.comboBox_GroupBy.Size = new System.Drawing.Size(142, 26);
@@ -259,6 +260,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.button_BarBorderColor.Size = new System.Drawing.Size(31, 22);
             this.button_BarBorderColor.TabIndex = 3;
             this.button_BarBorderColor.UseVisualStyleBackColor = true;
+            this.button_BarBorderColor.Click += new System.EventHandler(this.button_BarBorderColor_Click);
             // 
             // label10
             // 
@@ -278,6 +280,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.button_BarColor.Size = new System.Drawing.Size(31, 22);
             this.button_BarColor.TabIndex = 1;
             this.button_BarColor.UseVisualStyleBackColor = true;
+            this.button_BarColor.Click += new System.EventHandler(this.button_BarColor_Click);
             // 
             // label_Name
             // 
@@ -363,6 +366,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.comboBox_ID.Size = new System.Drawing.Size(135, 26);
             this.comboBox_ID.Sorted = true;
             this.comboBox_ID.TabIndex = 10;
+            this.comboBox_ID.SelectedIndexChanged += new System.EventHandler(this.comboBox_ID_SelectedIndexChanged);
+            this.comboBox_ID.TextChanged += new System.EventHandler(this.comboBox_ID_TextChanged);
             // 
             // label4
             // 
@@ -601,25 +606,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.checkBox_ValueLabel.UseVisualStyleBackColor = false;
             this.checkBox_ValueLabel.CheckedChanged += new System.EventHandler(this.CheckBox_ValueLabel_CheckedChanged);
             // 
-            // button_ExportExcel
-            // 
-            this.button_ExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ExportExcel.BackColor = System.Drawing.Color.White;
-            this.button_ExportExcel.FlatAppearance.BorderSize = 0;
-            this.button_ExportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.button_ExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_ExportExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.button_ExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_ExportExcel.Location = new System.Drawing.Point(680, 149);
-            this.button_ExportExcel.Margin = new System.Windows.Forms.Padding(2);
-            this.button_ExportExcel.Name = "button_ExportExcel";
-            this.button_ExportExcel.Size = new System.Drawing.Size(108, 29);
-            this.button_ExportExcel.TabIndex = 19;
-            this.button_ExportExcel.Text = "Xuất Excel";
-            this.button_ExportExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_ExportExcel.UseVisualStyleBackColor = false;
-            this.button_ExportExcel.Click += new System.EventHandler(this.button_ExportExcel_Click);
-            // 
             // panel_Chart
             // 
             this.panel_Chart.AutoScroll = true;
@@ -673,6 +659,25 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.label_Page.Text = "Trang 0/0";
             this.label_Page.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_Page.TextChanged += new System.EventHandler(this.label_Page_TextChanged);
+            // 
+            // button_ExportExcel
+            // 
+            this.button_ExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ExportExcel.BackColor = System.Drawing.Color.White;
+            this.button_ExportExcel.FlatAppearance.BorderSize = 0;
+            this.button_ExportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.button_ExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_ExportExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.button_ExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_ExportExcel.Location = new System.Drawing.Point(680, 149);
+            this.button_ExportExcel.Margin = new System.Windows.Forms.Padding(2);
+            this.button_ExportExcel.Name = "button_ExportExcel";
+            this.button_ExportExcel.Size = new System.Drawing.Size(108, 29);
+            this.button_ExportExcel.TabIndex = 19;
+            this.button_ExportExcel.Text = "Xuất Excel";
+            this.button_ExportExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_ExportExcel.UseVisualStyleBackColor = false;
+            this.button_ExportExcel.Click += new System.EventHandler(this.button_ExportExcel_Click);
             // 
             // StatisticsControl
             // 

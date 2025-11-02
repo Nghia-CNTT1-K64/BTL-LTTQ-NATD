@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-
+using BTL_LTTQ_BIDA.Utils;
 namespace BTL_LTTQ_BIDA.Forms
 {
     public partial class FAddService : Form
@@ -22,6 +22,7 @@ namespace BTL_LTTQ_BIDA.Forms
         {
             base.OnLoad(e);
             GenerateNewServiceID();
+            UIStyler.ApplyFormStyle(this);
         }
 
         // ===========================================================

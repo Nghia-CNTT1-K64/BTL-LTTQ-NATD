@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BTL_LTTQ_BIDA.Data;
+using System;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
-using BTL_LTTQ_BIDA.Data;
-
+using BTL_LTTQ_BIDA.Utils;
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
     public partial class AdminMenu : Form
@@ -25,10 +27,77 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             InitDgvDichVu();
             UpdateDichVu();
 
-            // Ensure ID textbox is never editable by the user
             txtMaDV.ReadOnly = true;
             txtMaDV.TabStop = false;
+
+            // 👉 Thêm style UI (như CSS)
+            UIStyler.ApplyFormStyle(this);
         }
+        // ===========================================================
+        // 🎨 UI BEAUTIFY – tạo hiệu ứng đẹp, giống CSS
+        // ===========================================================
+        //private void ApplyCustomUI()
+        //{
+        //    // 🎯 Nền tổng thể
+        //    this.BackColor = Color.FromArgb(245, 248, 255); // màu nền nhẹ
+
+        //    // 🎯 Style cho các panel
+        //    foreach (Panel pnl in new[] { pAdminNhanVien, pAdminBan, pAdminDichVu, pAdminThongKe })
+        //    {
+        //        pnl.BackColor = Color.White;
+        //        pnl.BorderStyle = BorderStyle.FixedSingle;
+        //    }
+
+        //    // 🎯 Style DataGridView
+        //    dgvDichVu.BackgroundColor = Color.White;
+        //    dgvDichVu.BorderStyle = BorderStyle.None;
+        //    dgvDichVu.EnableHeadersVisualStyles = false;
+        //    dgvDichVu.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(30, 144, 255);
+        //    dgvDichVu.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+        //    dgvDichVu.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+        //    dgvDichVu.DefaultCellStyle.Font = new Font("Segoe UI", 9);
+        //    dgvDichVu.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 250, 255);
+        //    dgvDichVu.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 224, 138);
+        //    dgvDichVu.DefaultCellStyle.SelectionForeColor = Color.Black;
+        //    dgvDichVu.GridColor = Color.FromArgb(200, 200, 200);
+
+        //    // 🎯 Style các button
+        //    foreach (var btn in this.Controls.OfType<Button>())
+        //        StyleButton(btn);
+
+        //    foreach (var pnl in this.Controls.OfType<Panel>())
+        //        foreach (var btn in pnl.Controls.OfType<Button>())
+        //            StyleButton(btn);
+
+        //    // 🎯 TextBox bo góc & viền sáng
+        //    foreach (TextBox tb in this.Controls.OfType<TextBox>())
+        //        StyleTextbox(tb);
+
+        //    foreach (Panel pnl in this.Controls.OfType<Panel>())
+        //        foreach (TextBox tb in pnl.Controls.OfType<TextBox>())
+        //            StyleTextbox(tb);
+        //}
+
+        //private void StyleButton(Button btn)
+        //{
+        //    btn.FlatStyle = FlatStyle.Flat;
+        //    btn.FlatAppearance.BorderSize = 0;
+        //    btn.BackColor = Color.FromArgb(30, 144, 255);
+        //    btn.ForeColor = Color.White;
+        //    btn.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+        //    btn.Cursor = Cursors.Hand;
+
+        //    btn.MouseEnter += (s, e) => btn.BackColor = Color.FromArgb(0, 120, 215);
+        //    btn.MouseLeave += (s, e) => btn.BackColor = Color.FromArgb(30, 144, 255);
+        //}
+
+        //private void StyleTextbox(TextBox tb)
+        //{
+        //    tb.BorderStyle = BorderStyle.FixedSingle;
+        //    tb.Font = new Font("Segoe UI", 9);
+        //    tb.BackColor = Color.FromArgb(252, 252, 255);
+        //}
+
 
         // DGV SETUP
         private void InitDgvDichVu()

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//using BTL_LTTQ_BIDA.Utils;
 
 namespace BTL_LTTQ_BIDA
 {
@@ -20,13 +21,8 @@ namespace BTL_LTTQ_BIDA
 
         private void FMain_Load(object sender, EventArgs e)
         {
-
+            //UIStyler.ApplyFormStyle(this);
         }
 
-        private void thôngTinTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AccountInfoDlg form = new AccountInfoDlg();
-            form.ShowDialog();
-        }
     }
 }

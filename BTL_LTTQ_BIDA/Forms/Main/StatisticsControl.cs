@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using BTL_LTTQ_BIDA.Data;
-
+using BTL_LTTQ_BIDA.Utils;
 namespace BTL_LTTQ_BIDA.Forms.Main
 {
     public partial class StatisticsControl : UserControl
@@ -26,9 +26,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private int beginIndex = 0;
         private int endIndex = 0;
 
-        // ==============================================
-        // CONSTRUCTOR
-        // ==============================================
         public StatisticsControl()
         {
             InitializeComponent();
@@ -40,7 +37,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 AutoCalculateVerticalValueList = true
             };
 
-            // Enable double buffering to reduce flicker
+            // reduce flicker
             typeof(Panel).InvokeMember(
                 "DoubleBuffered",
                 System.Reflection.BindingFlags.SetProperty |
@@ -49,9 +46,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 null, barChart, new object[] { true });
         }
 
-        // ==============================================
-        // FORM LOAD
-        // ==============================================
         private void StatisticsControl_Load(object sender, EventArgs e)
         {
             InitImageLists();
@@ -65,17 +59,15 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             button_AxisColor.BackColor = barChart.AxisColor;
         }
 
-        // ==============================================
-        // INITIALIZATION
-        // ==============================================
         private void InitImageLists()
         {
             var basePath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\Images"));
-            imageListSmall.Images.Clear();
-            imageList32x32.Images.Clear();
 
+            imageListSmall.Images.Clear();
             imageListSmall.ImageSize = new Size(16, 16);
             imageListSmall.ColorDepth = ColorDepth.Depth32Bit;
+
+            imageList32x32.Images.Clear();
             imageList32x32.ImageSize = new Size(32, 32);
             imageList32x32.ColorDepth = ColorDepth.Depth32Bit;
 
@@ -110,9 +102,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             dateTimePicker_EndDate.Value = endDate;
         }
 
-        // ==============================================
-        // EVENTS
-        // ==============================================
         private void CheckBox_ValueLabel_CheckedChanged(object sender, EventArgs e)
         {
             barChart.IsValueLabelShowed = checkBox_ValueLabel.Checked;
@@ -121,30 +110,33 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private void ComboBox_TableType_SelectionChangeCommitted(object sender, EventArgs e)
         {
             comboBox_ID.Items.Clear();
-            comboBox_Name.Items.Clear();
+            comboBox_Name.Text = string.Empty;
+            comboBox_Name.Enabled = false;
 
             string sql;
             switch (comboBox_TableType.SelectedIndex)
             {
                 case 0: sql = "SELECT IDHD FROM HOADON"; break;
-                case 1: sql = "SELECT IDDV, TENDV FROM DICHVU"; break;
-                case 2: sql = "SELECT IDKH, HOTEN FROM KHACHHANG"; break;
-                case 3: sql = "SELECT IDNV, HOTENNV FROM NHANVIEN"; break;
+                case 1: sql = "SELECT IDDV FROM DICHVU"; break;
+                case 2: sql = "SELECT IDKH FROM KHACHHANG"; break;
+                case 3: sql = "SELECT IDNV FROM NHANVIEN"; break;
                 default: sql = "SELECT IDBAN FROM BAN"; break;
             }
 
-            var table = dtBase.ReadData(sql);
-            foreach (DataRow row in table.Rows)
+            DataTable table = dtBase.ReadData(sql);
+            if (table != null)
             {
-                comboBox_ID.Items.Add(row[0].ToString());
-                comboBox_Name.Items.Add(table.Columns.Count > 1 ? row[1].ToString() : row[0].ToString());
+                foreach (DataRow row in table.Rows)
+                    comboBox_ID.Items.Add(row[0].ToString());
             }
+
+            comboBox_ID.SelectedIndex = -1;
+            comboBox_Name.Text = "";
         }
 
         private void ButtonShow_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-
             try
             {
                 startDate = dateTimePicker_StartDate.Value.Date;
@@ -162,19 +154,52 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                     return;
                 }
 
-                var sql = "SELECT " + GetSelect() +
-                          ", DOANHTHU = SUM(" + GetSumExpression() + ") " +
-                          "FROM " + GetTableName() + " " +
-                          GetCondition() +
-                          " GROUP BY " + GetGroupBy();
+                string sql =
+                    "SELECT " + GetSelect() +
+                    ", DOANHTHU = SUM(" + GetSumExpression() + ") " +
+                    "FROM " + GetTableName() + " " +
+                    GetCondition() +
+                    " GROUP BY " + GetGroupBy();
 
                 currentTable = dtBase.ReadData(sql);
 
-                if (currentTable.Rows.Count == 0)
+                if (currentTable == null || currentTable.Rows.Count == 0)
                 {
                     MessageBox.Show("Không tìm thấy dữ liệu phù hợp!", "Thông báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
+                }
+
+                // build readable NAME column for date/month grouping
+                if (comboBox_GroupBy.SelectedIndex == 1 && currentTable.Columns.Contains("NGAY"))
+                {
+                    if (!currentTable.Columns.Contains("NAME"))
+                        currentTable.Columns.Add("NAME", typeof(string));
+
+                    foreach (DataRow row in currentTable.Rows)
+                    {
+                        DateTime d;
+                        if (DateTime.TryParse(Convert.ToString(row["NGAY"]), out d))
+                            row["NAME"] = d.ToString("dd/MM/yyyy");
+                    }
+                }
+
+                if (comboBox_GroupBy.SelectedIndex == 2 &&
+                    currentTable.Columns.Contains("NAM") &&
+                    currentTable.Columns.Contains("THANG"))
+                {
+                    if (!currentTable.Columns.Contains("NAME"))
+                        currentTable.Columns.Add("NAME", typeof(string));
+
+                    foreach (DataRow row in currentTable.Rows)
+                    {
+                        int month, year;
+                        if (int.TryParse(Convert.ToString(row["THANG"]), out month) &&
+                            int.TryParse(Convert.ToString(row["NAM"]), out year))
+                        {
+                            row["NAME"] = string.Format("Tháng {0:00}/{1}", month, year);
+                        }
+                    }
                 }
 
                 DisplaySummary(currentTable);
@@ -182,7 +207,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải thống kê:\n" + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -199,9 +225,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             button_PageIncrease.Enabled = currentPageNum < maxPageNum;
         }
 
-        // ==============================================
-        // DRAW CHART
-        // ==============================================
         private void DrawChart(DataTable table)
         {
             barChart.HorizontalText = comboBox_TableType.Text;
@@ -230,17 +253,17 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
             for (int i = beginIndex; i < endIndex; i++)
             {
-                string name = currentTable.Rows[i][0].ToString();
+                string name = currentTable.Columns.Contains("NAME")
+                                ? Convert.ToString(currentTable.Rows[i]["NAME"])
+                                : Convert.ToString(currentTable.Rows[i][0]);
+
                 double value = Convert.ToDouble(currentTable.Rows[i]["DOANHTHU"]);
-                barChart.ChartItems.Add(new ChartItem<double>(name, value));
+                barChart.ChartItems.Add(new ChartItem<double>(name ?? string.Empty, value));
             }
 
             barChart.Refresh();
         }
 
-        // ==============================================
-        // PAGINATION
-        // ==============================================
         private void button_PageDecrease_Click(object sender, EventArgs e)
         {
             if (currentTable == null || currentTable.Rows.Count == 0 || currentPageNum <= 1) return;
@@ -267,9 +290,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             UpdateChartPage();
         }
 
-        // ==============================================
-        // OTHER METHODS
-        // ==============================================
         private void AdjustZoom(int direction)
         {
             int newIndex = currentZoomRatioIndex + direction;
@@ -294,9 +314,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             textBox_MinValue.Text = rows.Min(r => Convert.ToDecimal(r["DOANHTHU"])).ToString("C0");
         }
 
-        // ==============================================
-        // SQL HELPERS
-        // ==============================================
         private string GetTableName()
         {
             switch (comboBox_TableType.SelectedIndex)
@@ -335,9 +352,14 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                     default: return "NAME = N'Bàn ' + b.IDBAN";
                 }
             }
-
-            return g == 1 ? "NGHD = CAST(h.NGAYLAP AS DATE)" :
-                            "NAM = YEAR(h.NGAYLAP), THANG = MONTH(h.NGAYLAP)";
+            else if (g == 1)
+            {
+                return "CAST(h.NGAYLAP AS DATE) AS NGAY";
+            }
+            else
+            {
+                return "YEAR(h.NGAYLAP) AS NAM, MONTH(h.NGAYLAP) AS THANG";
+            }
         }
 
         private string GetGroupBy()
@@ -356,9 +378,14 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                     default: return "b.IDBAN";
                 }
             }
-
-            return g == 1 ? "CAST(h.NGAYLAP AS DATE)" :
-                            "YEAR(h.NGAYLAP), MONTH(h.NGAYLAP)";
+            else if (g == 1)
+            {
+                return "CAST(h.NGAYLAP AS DATE)";
+            }
+            else
+            {
+                return "YEAR(h.NGAYLAP), MONTH(h.NGAYLAP)";
+            }
         }
 
         private string GetCondition()
@@ -369,23 +396,138 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             if (comboBox_ID.SelectedIndex != -1)
             {
                 string id = comboBox_ID.SelectedItem.ToString();
-                string col = t == 0 ? "h.IDHD" :
-                             t == 1 ? "dv.IDDV" :
-                             t == 2 ? "h.IDKH" :
-                             t == 3 ? "h.IDNV" : "b.IDBAN";
-                where += $"{col} = N'{id}' AND ";
+                string col;
+                switch (t)
+                {
+                    case 0: col = "h.IDHD"; break;
+                    case 1: col = "dv.IDDV"; break;
+                    case 2: col = "h.IDKH"; break;
+                    case 3: col = "h.IDNV"; break;
+                    default: col = "b.IDBAN"; break;
+                }
+                where += string.Format("{0} = N'{1}' AND ", col, id);
             }
 
             string s = startDate.ToString("yyyy-MM-dd");
             string e = endDate.ToString("yyyy-MM-dd");
 
             if (comboBox_GroupBy.SelectedIndex <= 1)
-                where += $"CAST(h.NGAYLAP AS DATE) BETWEEN '{s}' AND '{e}'";
+                where += string.Format("CAST(h.NGAYLAP AS DATE) BETWEEN '{0}' AND '{1}'", s, e);
             else
                 where += "YEAR(h.NGAYLAP) * 12 + MONTH(h.NGAYLAP) BETWEEN " +
-                         $"YEAR('{s}') * 12 + MONTH('{s}') AND YEAR('{e}') * 12 + MONTH('{e}')";
+                         string.Format("YEAR('{0}') * 12 + MONTH('{0}') AND YEAR('{1}') * 12 + MONTH('{1}')", s, e);
 
             return where;
+        }
+
+        private void comboBox_ID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox_ID.SelectedIndex == -1 || string.IsNullOrWhiteSpace(comboBox_ID.Text))
+            {
+                comboBox_Name.Text = "";
+                return;
+            }
+
+            string id = comboBox_ID.Text.Trim();
+            string sql;
+
+            switch (comboBox_TableType.SelectedIndex)
+            {
+                case 0: sql = "SELECT IDHD AS Ma, N'Hóa đơn ' + IDHD AS Ten FROM HOADON WHERE IDHD = N'" + id + "'"; break;
+                case 1: sql = "SELECT IDDV AS Ma, TENDV AS Ten FROM DICHVU WHERE IDDV = N'" + id + "'"; break;
+                case 2: sql = "SELECT IDKH AS Ma, HOTEN AS Ten FROM KHACHHANG WHERE IDKH = N'" + id + "'"; break;
+                case 3: sql = "SELECT IDNV AS Ma, HOTENNV AS Ten FROM NHANVIEN WHERE IDNV = N'" + id + "'"; break;
+                default: sql = "SELECT IDBAN AS Ma, N'Bàn ' + IDBAN AS Ten FROM BAN WHERE IDBAN = N'" + id + "'"; break;
+            }
+
+            var dt = dtBase.ReadData(sql);
+            comboBox_Name.Text = (dt != null && dt.Rows.Count > 0) ? dt.Rows[0]["Ten"].ToString() : "";
+        }
+
+        private void comboBox_ID_TextChanged(object sender, EventArgs e)
+        {
+            string id = comboBox_ID.Text.Trim();
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                comboBox_Name.Text = "";
+                return;
+            }
+
+            string sql;
+            switch (comboBox_TableType.SelectedIndex)
+            {
+                case 0: sql = "SELECT IDHD AS Ma, N'Hóa đơn ' + IDHD AS Ten FROM HOADON WHERE IDHD = N'" + id + "'"; break;
+                case 1: sql = "SELECT IDDV AS Ma, TENDV AS Ten FROM DICHVU WHERE IDDV = N'" + id + "'"; break;
+                case 2: sql = "SELECT IDKH AS Ma, HOTEN AS Ten FROM KHACHHANG WHERE IDKH = N'" + id + "'"; break;
+                case 3: sql = "SELECT IDNV AS Ma, HOTENNV AS Ten FROM NHANVIEN WHERE IDNV = N'" + id + "'"; break;
+                default: sql = "SELECT IDBAN AS Ma, N'Bàn ' + IDBAN AS Ten FROM BAN WHERE IDBAN = N'" + id + "'"; break;
+            }
+
+            try
+            {
+                var dt = dtBase.ReadData(sql);
+                comboBox_Name.Text = (dt != null && dt.Rows.Count > 0) ? dt.Rows[0]["Ten"].ToString() : "";
+            }
+            catch
+            {
+                comboBox_Name.Text = "";
+            }
+        }
+
+        private void button_BarColor_Click(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                using (ColorDialog dlg = new ColorDialog())
+                {
+                    dlg.Color = btn.BackColor;
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        // Đổi màu cho chính nút
+                        btn.BackColor = dlg.Color;
+
+                        // 👉 Gán màu vừa chọn cho BarChart
+                        barChart.BarColor = dlg.Color;
+
+                        // Làm mới lại biểu đồ
+                        barChart.Refresh();
+                    }
+                }
+            }
+        }
+
+        private void button_BarBorderColor_Click(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                using (ColorDialog dlg = new ColorDialog())
+                {
+                    dlg.Color = btn.BackColor;
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        btn.BackColor = dlg.Color;
+                        barChart.BarBorderColor = dlg.Color;
+                        barChart.Refresh();
+                    }
+                }
+            }
+        }
+
+        private void button_AxisColor_Click(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                using (ColorDialog dlg = new ColorDialog())
+                {
+                    dlg.Color = btn.BackColor;
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        btn.BackColor = dlg.Color;
+                        barChart.AxisColor = dlg.Color;
+                        barChart.Refresh();
+                    }
+                }
+            }
         }
 
         private void button_ExportExcel_Click(object sender, EventArgs e)
@@ -404,10 +546,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                     FileName = $"ThongKe_{comboBox_TableType.Text}_{DateTime.Now:yyyyMMdd_HHmm}.xlsx"
                 })
                 {
-                    if (sfd.ShowDialog() != DialogResult.OK)
-                        return;
+                    if (sfd.ShowDialog() != DialogResult.OK) return;
 
-                    // Create Excel application
                     Excel.Application app = null;
                     Excel.Workbook workbook = null;
                     Excel.Worksheet sheet = null;
@@ -449,7 +589,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                             }
                         }
 
-                        // Auto fit and chart
                         sheet.Columns.AutoFit();
 
                         var charts = (Excel.ChartObjects)sheet.ChartObjects(Type.Missing);
@@ -471,12 +610,10 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                         chart.Axes(Excel.XlAxisType.xlValue).HasTitle = true;
                         chart.Axes(Excel.XlAxisType.xlValue).AxisTitle.Text = "Doanh thu (VNĐ)";
 
-                        // Save
                         workbook.SaveAs(sfd.FileName);
                     }
                     finally
                     {
-                        // Close and release COM objects
                         try { workbook?.Close(); } catch { }
                         try { app?.Quit(); } catch { }
 
