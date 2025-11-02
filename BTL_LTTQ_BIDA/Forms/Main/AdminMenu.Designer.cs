@@ -17,14 +17,19 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pAdminControl = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnQLNhanVien = new System.Windows.Forms.Button();
-            this.btnTroVe = new System.Windows.Forms.Button();
-            this.btnThongKe = new System.Windows.Forms.Button();
             this.btnQLBan = new System.Windows.Forms.Button();
             this.btnQLDichVu = new System.Windows.Forms.Button();
+            this.btnTroVe = new System.Windows.Forms.Button();
+            this.btnThongKe = new System.Windows.Forms.Button();
+            this.btnQLKhachHang = new System.Windows.Forms.Button();
             this.pAdminNhanVien = new System.Windows.Forms.Panel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label14 = new System.Windows.Forms.Label();
             this.btnXuatDSNhanVien = new System.Windows.Forms.Button();
             this.txtSDT = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -74,8 +79,23 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.dgvBan = new System.Windows.Forms.DataGridView();
             this.pAdminThongKe = new System.Windows.Forms.Panel();
             this.pMainMenu = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.pAdminKhachHang = new System.Windows.Forms.Panel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.dgvKhachHang = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtSDTKH = new System.Windows.Forms.TextBox();
+            this.txtDiaChiKH = new System.Windows.Forms.TextBox();
+            this.txtHoTenKH = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtIDKH = new System.Windows.Forms.TextBox();
+            this.btnThemKH = new System.Windows.Forms.Button();
+            this.btnChinhSuaKH = new System.Windows.Forms.Button();
+            this.btnXuatDSKH = new System.Windows.Forms.Button();
+            this.btnXoaKH = new System.Windows.Forms.Button();
             this.pAdminControl.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pAdminNhanVien.SuspendLayout();
@@ -91,6 +111,14 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.pAdminBan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBan)).BeginInit();
             this.pMainMenu.SuspendLayout();
+            this.pAdminKhachHang.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pAdminControl
@@ -108,19 +136,21 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.btnQLNhanVien, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnTroVe, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnThongKe, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnQLBan, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnQLDichVu, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnTroVe, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.btnThongKe, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.btnQLKhachHang, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(215, 586);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -131,43 +161,19 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.btnQLNhanVien.Location = new System.Drawing.Point(3, 2);
             this.btnQLNhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLNhanVien.Name = "btnQLNhanVien";
-            this.btnQLNhanVien.Size = new System.Drawing.Size(209, 113);
+            this.btnQLNhanVien.Size = new System.Drawing.Size(209, 89);
             this.btnQLNhanVien.TabIndex = 0;
             this.btnQLNhanVien.Text = "QUẢN LÝ NHÂN VIÊN";
             this.btnQLNhanVien.UseVisualStyleBackColor = true;
             this.btnQLNhanVien.Click += new System.EventHandler(this.btnQLNhanVien_Click_1);
             // 
-            // btnTroVe
-            // 
-            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTroVe.Location = new System.Drawing.Point(3, 470);
-            this.btnTroVe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnTroVe.Name = "btnTroVe";
-            this.btnTroVe.Size = new System.Drawing.Size(209, 114);
-            this.btnTroVe.TabIndex = 4;
-            this.btnTroVe.Text = "TRỞ VỀ";
-            this.btnTroVe.UseVisualStyleBackColor = true;
-            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
-            // 
-            // btnThongKe
-            // 
-            this.btnThongKe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnThongKe.Location = new System.Drawing.Point(3, 353);
-            this.btnThongKe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnThongKe.Name = "btnThongKe";
-            this.btnThongKe.Size = new System.Drawing.Size(209, 113);
-            this.btnThongKe.TabIndex = 3;
-            this.btnThongKe.Text = "THỐNG KÊ";
-            this.btnThongKe.UseVisualStyleBackColor = true;
-            this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click);
-            // 
             // btnQLBan
             // 
             this.btnQLBan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnQLBan.Location = new System.Drawing.Point(3, 236);
+            this.btnQLBan.Location = new System.Drawing.Point(3, 188);
             this.btnQLBan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLBan.Name = "btnQLBan";
-            this.btnQLBan.Size = new System.Drawing.Size(209, 113);
+            this.btnQLBan.Size = new System.Drawing.Size(209, 89);
             this.btnQLBan.TabIndex = 2;
             this.btnQLBan.Text = "QUẢN LÝ BÀN";
             this.btnQLBan.UseVisualStyleBackColor = true;
@@ -176,14 +182,49 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // btnQLDichVu
             // 
             this.btnQLDichVu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnQLDichVu.Location = new System.Drawing.Point(3, 119);
+            this.btnQLDichVu.Location = new System.Drawing.Point(3, 95);
             this.btnQLDichVu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLDichVu.Name = "btnQLDichVu";
-            this.btnQLDichVu.Size = new System.Drawing.Size(209, 113);
+            this.btnQLDichVu.Size = new System.Drawing.Size(209, 89);
             this.btnQLDichVu.TabIndex = 1;
             this.btnQLDichVu.Text = "QUẢN LÝ DỊCH VỤ";
             this.btnQLDichVu.UseVisualStyleBackColor = true;
             this.btnQLDichVu.Click += new System.EventHandler(this.btnQLDichVu_Click_1);
+            // 
+            // btnTroVe
+            // 
+            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTroVe.Location = new System.Drawing.Point(3, 467);
+            this.btnTroVe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnTroVe.Name = "btnTroVe";
+            this.btnTroVe.Size = new System.Drawing.Size(209, 117);
+            this.btnTroVe.TabIndex = 4;
+            this.btnTroVe.Text = "TRỞ VỀ";
+            this.btnTroVe.UseVisualStyleBackColor = true;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
+            // 
+            // btnThongKe
+            // 
+            this.btnThongKe.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnThongKe.Location = new System.Drawing.Point(3, 374);
+            this.btnThongKe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnThongKe.Name = "btnThongKe";
+            this.btnThongKe.Size = new System.Drawing.Size(209, 89);
+            this.btnThongKe.TabIndex = 3;
+            this.btnThongKe.Text = "THỐNG KÊ";
+            this.btnThongKe.UseVisualStyleBackColor = true;
+            this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click);
+            // 
+            // btnQLKhachHang
+            // 
+            this.btnQLKhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnQLKhachHang.Location = new System.Drawing.Point(3, 282);
+            this.btnQLKhachHang.Name = "btnQLKhachHang";
+            this.btnQLKhachHang.Size = new System.Drawing.Size(209, 87);
+            this.btnQLKhachHang.TabIndex = 5;
+            this.btnQLKhachHang.Text = "QUẢN LÝ KHÁCH HÀNG";
+            this.btnQLKhachHang.UseVisualStyleBackColor = true;
+            this.btnQLKhachHang.Click += new System.EventHandler(this.btnQLKhachHang_Click);
             // 
             // pAdminNhanVien
             // 
@@ -216,6 +257,26 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.pAdminNhanVien.Name = "pAdminNhanVien";
             this.pAdminNhanVien.Size = new System.Drawing.Size(961, 586);
             this.pAdminNhanVien.TabIndex = 1;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(551, 375);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(132, 16);
+            this.linkLabel1.TabIndex = 23;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Danh sách chờ duyệt";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(551, 63);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(85, 16);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Số điện thoại";
             // 
             // btnXuatDSNhanVien
             // 
@@ -303,7 +364,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.cbQQTV.Location = new System.Drawing.Point(681, 272);
             this.cbQQTV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbQQTV.Name = "cbQQTV";
-            this.cbQQTV.Size = new System.Drawing.Size(15, 14);
+            this.cbQQTV.Size = new System.Drawing.Size(18, 17);
             this.cbQQTV.TabIndex = 12;
             // 
             // txtCCCD
@@ -530,7 +591,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(21, 38);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(76, 17);
+            this.label12.Size = new System.Drawing.Size(90, 20);
             this.label12.TabIndex = 9;
             this.label12.Text = "Mã dịch vụ";
             // 
@@ -539,7 +600,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.txtMaDV.Location = new System.Drawing.Point(177, 34);
             this.txtMaDV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaDV.Name = "txtMaDV";
-            this.txtMaDV.Size = new System.Drawing.Size(144, 23);
+            this.txtMaDV.Size = new System.Drawing.Size(144, 26);
             this.txtMaDV.TabIndex = 10;
             // 
             // label13
@@ -547,7 +608,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(21, 204);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(64, 17);
+            this.label13.Size = new System.Drawing.Size(74, 20);
             this.label13.TabIndex = 1;
             this.label13.Text = "Số lượng";
             // 
@@ -556,7 +617,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.txtGiaDV.Location = new System.Drawing.Point(177, 145);
             this.txtGiaDV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtGiaDV.Name = "txtGiaDV";
-            this.txtGiaDV.Size = new System.Drawing.Size(144, 23);
+            this.txtGiaDV.Size = new System.Drawing.Size(144, 26);
             this.txtGiaDV.TabIndex = 5;
             // 
             // txtSoLuong
@@ -564,7 +625,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.txtSoLuong.Location = new System.Drawing.Point(177, 201);
             this.txtSoLuong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSoLuong.Name = "txtSoLuong";
-            this.txtSoLuong.Size = new System.Drawing.Size(144, 23);
+            this.txtSoLuong.Size = new System.Drawing.Size(144, 26);
             this.txtSoLuong.TabIndex = 0;
             // 
             // label11
@@ -572,7 +633,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(21, 94);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(82, 17);
+            this.label11.Size = new System.Drawing.Size(95, 20);
             this.label11.TabIndex = 8;
             this.label11.Text = "Tên dịch vụ";
             // 
@@ -581,7 +642,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(21, 149);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 17);
+            this.label9.Size = new System.Drawing.Size(67, 20);
             this.label9.TabIndex = 7;
             this.label9.Text = "Giá tiền";
             // 
@@ -590,7 +651,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.txtTenDV.Location = new System.Drawing.Point(177, 87);
             this.txtTenDV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTenDV.Name = "txtTenDV";
-            this.txtTenDV.Size = new System.Drawing.Size(144, 23);
+            this.txtTenDV.Size = new System.Drawing.Size(144, 26);
             this.txtTenDV.TabIndex = 6;
             // 
             // pAdminBan
@@ -709,9 +770,10 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // pMainMenu
             // 
             this.pMainMenu.Controls.Add(this.pAdminNhanVien);
+            this.pMainMenu.Controls.Add(this.pAdminDichVu);
             this.pMainMenu.Controls.Add(this.pAdminBan);
             this.pMainMenu.Controls.Add(this.pAdminThongKe);
-            this.pMainMenu.Controls.Add(this.pAdminDichVu);
+            this.pMainMenu.Controls.Add(this.pAdminKhachHang);
             this.pMainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pMainMenu.Location = new System.Drawing.Point(215, 0);
             this.pMainMenu.Margin = new System.Windows.Forms.Padding(4);
@@ -719,25 +781,199 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.pMainMenu.Size = new System.Drawing.Size(961, 586);
             this.pMainMenu.TabIndex = 18;
             // 
-            // label14
+            // pAdminKhachHang
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(551, 63);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(85, 16);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "Số điện thoại";
+            this.pAdminKhachHang.Controls.Add(this.splitContainer2);
+            this.pAdminKhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pAdminKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pAdminKhachHang.Location = new System.Drawing.Point(0, 0);
+            this.pAdminKhachHang.Name = "pAdminKhachHang";
+            this.pAdminKhachHang.Size = new System.Drawing.Size(961, 586);
+            this.pAdminKhachHang.TabIndex = 24;
             // 
-            // linkLabel1
+            // splitContainer2
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(551, 375);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(132, 16);
-            this.linkLabel1.TabIndex = 23;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Danh sách chờ duyệt";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.dgvKhachHang);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.groupBox4);
+            this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
+            this.splitContainer2.Size = new System.Drawing.Size(961, 586);
+            this.splitContainer2.SplitterDistance = 423;
+            this.splitContainer2.TabIndex = 1;
+            // 
+            // dgvKhachHang
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvKhachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.dgvKhachHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvKhachHang.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dgvKhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvKhachHang.Location = new System.Drawing.Point(0, 0);
+            this.dgvKhachHang.Name = "dgvKhachHang";
+            this.dgvKhachHang.RowHeadersWidth = 51;
+            this.dgvKhachHang.RowTemplate.Height = 24;
+            this.dgvKhachHang.Size = new System.Drawing.Size(423, 586);
+            this.dgvKhachHang.TabIndex = 0;
+            this.dgvKhachHang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKhachHang_CellClick);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnXoaKH);
+            this.groupBox4.Controls.Add(this.btnXuatDSKH);
+            this.groupBox4.Controls.Add(this.btnChinhSuaKH);
+            this.groupBox4.Controls.Add(this.btnThemKH);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(0, 400);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(534, 186);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Chức năng";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtSDTKH);
+            this.groupBox3.Controls.Add(this.txtDiaChiKH);
+            this.groupBox3.Controls.Add(this.txtHoTenKH);
+            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.txtIDKH);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(534, 400);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Thông tin khách hàng";
+            // 
+            // txtSDTKH
+            // 
+            this.txtSDTKH.Location = new System.Drawing.Point(163, 310);
+            this.txtSDTKH.Name = "txtSDTKH";
+            this.txtSDTKH.Size = new System.Drawing.Size(166, 27);
+            this.txtSDTKH.TabIndex = 7;
+            // 
+            // txtDiaChiKH
+            // 
+            this.txtDiaChiKH.Location = new System.Drawing.Point(167, 217);
+            this.txtDiaChiKH.Name = "txtDiaChiKH";
+            this.txtDiaChiKH.Size = new System.Drawing.Size(166, 27);
+            this.txtDiaChiKH.TabIndex = 6;
+            // 
+            // txtHoTenKH
+            // 
+            this.txtHoTenKH.Location = new System.Drawing.Point(163, 124);
+            this.txtHoTenKH.Name = "txtHoTenKH";
+            this.txtHoTenKH.Size = new System.Drawing.Size(166, 27);
+            this.txtHoTenKH.TabIndex = 5;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(20, 314);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(106, 20);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "Số điện thoại";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(24, 221);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(61, 20);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "Địa chỉ";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(20, 128);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 20);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Họ và tên";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(20, 45);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(116, 20);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "ID khách hàng";
+            // 
+            // txtIDKH
+            // 
+            this.txtIDKH.Location = new System.Drawing.Point(163, 41);
+            this.txtIDKH.Name = "txtIDKH";
+            this.txtIDKH.Size = new System.Drawing.Size(166, 27);
+            this.txtIDKH.TabIndex = 1;
+            // 
+            // btnThemKH
+            // 
+            this.btnThemKH.Location = new System.Drawing.Point(71, 34);
+            this.btnThemKH.Name = "btnThemKH";
+            this.btnThemKH.Size = new System.Drawing.Size(121, 62);
+            this.btnThemKH.TabIndex = 0;
+            this.btnThemKH.Text = "Thêm khách hàng";
+            this.btnThemKH.UseVisualStyleBackColor = true;
+            this.btnThemKH.Click += new System.EventHandler(this.btnThemKH_Click);
+            // 
+            // btnChinhSuaKH
+            // 
+            this.btnChinhSuaKH.Location = new System.Drawing.Point(236, 34);
+            this.btnChinhSuaKH.Name = "btnChinhSuaKH";
+            this.btnChinhSuaKH.Size = new System.Drawing.Size(121, 62);
+            this.btnChinhSuaKH.TabIndex = 1;
+            this.btnChinhSuaKH.Text = "Chỉnh sửa";
+            this.btnChinhSuaKH.UseVisualStyleBackColor = true;
+            this.btnChinhSuaKH.Click += new System.EventHandler(this.btnChinhSuaKH_Click);
+            // 
+            // btnXuatDSKH
+            // 
+            this.btnXuatDSKH.Location = new System.Drawing.Point(236, 102);
+            this.btnXuatDSKH.Name = "btnXuatDSKH";
+            this.btnXuatDSKH.Size = new System.Drawing.Size(121, 62);
+            this.btnXuatDSKH.TabIndex = 2;
+            this.btnXuatDSKH.Text = "Xuất Excel";
+            this.btnXuatDSKH.UseVisualStyleBackColor = true;
+            this.btnXuatDSKH.Click += new System.EventHandler(this.btnXuatDSKH_Click);
+            // 
+            // btnXoaKH
+            // 
+            this.btnXoaKH.Location = new System.Drawing.Point(71, 102);
+            this.btnXoaKH.Name = "btnXoaKH";
+            this.btnXoaKH.Size = new System.Drawing.Size(121, 62);
+            this.btnXoaKH.TabIndex = 3;
+            this.btnXoaKH.Text = "Xóa";
+            this.btnXoaKH.UseVisualStyleBackColor = true;
+            this.btnXoaKH.Click += new System.EventHandler(this.btnXoaKH_Click);
             // 
             // AdminMenu
             // 
@@ -768,6 +1004,15 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.pAdminBan.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBan)).EndInit();
             this.pMainMenu.ResumeLayout(false);
+            this.pAdminKhachHang.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -832,5 +1077,23 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         private GroupBox groupBox2;
         private Label label14;
         private LinkLabel linkLabel1;
+        private Button btnQLKhachHang;
+        private Panel pAdminKhachHang;
+        private SplitContainer splitContainer2;
+        private DataGridView dgvKhachHang;
+        private GroupBox groupBox3;
+        private Label label15;
+        private TextBox txtIDKH;
+        private TextBox txtSDTKH;
+        private TextBox txtDiaChiKH;
+        private TextBox txtHoTenKH;
+        private Label label18;
+        private Label label17;
+        private Label label16;
+        private GroupBox groupBox4;
+        private Button btnXuatDSKH;
+        private Button btnChinhSuaKH;
+        private Button btnThemKH;
+        private Button btnXoaKH;
     }
 }
