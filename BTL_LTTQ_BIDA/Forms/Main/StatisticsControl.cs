@@ -405,20 +405,23 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                     case 3: col = "h.IDNV"; break;
                     default: col = "b.IDBAN"; break;
                 }
-                where += string.Format("{0} = N'{1}' AND ", col, id);
+                where += $"{col} = N'{id}' AND ";
             }
 
             string s = startDate.ToString("yyyy-MM-dd");
             string e = endDate.ToString("yyyy-MM-dd");
 
             if (comboBox_GroupBy.SelectedIndex <= 1)
-                where += string.Format("CAST(h.NGAYLAP AS DATE) BETWEEN '{0}' AND '{1}'", s, e);
+                where += $"CAST(h.NGAYLAP AS DATE) BETWEEN '{s}' AND '{e}' ";
             else
-                where += "YEAR(h.NGAYLAP) * 12 + MONTH(h.NGAYLAP) BETWEEN " +
-                         string.Format("YEAR('{0}') * 12 + MONTH('{0}') AND YEAR('{1}') * 12 + MONTH('{1}')", s, e);
+                where += $"YEAR(h.NGAYLAP) * 12 + MONTH(h.NGAYLAP) BETWEEN YEAR('{s}') * 12 + MONTH('{s}') AND YEAR('{e}') * 12 + MONTH('{e}') ";
+
+            // 🔹 Thêm điều kiện lọc hóa đơn đã thanh toán
+            where += "AND h.TRANGTHAI = 1";
 
             return where;
         }
+
 
         private void comboBox_ID_SelectedIndexChanged(object sender, EventArgs e)
         {
