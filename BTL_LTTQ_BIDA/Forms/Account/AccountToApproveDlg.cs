@@ -21,6 +21,7 @@ namespace BTL_LTTQ_BIDA.Forms.Account
 
         private void AccountToApproveDlg_Load(object sender, EventArgs e)
         {
+            dgvNhanVien.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             UIStyler.ApplyFormStyle(this);
             if (dgvNhanVien.Columns.Count == 0)
             {
@@ -36,6 +37,8 @@ namespace BTL_LTTQ_BIDA.Forms.Account
                 dgvNhanVien.Columns.Add("NGHIVIEC", "Nghỉ việc");
             }
             UpdateNhanVienChuaDuocDuyet();
+            btnDuyet.Enabled = false;
+            btnXoa.Enabled = false;
         }
         private void UpdateNhanVienChuaDuocDuyet()
         {
@@ -69,6 +72,10 @@ namespace BTL_LTTQ_BIDA.Forms.Account
 
                 dgvNhanVien.Rows.Add(id, tenNV, sdt, ngaySinh.ToString("dd/MM/yyyy"), cccd, quyenAdmin, tenDangNhap, duyet);
             }
+
+            bool hasData = table.Rows.Count > 0;
+            btnDuyetTatCa.Enabled = hasData;
+            btnXoaTatCa.Enabled = hasData;
         }
 
         private void dgvNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -104,7 +111,7 @@ namespace BTL_LTTQ_BIDA.Forms.Account
             if (dgvNhanVien.SelectedRows.Count == 0)
                 return;
             string idNV = dgvNhanVien.SelectedRows[0].Cells["IDNV"].Value.ToString();
-            string commandString = $"DELETE FROM NHANVIEN WHERE IDNV = {idNV}";
+            string commandString = $"DELETE FROM NHANVIEN WHERE IDNV = '{idNV}'";
             DataConnect conn = new DataConnect();
             conn.UpdateData(commandString);
             MessageBox.Show("Đã xóa tài khoản thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -118,7 +125,7 @@ namespace BTL_LTTQ_BIDA.Forms.Account
             if (dgvNhanVien.SelectedRows.Count == 0)
                 return;
             string idNV = dgvNhanVien.SelectedRows[0].Cells["IDNV"].Value.ToString();
-            string commandString = $"UPDATE NHANVIEN SET HIENTHI = 1 WHERE IDNV = {idNV}";
+            string commandString = $"UPDATE NHANVIEN SET HIENTHI = 1 WHERE IDNV = '{idNV}'";
             DataConnect conn = new DataConnect();
             conn.UpdateData(commandString);
             MessageBox.Show("Đã duyệt tài khoản thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -377,8 +377,10 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             Hide();
             using (var dlg = new AccountToApproveDlg())
             {
+                
                 dlg.ShowDialog();
             }
+            UpdateNhanVien();
             Show();
         }
 
@@ -754,6 +756,9 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 cboTrangThai.Text = Convert.ToString(row.Cells["TRANGTHAI"].Value);
                 btnChinhSuaBan.Enabled = true;
             }
+            txtMaBan.Enabled = true;
+            txtGiaTien.Enabled = true;
+            cboTrangThai.Enabled = true;
         }
 
         private void btnChinhSuaBan_Click(object sender, EventArgs e)
@@ -778,6 +783,11 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 addTableDlg.ShowDialog();
             }
             updateBan();
+        }
+        private void txtGiaTien_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
         }
 
         /// <summary>

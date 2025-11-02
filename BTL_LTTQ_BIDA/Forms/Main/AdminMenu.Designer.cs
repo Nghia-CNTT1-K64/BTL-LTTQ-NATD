@@ -17,8 +17,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pAdminControl = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnQLNhanVien = new System.Windows.Forms.Button();
@@ -73,8 +73,8 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.pAdminBan = new System.Windows.Forms.Panel();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvBan = new System.Windows.Forms.DataGridView();
-            this.btnThemBan = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.btnThemBan = new System.Windows.Forms.Button();
             this.btnChinhSuaBan = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.cboTrangThai = new System.Windows.Forms.ComboBox();
@@ -755,16 +755,6 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.dgvBan.TabIndex = 8;
             this.dgvBan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBan_CellClick);
             // 
-            // btnThemBan
-            // 
-            this.btnThemBan.Location = new System.Drawing.Point(109, 99);
-            this.btnThemBan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnThemBan.Name = "btnThemBan";
-            this.btnThemBan.Size = new System.Drawing.Size(167, 68);
-            this.btnThemBan.TabIndex = 7;
-            this.btnThemBan.Text = "Thêm bàn";
-            this.btnThemBan.Click += new System.EventHandler(this.btnThemBan_Click);
-            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.btnThemBan);
@@ -777,6 +767,16 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.groupBox8.TabIndex = 9;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Chức năng";
+            // 
+            // btnThemBan
+            // 
+            this.btnThemBan.Location = new System.Drawing.Point(109, 99);
+            this.btnThemBan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnThemBan.Name = "btnThemBan";
+            this.btnThemBan.Size = new System.Drawing.Size(167, 68);
+            this.btnThemBan.TabIndex = 7;
+            this.btnThemBan.Text = "Thêm bàn";
+            this.btnThemBan.Click += new System.EventHandler(this.btnThemBan_Click);
             // 
             // btnChinhSuaBan
             // 
@@ -807,6 +807,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // 
             // cboTrangThai
             // 
+            this.cboTrangThai.Enabled = false;
             this.cboTrangThai.Location = new System.Drawing.Point(233, 210);
             this.cboTrangThai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboTrangThai.Name = "cboTrangThai";
@@ -815,6 +816,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // 
             // txtMaBan
             // 
+            this.txtMaBan.Enabled = false;
             this.txtMaBan.Location = new System.Drawing.Point(233, 46);
             this.txtMaBan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaBan.Name = "txtMaBan";
@@ -841,11 +843,13 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // 
             // txtGiaTien
             // 
+            this.txtGiaTien.Enabled = false;
             this.txtGiaTien.Location = new System.Drawing.Point(233, 129);
             this.txtGiaTien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtGiaTien.Name = "txtGiaTien";
             this.txtGiaTien.Size = new System.Drawing.Size(100, 26);
             this.txtGiaTien.TabIndex = 2;
+            this.txtGiaTien.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtGiaTien_KeyPress);
             // 
             // label7
             // 
@@ -906,34 +910,34 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.splitContainer2.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer2.Size = new System.Drawing.Size(1095, 608);
-            this.splitContainer2.SplitterDistance = 481;
+            this.splitContainer2.SplitterDistance = 480;
             this.splitContainer2.TabIndex = 1;
             // 
             // dgvKhachHang
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvKhachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvKhachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvKhachHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvKhachHang.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvKhachHang.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvKhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvKhachHang.Location = new System.Drawing.Point(0, 0);
             this.dgvKhachHang.Name = "dgvKhachHang";
             this.dgvKhachHang.RowHeadersWidth = 51;
             this.dgvKhachHang.RowTemplate.Height = 24;
-            this.dgvKhachHang.Size = new System.Drawing.Size(481, 608);
+            this.dgvKhachHang.Size = new System.Drawing.Size(480, 608);
             this.dgvKhachHang.TabIndex = 0;
             this.dgvKhachHang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKhachHang_CellClick);
             // 
@@ -947,7 +951,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.groupBox4.Location = new System.Drawing.Point(0, 371);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(610, 237);
+            this.groupBox4.Size = new System.Drawing.Size(611, 237);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chức năng";
@@ -1006,7 +1010,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(610, 371);
+            this.groupBox3.Size = new System.Drawing.Size(611, 371);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thông tin khách hàng";
