@@ -43,7 +43,7 @@
             this.lblBanCu.ForeColor = System.Drawing.Color.Black;
             this.lblBanCu.Location = new System.Drawing.Point(40, 101);
             this.lblBanCu.Name = "lblBanCu";
-            this.lblBanCu.Size = new System.Drawing.Size(67, 20);
+            this.lblBanCu.Size = new System.Drawing.Size(56, 17);
             this.lblBanCu.TabIndex = 0;
             this.lblBanCu.Text = "Bàn cũ:";
             // 
@@ -54,7 +54,7 @@
             this.lblBanMoi.ForeColor = System.Drawing.Color.Black;
             this.lblBanMoi.Location = new System.Drawing.Point(263, 101);
             this.lblBanMoi.Name = "lblBanMoi";
-            this.lblBanMoi.Size = new System.Drawing.Size(76, 20);
+            this.lblBanMoi.Size = new System.Drawing.Size(63, 17);
             this.lblBanMoi.TabIndex = 1;
             this.lblBanMoi.Text = "Bàn mới:";
             // 
@@ -65,7 +65,7 @@
             this.cboBanMoi.Name = "cboBanMoi";
             this.cboBanMoi.Size = new System.Drawing.Size(121, 24);
             this.cboBanMoi.TabIndex = 3;
-            this.cboBanMoi.SelectedIndexChanged += new System.EventHandler(this.cboBanMoi_SelectedIndexChanged);
+
             // 
             // btnDoiBan
             // 

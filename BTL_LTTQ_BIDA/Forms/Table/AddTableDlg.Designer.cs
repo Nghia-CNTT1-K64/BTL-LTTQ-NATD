@@ -46,7 +46,7 @@
             this.lblMaBan.Size = new System.Drawing.Size(69, 20);
             this.lblMaBan.TabIndex = 0;
             this.lblMaBan.Text = "Mã bàn:";
-            this.lblMaBan.Click += new System.EventHandler(this.lblMaBan_Click_1);
+            //this.lblMaBan.Click += new System.EventHandler(this.lblMaBan_Click_1);
             // 
             // lblGiaTien
             // 
@@ -65,7 +65,7 @@
             this.txtMaBan.Name = "txtMaBan";
             this.txtMaBan.Size = new System.Drawing.Size(168, 27);
             this.txtMaBan.TabIndex = 2;
-            this.txtMaBan.TextChanged += new System.EventHandler(this.txtMaBan_TextChanged_1);
+            //this.txtMaBan.TextChanged += new System.EventHandler(this.txtMaBan_TextChanged_1);
             // 
             // txtGiaTien
             // 
