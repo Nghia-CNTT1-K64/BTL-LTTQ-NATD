@@ -1,6 +1,6 @@
 ﻿namespace BTL_LTTQ_BIDA.Forms.Table
 {
-    partial class frmDoiBan
+    partial class FChangeTable
     {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,9 @@
         {
             this.lblBanCu = new System.Windows.Forms.Label();
             this.lblBanMoi = new System.Windows.Forms.Label();
-            this.cboBanCu = new System.Windows.Forms.ComboBox();
             this.cboBanMoi = new System.Windows.Forms.ComboBox();
             this.btnDoiBan = new System.Windows.Forms.Button();
+            this.txtBanCu = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblBanCu
@@ -41,33 +41,22 @@
             this.lblBanCu.BackColor = System.Drawing.Color.Transparent;
             this.lblBanCu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBanCu.ForeColor = System.Drawing.Color.Black;
-            this.lblBanCu.Location = new System.Drawing.Point(40, 105);
+            this.lblBanCu.Location = new System.Drawing.Point(40, 101);
             this.lblBanCu.Name = "lblBanCu";
             this.lblBanCu.Size = new System.Drawing.Size(67, 20);
             this.lblBanCu.TabIndex = 0;
             this.lblBanCu.Text = "Bàn cũ:";
-            this.lblBanCu.Click += new System.EventHandler(this.lblBanCu_Click);
             // 
             // lblBanMoi
             // 
             this.lblBanMoi.AutoSize = true;
             this.lblBanMoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBanMoi.ForeColor = System.Drawing.Color.Black;
-            this.lblBanMoi.Location = new System.Drawing.Point(263, 105);
+            this.lblBanMoi.Location = new System.Drawing.Point(263, 101);
             this.lblBanMoi.Name = "lblBanMoi";
             this.lblBanMoi.Size = new System.Drawing.Size(76, 20);
             this.lblBanMoi.TabIndex = 1;
             this.lblBanMoi.Text = "Bàn mới:";
-            // 
-            // cboBanCu
-            // 
-            this.cboBanCu.FormattingEnabled = true;
-            this.cboBanCu.Location = new System.Drawing.Point(113, 101);
-            this.cboBanCu.Name = "cboBanCu";
-            this.cboBanCu.Size = new System.Drawing.Size(121, 24);
-            this.cboBanCu.TabIndex = 2;
-            this.cboBanCu.TabStop = false;
-            this.cboBanCu.SelectedIndexChanged += new System.EventHandler(this.cboBanCu_SelectedIndexChanged);
             // 
             // cboBanMoi
             // 
@@ -76,12 +65,11 @@
             this.cboBanMoi.Name = "cboBanMoi";
             this.cboBanMoi.Size = new System.Drawing.Size(121, 24);
             this.cboBanMoi.TabIndex = 3;
-            this.cboBanMoi.SelectedIndexChanged += new System.EventHandler(this.cboBanMoi_SelectedIndexChanged);
             // 
             // btnDoiBan
             // 
             this.btnDoiBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDoiBan.Location = new System.Drawing.Point(203, 206);
+            this.btnDoiBan.Location = new System.Drawing.Point(226, 194);
             this.btnDoiBan.Name = "btnDoiBan";
             this.btnDoiBan.Size = new System.Drawing.Size(75, 30);
             this.btnDoiBan.TabIndex = 4;
@@ -89,18 +77,27 @@
             this.btnDoiBan.UseVisualStyleBackColor = true;
             this.btnDoiBan.Click += new System.EventHandler(this.btnDoiBan_Click);
             // 
-            // frmDoiBan
+            // txtBanCu
+            // 
+            this.txtBanCu.Location = new System.Drawing.Point(113, 101);
+            this.txtBanCu.Name = "txtBanCu";
+            this.txtBanCu.Size = new System.Drawing.Size(115, 22);
+            this.txtBanCu.TabIndex = 5;
+            // 
+            // FChangeTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(541, 289);
+            this.Controls.Add(this.txtBanCu);
             this.Controls.Add(this.btnDoiBan);
             this.Controls.Add(this.cboBanMoi);
-            this.Controls.Add(this.cboBanCu);
             this.Controls.Add(this.lblBanMoi);
             this.Controls.Add(this.lblBanCu);
-            this.Name = "frmDoiBan";
+            this.Name = "FChangeTable";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đổi bàn";
+            this.Load += new System.EventHandler(this.FChangeTable_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,8 +107,8 @@
 
         private System.Windows.Forms.Label lblBanCu;
         private System.Windows.Forms.Label lblBanMoi;
-        private System.Windows.Forms.ComboBox cboBanCu;
         private System.Windows.Forms.ComboBox cboBanMoi;
         private System.Windows.Forms.Button btnDoiBan;
+        private System.Windows.Forms.TextBox txtBanCu;
     }
 }

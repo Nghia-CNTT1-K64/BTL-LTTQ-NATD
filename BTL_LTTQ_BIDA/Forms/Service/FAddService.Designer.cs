@@ -36,6 +36,8 @@
             this.btnHuy = new System.Windows.Forms.Button();
             this.txtTenDichVu = new System.Windows.Forms.TextBox();
             this.txtGiaTien = new System.Windows.Forms.TextBox();
+            this.txtSoLuong = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -57,17 +59,18 @@
             // btnLuu
             // 
             this.btnLuu.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnLuu.Location = new System.Drawing.Point(316, 204);
+            this.btnLuu.Location = new System.Drawing.Point(326, 239);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(97, 34);
-            this.btnLuu.TabIndex = 2;
+            this.btnLuu.TabIndex = 5;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(59, 86);
+            this.label2.Location = new System.Drawing.Point(59, 82);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 20);
             this.label2.TabIndex = 3;
@@ -76,7 +79,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(59, 140);
+            this.label3.Location = new System.Drawing.Point(59, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 20);
             this.label3.TabIndex = 4;
@@ -85,32 +88,51 @@
             // btnHuy
             // 
             this.btnHuy.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnHuy.Location = new System.Drawing.Point(453, 204);
+            this.btnHuy.Location = new System.Drawing.Point(463, 239);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(97, 34);
-            this.btnHuy.TabIndex = 5;
+            this.btnHuy.TabIndex = 6;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.UseVisualStyleBackColor = true;
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // txtTenDichVu
             // 
-            this.txtTenDichVu.Location = new System.Drawing.Point(150, 79);
+            this.txtTenDichVu.Location = new System.Drawing.Point(150, 75);
             this.txtTenDichVu.Name = "txtTenDichVu";
             this.txtTenDichVu.Size = new System.Drawing.Size(263, 27);
-            this.txtTenDichVu.TabIndex = 6;
+            this.txtTenDichVu.TabIndex = 2;
             // 
             // txtGiaTien
             // 
-            this.txtGiaTien.Location = new System.Drawing.Point(150, 133);
+            this.txtGiaTien.Location = new System.Drawing.Point(150, 123);
             this.txtGiaTien.Name = "txtGiaTien";
             this.txtGiaTien.Size = new System.Drawing.Size(263, 27);
-            this.txtGiaTien.TabIndex = 7;
+            this.txtGiaTien.TabIndex = 3;
+            // 
+            // txtSoLuong
+            // 
+            this.txtSoLuong.Location = new System.Drawing.Point(150, 170);
+            this.txtSoLuong.Name = "txtSoLuong";
+            this.txtSoLuong.Size = new System.Drawing.Size(263, 27);
+            this.txtSoLuong.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(59, 177);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 20);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Số lượng:";
             // 
             // FAddService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 250);
+            this.ClientSize = new System.Drawing.Size(572, 285);
+            this.Controls.Add(this.txtSoLuong);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtGiaTien);
             this.Controls.Add(this.txtTenDichVu);
             this.Controls.Add(this.btnHuy);
@@ -122,6 +144,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FAddService";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm dịch vụ mới";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -138,5 +161,7 @@
         private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.TextBox txtTenDichVu;
         private System.Windows.Forms.TextBox txtGiaTien;
+        private System.Windows.Forms.TextBox txtSoLuong;
+        private System.Windows.Forms.Label label4;
     }
 }

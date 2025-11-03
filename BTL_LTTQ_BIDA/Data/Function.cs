@@ -7,10 +7,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 namespace BTL_LTTQ_BIDA.Data
-{   
-    internal class Function
+{
+    public class Function
     {
-        public void FillCombox(ComboBox cb, DataTable dt, string display, string value)
+        public void FillComboBox(ComboBox cb, DataTable dt, string display, string value)
         {
             cb.DataSource = dt;
             cb.DisplayMember = display;

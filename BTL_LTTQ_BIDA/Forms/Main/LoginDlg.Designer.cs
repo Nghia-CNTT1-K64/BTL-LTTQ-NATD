@@ -62,29 +62,33 @@
             // 
             // txtTenDN
             // 
-            this.txtTenDN.Location = new System.Drawing.Point(212, 262);
+            this.txtTenDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtTenDN.Location = new System.Drawing.Point(212, 258);
             this.txtTenDN.Name = "txtTenDN";
-            this.txtTenDN.Size = new System.Drawing.Size(348, 22);
+            this.txtTenDN.Size = new System.Drawing.Size(348, 26);
             this.txtTenDN.TabIndex = 3;
-            this.txtTenDN.TextChanged += new System.EventHandler(this.txtTenDN_TextChanged);
+            //this.txtTenDN.TextChanged += new System.EventHandler(this.txtTenDN_TextChanged);
             // 
             // txtMatKhau
             // 
-            this.txtMatKhau.Location = new System.Drawing.Point(212, 321);
+            this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtMatKhau.Location = new System.Drawing.Point(212, 320);
             this.txtMatKhau.Name = "txtMatKhau";
-            this.txtMatKhau.Size = new System.Drawing.Size(348, 22);
+            this.txtMatKhau.PasswordChar = '●';
+            this.txtMatKhau.Size = new System.Drawing.Size(348, 26);
             this.txtMatKhau.TabIndex = 4;
-            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
+            this.txtMatKhau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMatKhau_KeyDown);
             // 
             // checkBoxHienMK
             // 
             this.checkBoxHienMK.AutoSize = true;
-            this.checkBoxHienMK.Location = new System.Drawing.Point(587, 321);
+            this.checkBoxHienMK.Location = new System.Drawing.Point(587, 326);
             this.checkBoxHienMK.Name = "checkBoxHienMK";
             this.checkBoxHienMK.Size = new System.Drawing.Size(114, 20);
             this.checkBoxHienMK.TabIndex = 5;
             this.checkBoxHienMK.Text = "Hiện mật khẩu";
             this.checkBoxHienMK.UseVisualStyleBackColor = true;
+            this.checkBoxHienMK.CheckedChanged += new System.EventHandler(this.checkBoxHienMK_CheckedChanged);
             // 
             // btnDN
             // 
@@ -94,6 +98,7 @@
             this.btnDN.TabIndex = 6;
             this.btnDN.Text = "Đăng nhập";
             this.btnDN.UseVisualStyleBackColor = true;
+            this.btnDN.Click += new System.EventHandler(this.btnDN_Click_1);
             // 
             // btnDK
             // 
@@ -103,6 +108,7 @@
             this.btnDK.TabIndex = 7;
             this.btnDK.Text = "Đăng ký";
             this.btnDK.UseVisualStyleBackColor = true;
+            this.btnDK.Click += new System.EventHandler(this.btnDK_Click);
             // 
             // btnThoat
             // 
@@ -112,6 +118,7 @@
             this.btnThoat.TabIndex = 8;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // ptcLogoQuan
             // 
@@ -138,7 +145,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ptcLogoQuan);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LoginDlg";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";
             this.Load += new System.EventHandler(this.LoginDlg_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ptcLogoQuan)).EndInit();

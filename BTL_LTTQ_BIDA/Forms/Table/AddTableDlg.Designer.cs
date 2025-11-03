@@ -1,6 +1,6 @@
 ﻿namespace BTL_LTTQ_BIDA.Forms.Main
 {
-    partial class frmThemBanMoi
+    partial class AddTableDlg
     {
         /// <summary>
         /// Required designer variable.
@@ -46,7 +46,6 @@
             this.lblMaBan.Size = new System.Drawing.Size(69, 20);
             this.lblMaBan.TabIndex = 0;
             this.lblMaBan.Text = "Mã bàn:";
-            this.lblMaBan.Click += new System.EventHandler(this.lblMaBan_Click_1);
             // 
             // lblGiaTien
             // 
@@ -65,7 +64,6 @@
             this.txtMaBan.Name = "txtMaBan";
             this.txtMaBan.Size = new System.Drawing.Size(168, 27);
             this.txtMaBan.TabIndex = 2;
-            this.txtMaBan.TextChanged += new System.EventHandler(this.txtMaBan_TextChanged_1);
             // 
             // txtGiaTien
             // 
@@ -98,7 +96,7 @@
             this.btnHuy.UseVisualStyleBackColor = true;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
-            // frmThemBanMoi
+            // AddTableDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,7 +107,8 @@
             this.Controls.Add(this.txtMaBan);
             this.Controls.Add(this.lblGiaTien);
             this.Controls.Add(this.lblMaBan);
-            this.Name = "frmThemBanMoi";
+            this.Name = "AddTableDlg";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm bàn mới";
             this.Load += new System.EventHandler(this.frmThemBanMoi_Load);
             this.ResumeLayout(false);

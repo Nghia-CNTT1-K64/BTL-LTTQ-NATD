@@ -69,5 +69,21 @@ namespace BTL_LTTQ_BIDA.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        //internal static System.Drawing.Bitmap RightCap
+        //{
+        //    get
+        //    {
+        //        object obj = ResourceManager.GetObject("RightCap", resourceCulture);
+        //        return ((System.Drawing.Bitmap)(obj));
+        //    }
+        //}
+        //internal static System.Drawing.Bitmap LeftCap
+        //{
+        //    get
+        //    {
+        //        object obj = ResourceManager.GetObject("LeftCap", resourceCulture);
+        //        return ((System.Drawing.Bitmap)(obj));
+        //    }
+        //}
     }
 }
