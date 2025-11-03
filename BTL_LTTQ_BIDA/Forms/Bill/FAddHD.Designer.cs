@@ -316,6 +316,7 @@
             // 
             // btnThoat
             // 
+            this.btnThoat.Enabled = false;
             this.btnThoat.Location = new System.Drawing.Point(633, 13);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(124, 35);

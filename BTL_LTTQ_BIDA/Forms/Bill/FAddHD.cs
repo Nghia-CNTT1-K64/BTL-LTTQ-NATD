@@ -255,6 +255,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
             btnTao.Enabled = false; // 🚫 KHÔNG cho ấn “Tạo hóa đơn” nữa
             btnThoat.Enabled = true; // ✅ Cho phép thoát
+            
 
             // 🔁 Cập nhật lại danh sách bàn ở FMain
             foreach (Form f in Application.OpenForms)

@@ -418,7 +418,15 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 where += $"YEAR(h.NGAYLAP) * 12 + MONTH(h.NGAYLAP) BETWEEN YEAR('{s}') * 12 + MONTH('{s}') AND YEAR('{e}') * 12 + MONTH('{e}') ";
 
             // 🔹 Thêm điều kiện lọc hóa đơn đã thanh toán
-            where += "AND h.TRANGTHAI = 1";
+            // 🔹 Lọc chỉ lấy hóa đơn đã thanh toán
+            where += "AND h.TRANGTHAI = 1 ";
+
+            // 🔹 Nếu đang thống kê theo Bàn → chỉ lấy những bàn đã kết thúc phiên chơi
+            if (t == 4)
+            {
+                where += "AND b.TRANGTHAI = 0 ";
+            }
+
 
             return where;
         }

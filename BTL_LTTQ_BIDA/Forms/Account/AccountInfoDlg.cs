@@ -42,6 +42,7 @@ namespace BTL_LTTQ_BIDA.Forms.Account
             txtMatKhau.Text = nv.MatKhau;
             cbQQTV.Checked = nv.QuyenAdmin;
             txtTenDangNhap.Text = nv.TenDangNhap;
+            dtpNgaySinh.Value = nv.NgaySinh;
 
 
         }

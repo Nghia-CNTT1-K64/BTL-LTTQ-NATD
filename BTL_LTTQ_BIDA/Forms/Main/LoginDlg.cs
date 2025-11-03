@@ -104,6 +104,17 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 return;
             }
 
+            //ktra nhân viên đã nghỉ việc
+            bool nghiViec = dt.Rows[0]["NGHIVIEC"] != DBNull.Value && !(bool)dt.Rows[0]["NGHIVIEC"];
+            if (nghiViec)
+            {
+                MessageBox.Show("Nhân viên này đã nghỉ việc, không thể đăng nhập", "đăng nhập thất bại",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+
+            }
+
             //ktra quyền admin
             bool isAdmin = (bool)dt.Rows[0]["QUYENADMIN"];
             if (isAdmin)
