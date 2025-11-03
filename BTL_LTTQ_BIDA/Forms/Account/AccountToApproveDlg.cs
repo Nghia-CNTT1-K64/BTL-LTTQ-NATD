@@ -95,6 +95,10 @@ namespace BTL_LTTQ_BIDA.Forms.Account
             conn.UpdateData(commandString);
             MessageBox.Show("Đã duyệt tất cả tài khoản thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             UpdateNhanVienChuaDuocDuyet();
+
+            //tắt tất cả nút
+            btnDuyet.Enabled = false;
+            btnXoa.Enabled = false;
         }
 
         private void btnXoaTatCa_Click(object sender, EventArgs e)
@@ -104,6 +108,10 @@ namespace BTL_LTTQ_BIDA.Forms.Account
             conn.UpdateData(commandString);
             MessageBox.Show("Đã xóa tất cả tài khoản thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             UpdateNhanVienChuaDuocDuyet();
+
+            //tắt tất cả nút
+            btnDuyet.Enabled = false;
+            btnXoa.Enabled = false;
         }
 
         private void btnXoa_Click_1(object sender, EventArgs e)

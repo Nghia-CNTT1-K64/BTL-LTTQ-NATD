@@ -93,6 +93,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
                 return;
             }
 
+
             //check username tồn tại
             Data.DataConnect dtConnect = new Data.DataConnect();
             string sqlCheckUser = $"SELECT * FROM NHANVIEN WHERE TENDANGNHAP = '{txtTenDN.Text}'";
@@ -163,8 +164,20 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             dtConnect.UpdateData(sqlInsert);
             MessageBox.Show("Đăng ký thành công! Vui lòng chờ Admin duyệt tài khoản.", "Thông báo");
 
+            this.Close();
+
         }
 
+        void ClearForm()
+        {
+            txtHoTen.Clear();
+            txtSDT.Clear();
+            txtCCCD.Clear();
+            txtTenDN.Clear();
+            txtMK.Clear();
+            txtNhapLaiMK.Clear();
+            dtpNgaySinh.Value = DateTime.Now;
+        }
         private void txtCCCD_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))

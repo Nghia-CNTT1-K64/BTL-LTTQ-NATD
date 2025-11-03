@@ -795,16 +795,80 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         //}
 
 
+        //        private void TinhTongTienHD()
+        //        {
+        //            try
+        //            {
+        //                string sql = $@"
+        //SELECT b.GIATIEN, p.GIOBATDAU, p.GIOKETTHUC, h.TRANGTHAI, h.TONGTIEN
+        //FROM HOADON h
+        //JOIN PHIENCHOI p ON h.IDPHIEN = p.IDPHIEN
+        //JOIN BAN b ON p.IDBAN = b.IDBAN
+        //WHERE h.IDHD = '{IDHD}'";
+
+        //                DataTable dt = dtbase.ReadData(sql);
+        //                if (dt.Rows.Count == 0) return;
+
+        //                double giaBan = Convert.ToDouble(dt.Rows[0]["GIATIEN"]);
+        //                DateTime gioBD = Convert.ToDateTime(dt.Rows[0]["GIOBATDAU"]);
+        //                int trangThaiHD = Convert.ToInt32(dt.Rows[0]["TRANGTHAI"]);
+        //                double tongTienDaLuu = Convert.ToDouble(dt.Rows[0]["TONGTIEN"]);
+        //                double tienDV = string.IsNullOrEmpty(txtTongTienDV.Text) ? 0 : Convert.ToDouble(txtTongTienDV.Text);
+
+        //                // ---------------------------
+        //                // 🔹 Nếu hóa đơn đang xử lý
+        //                // ---------------------------
+        //                if (trangThaiHD == 0)
+        //                {
+        //                    DateTime gioKT = DateTime.Now;
+
+        //                    double gioChoi = (gioKT - gioBD).TotalHours;
+        //                    double soBlock = Math.Ceiling(gioChoi / 0.5) * 0.5;
+        //                    double tienBanHienTai = giaBan * soBlock;
+
+        //                    double tongTienHD = tongTienDaLuu + tienBanHienTai + tienDV;
+
+        //                    txtTienBan.Text = tienBanHienTai.ToString();
+        //                    txtTongTienHD.Text = tongTienHD.ToString();
+        //                }
+        //                // ---------------------------
+        //                // 🔹 Nếu hóa đơn đã kết thúc
+        //                // ---------------------------
+        //                else
+        //                {
+        //                    // Lấy giờ kết thúc từ DB (để hiển thị thời gian chính xác)
+        //                    if (dt.Rows[0]["GIOKETTHUC"] != DBNull.Value)
+        //                    {
+        //                        DateTime gioKT = Convert.ToDateTime(dt.Rows[0]["GIOKETTHUC"]);
+        //                        TimeSpan tgChoi = gioKT - gioBD;
+        //                        lblThoiGianChoi.Text = $"Thời gian chơi: {tgChoi.Hours} giờ {tgChoi.Minutes} phút";
+        //                    }
+
+        //                    // ✅ Lấy tổng tiền thực tế đã lưu trong DB
+        //                    txtTongTienHD.Text = tongTienDaLuu.ToString();
+
+        //                    // ✅ (Không cần tính lại tiền bàn vì đã kết thúc)
+        //                    txtTienBan.Text = (tongTienDaLuu - tienDV).ToString();
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                txtTienBan.Text = "0";
+        //                txtTongTienHD.Text = "0";
+        //                MessageBox.Show("Lỗi tính tổng tiền: " + ex.Message);
+        //            }
+        //        }
+
         private void TinhTongTienHD()
         {
             try
             {
                 string sql = $@"
-SELECT b.GIATIEN, p.GIOBATDAU, p.GIOKETTHUC, h.TRANGTHAI, h.TONGTIEN
-FROM HOADON h
-JOIN PHIENCHOI p ON h.IDPHIEN = p.IDPHIEN
-JOIN BAN b ON p.IDBAN = b.IDBAN
-WHERE h.IDHD = '{IDHD}'";
+            SELECT b.GIATIEN, p.GIOBATDAU, p.GIOKETTHUC, h.TRANGTHAI, h.TONGTIEN
+            FROM HOADON h
+            JOIN PHIENCHOI p ON h.IDPHIEN = p.IDPHIEN
+            JOIN BAN b ON p.IDBAN = b.IDBAN
+            WHERE h.IDHD = '{IDHD}'";
 
                 DataTable dt = dtbase.ReadData(sql);
                 if (dt.Rows.Count == 0) return;
@@ -815,13 +879,12 @@ WHERE h.IDHD = '{IDHD}'";
                 double tongTienDaLuu = Convert.ToDouble(dt.Rows[0]["TONGTIEN"]);
                 double tienDV = string.IsNullOrEmpty(txtTongTienDV.Text) ? 0 : Convert.ToDouble(txtTongTienDV.Text);
 
-                // ---------------------------
-                // 🔹 Nếu hóa đơn đang xử lý
-                // ---------------------------
+                // ============================================
+                // 🔹 1. Hóa đơn đang xử lý
+                // ============================================
                 if (trangThaiHD == 0)
                 {
                     DateTime gioKT = DateTime.Now;
-
                     double gioChoi = (gioKT - gioBD).TotalHours;
                     double soBlock = Math.Ceiling(gioChoi / 0.5) * 0.5;
                     double tienBanHienTai = giaBan * soBlock;
@@ -831,24 +894,27 @@ WHERE h.IDHD = '{IDHD}'";
                     txtTienBan.Text = tienBanHienTai.ToString("N0");
                     txtTongTienHD.Text = tongTienHD.ToString("N0");
                 }
-                // ---------------------------
-                // 🔹 Nếu hóa đơn đã kết thúc
-                // ---------------------------
+                // ============================================
+                // 🔹 2. Hóa đơn đã kết thúc
+                // ============================================
                 else
                 {
-                    // Lấy giờ kết thúc từ DB (để hiển thị thời gian chính xác)
-                    if (dt.Rows[0]["GIOKETTHUC"] != DBNull.Value)
-                    {
-                        DateTime gioKT = Convert.ToDateTime(dt.Rows[0]["GIOKETTHUC"]);
-                        TimeSpan tgChoi = gioKT - gioBD;
-                        lblThoiGianChoi.Text = $"Thời gian chơi: {tgChoi.Hours} giờ {tgChoi.Minutes} phút";
-                    }
+                    DateTime gioKT = dt.Rows[0]["GIOKETTHUC"] != DBNull.Value
+                        ? Convert.ToDateTime(dt.Rows[0]["GIOKETTHUC"])
+                        : DateTime.Now;
 
-                    // ✅ Lấy tổng tiền thực tế đã lưu trong DB
+                    // Tính lại tiền bàn dựa trên giờ bắt đầu/kết thúc
+                    double gioChoi = (gioKT - gioBD).TotalHours;
+                    double soBlock = Math.Ceiling(gioChoi / 0.5) * 0.5;
+                    double tienBan = giaBan * soBlock;
+
+                    // Hiển thị
+                    txtTienBan.Text = tienBan.ToString("N0");
                     txtTongTienHD.Text = tongTienDaLuu.ToString("N0");
 
-                    // ✅ (Không cần tính lại tiền bàn vì đã kết thúc)
-                    txtTienBan.Text = (tongTienDaLuu - tienDV).ToString("N0");
+                    // Hiển thị thời gian chơi
+                    TimeSpan thoiGian = gioKT - gioBD;
+                    lblThoiGianChoi.Text = $"Thời gian chơi: {thoiGian.Hours} giờ {thoiGian.Minutes} phút";
                 }
             }
             catch (Exception ex)
@@ -858,6 +924,7 @@ WHERE h.IDHD = '{IDHD}'";
                 MessageBox.Show("Lỗi tính tổng tiền: " + ex.Message);
             }
         }
+
 
 
 
@@ -1194,8 +1261,8 @@ WHERE h.IDHD = '{IDHD}'";
             btnSuaHoaDon.Enabled = true;
 
 
-            // Tải lại dữ liệu gốc
-            FHoaDon_Load(sender, e);
+
+            
         }
         private void btnSuaHoaDon_Click(object sender, EventArgs e)
         {

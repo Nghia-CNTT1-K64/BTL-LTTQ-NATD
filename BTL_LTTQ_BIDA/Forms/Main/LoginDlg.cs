@@ -35,7 +35,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
         {
             SignUpDlg fSignUp = new SignUpDlg();
             this.Hide();
-            fSignUp.FormClosed += (s, args) => this.Close();//tắt login khi signup hiện
+            fSignUp.FormClosed += (s, args) => this.Show();//tắt login khi signup hiện
             fSignUp.Show();
         }
 

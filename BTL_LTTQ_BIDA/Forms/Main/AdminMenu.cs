@@ -322,6 +322,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             updateBan();
             btnChinhSuaBan.Enabled = false;
             txtMaBan.ReadOnly = true;
+            cboTrangThai.Enabled = false;
 
             InitDgvDichVu();
             UpdateDichVu();
@@ -443,6 +444,12 @@ namespace BTL_LTTQ_BIDA.Forms.Main
 
         private void btnChoNghiViec_Click(object sender, EventArgs e)
         {
+
+            if (dgvNhanVien.SelectedRows[0].Cells["IDNV"].Value.ToString() == "NV001")
+            {
+                MessageBox.Show("Không thể cho nghỉ việc nhân viên NV001 (Admin).");
+                return;
+            }
             if (MessageBox.Show("Bạn có chắc chắn muốn cho nhân viên này nghỉ việc?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
@@ -758,7 +765,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             }
             txtMaBan.Enabled = true;
             txtGiaTien.Enabled = true;
-            cboTrangThai.Enabled = true;
+            
         }
 
         private void btnChinhSuaBan_Click(object sender, EventArgs e)

@@ -194,6 +194,7 @@
             // 
             // cboMaKH
             // 
+            this.cboMaKH.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMaKH.FormattingEnabled = true;
             this.cboMaKH.Location = new System.Drawing.Point(149, 157);
             this.cboMaKH.Name = "cboMaKH";
