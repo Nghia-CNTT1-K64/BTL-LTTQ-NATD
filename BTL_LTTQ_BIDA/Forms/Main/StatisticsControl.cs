@@ -131,6 +131,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             }
 
             comboBox_ID.SelectedIndex = -1;
+            comboBox_ID.Text = string.Empty;
             comboBox_Name.Text = "";
         }
 
