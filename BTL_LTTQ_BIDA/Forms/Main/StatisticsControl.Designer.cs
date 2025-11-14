@@ -231,7 +231,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(280, 16);
+            this.label3.Location = new System.Drawing.Point(270, 16);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(216, 18);
@@ -246,7 +246,7 @@ namespace BTL_LTTQ_BIDA.Forms.Main
             "Mã số",
             "Thời gian - Ngày",
             "Thời gian - Tháng"});
-            this.comboBox_GroupBy.Location = new System.Drawing.Point(517, 14);
+            this.comboBox_GroupBy.Location = new System.Drawing.Point(507, 14);
             this.comboBox_GroupBy.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_GroupBy.Name = "comboBox_GroupBy";
             this.comboBox_GroupBy.Size = new System.Drawing.Size(142, 26);

@@ -47,6 +47,7 @@
             this.dgvNhanVien.RowTemplate.Height = 24;
             this.dgvNhanVien.Size = new System.Drawing.Size(791, 350);
             this.dgvNhanVien.TabIndex = 0;
+            this.dgvNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNhanVien_CellClick);
             // 
             // btnDuyet
             // 
@@ -57,6 +58,7 @@
             this.btnDuyet.TabIndex = 1;
             this.btnDuyet.Text = "Duyệt";
             this.btnDuyet.UseVisualStyleBackColor = true;
+            this.btnDuyet.Click += new System.EventHandler(this.btnDuyet_Click_1);
             // 
             // btnDuyetTatCa
             // 
@@ -66,6 +68,7 @@
             this.btnDuyetTatCa.TabIndex = 2;
             this.btnDuyetTatCa.Text = "Duyệt tất cả";
             this.btnDuyetTatCa.UseVisualStyleBackColor = true;
+            this.btnDuyetTatCa.Click += new System.EventHandler(this.btnDuyetTatCa_Click);
             // 
             // btnXoaTatCa
             // 
@@ -75,6 +78,7 @@
             this.btnXoaTatCa.TabIndex = 4;
             this.btnXoaTatCa.Text = "Xóa tất cả";
             this.btnXoaTatCa.UseVisualStyleBackColor = true;
+            this.btnXoaTatCa.Click += new System.EventHandler(this.btnXoaTatCa_Click);
             // 
             // btnXoa
             // 
@@ -85,10 +89,11 @@
             this.btnXoa.TabIndex = 3;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click_1);
             // 
             // AccountToApproveDlg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 499);
             this.Controls.Add(this.btnXoaTatCa);
@@ -99,7 +104,9 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AccountToApproveDlg";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Danh sách tài khoản chờ được duyệt";
+            this.Load += new System.EventHandler(this.AccountToApproveDlg_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhanVien)).EndInit();
             this.ResumeLayout(false);
 

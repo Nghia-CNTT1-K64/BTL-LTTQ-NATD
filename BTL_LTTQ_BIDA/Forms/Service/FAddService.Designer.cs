@@ -144,6 +144,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FAddService";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm dịch vụ mới";
             this.ResumeLayout(false);
             this.PerformLayout();

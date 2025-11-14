@@ -6,8 +6,8 @@ namespace BTL_LTTQ_BIDA.Data
 {
     internal class DataConnect
     {
-        private SqlConnection sqlconnect = null;
-        private readonly string connectStr = "Data Source=localhost;Initial Catalog=QLQuanBilliard4;Integrated Security=True;";
+        SqlConnection sqlconnect = null;
+        string connectStr = "Data Source=localhost;Initial Catalog=QLQuanBilliard5;Integrated Security=True;";
 
         // ==========================
         // 🔹 MỞ / ĐÓNG KẾT NỐI
@@ -21,6 +21,7 @@ namespace BTL_LTTQ_BIDA.Data
                 sqlconnect.Open();
         }
 
+        // đóng kết nối
         public void CloseConnect()
         {
             if (sqlconnect != null && sqlconnect.State != ConnectionState.Closed)
